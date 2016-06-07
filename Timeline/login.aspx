@@ -10,7 +10,7 @@
     <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate">
     </asp:Login>
     <br />
-    New user? Click
+    New user? Click here
     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/register.aspx">here</asp:HyperLink>
     .
 </asp:Content>
