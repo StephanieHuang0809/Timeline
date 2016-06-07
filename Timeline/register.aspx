@@ -290,5 +290,7 @@
     <p style="font-family: 'Comic Sans MS'; font-size: medium; font-weight: normal; color: #FFFFFF">
         &nbsp;</p>
     <p style="font-family: 'Comic Sans MS'; font-size: medium; font-weight: normal; color: #FFFFFF">
-        &nbsp;</p>
+        FirstName:
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+    </p>
 </asp:Content>
