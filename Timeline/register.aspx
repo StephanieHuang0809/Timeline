@@ -4,7 +4,7 @@
     <script type="text/javascript" src="js/jquery.lavalamp-1.3.5.js"></script>
 
     <style type="text/css"">
-.compactlabel-wrapper {
+         .compactlabel-wrapper {
 			display: inline-block;
 			position: relative;
 		}
@@ -281,6 +281,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="form">
+    <form id="app_form"   name="application" action=""  onClick="validate">
     <p style="font-family: 'Comic Sans MS'; font-size: xx-large; font-weight: 900; color: #FFFFFF">
     Welcome to T:meLine</p>
     <p style="font-family: 'Comic Sans MS'; font-size: xx-large; font-weight: 900; color: #FFFFFF">
@@ -290,7 +292,9 @@
     <p style="font-family: 'Comic Sans MS'; font-size: medium; font-weight: normal; color: #FFFFFF">
         &nbsp;</p>
     <p style="font-family: 'Comic Sans MS'; font-size: medium; font-weight: normal; color: #FFFFFF">
-        FirstName:
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <label for="fName">First Name</label>
+        <asp:TextBox ID="firstName" runat="server" ></asp:TextBox>
     </p>
+        </form>
+        </div>
 </asp:Content>
