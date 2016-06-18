@@ -66,6 +66,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\calendar.png" />
+    <Content Include="Images\submit.png" />
+    <Content Include="App_Page\login.aspx" />
     <Content Include="packages.config" />
     <Content Include="Root.Master" />
     <None Include="Web.Debug.config">
@@ -82,17 +85,17 @@
     </Content>
     <Content Include="App_Page\corporateHome.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="App_Page\home.aspx" />
     <Content Include="Images\fingers.jpg" />
     <Content Include="App_Page\mySchedule.aspx" />
     <Content Include="js\jquery.lavalamp-1.3.5.js" />
     <Content Include="js\jquery.min2.js" />
-    <Content Include="login.aspx" />
-    <Content Include="register.aspx" />
+    <Content Include="App_Page\register.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\DAL\RegisterDAL.cs" />
     <Compile Include="App_Code\DBManager.cs" />
+    <Content Include="App_Code\BLL\RegisterBLL.cs" />
     <Compile Include="App_Page\corporateHome.aspx.cs">
       <DependentUpon>corporateHome.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -103,13 +106,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="App_Page\home.aspx.cs">
-      <DependentUpon>home.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App_Page\home.aspx.designer.cs">
-      <DependentUpon>home.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Page\mySchedule.aspx.cs">
       <DependentUpon>mySchedule.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -117,19 +113,19 @@
     <Compile Include="App_Page\mySchedule.aspx.designer.cs">
       <DependentUpon>mySchedule.aspx</DependentUpon>
     </Compile>
-    <Compile Include="login.aspx.cs">
+    <Compile Include="App_Page\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="login.aspx.designer.cs">
+    <Compile Include="App_Page\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="register.aspx.cs">
+    <Compile Include="App_Page\register.aspx.cs">
       <DependentUpon>register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="register.aspx.designer.cs">
+    <Compile Include="App_Page\register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Root.Master.cs">

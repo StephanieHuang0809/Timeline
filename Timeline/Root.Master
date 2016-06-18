@@ -7,15 +7,19 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
-        <style type="text/css">
-        body
+     <style type="text/css" media="screen">
+     body
         {
             background-size: 1370px 700px;
-        }
-    </style>
+            background-repeat: no-repeat; 
+            background-size:cover;
+            
+            background-image: url('<%= Page.ResolveUrl("~/images/fingers.jpg")%>');
+        
+        } 
+         </style>
 </head>
-<body style="background-attachment: fixed; background-repeat: no-repeat;" background="images/fingers.jpg">
+<body>
     <form id="form1" runat="server">
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
