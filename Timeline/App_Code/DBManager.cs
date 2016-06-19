@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace Timeline
+namespace Timeline.App_Code
 {
     public class DBManager
     {

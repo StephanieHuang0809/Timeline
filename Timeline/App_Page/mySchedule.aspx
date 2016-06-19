@@ -224,14 +224,14 @@ td {
 			</tr>
 			
 			<tr class="alt">
-			<th>12:00</th>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<th class="auto-style1">12:00</th>
+			<td class="auto-style1"></td>
+			<td class="auto-style1"></td>
+			<td class="auto-style1"></td>
+			<td class="auto-style1"></td>
+			<td class="auto-style1"></td>
+			<td class="auto-style1"></td>
+			<td class="auto-style1"></td>
 			</tr>
 			
 			<tr class="">
@@ -460,6 +460,12 @@ td {
 			<tr>
 			<th>
 				<button id="btn_submit">Submit</button>
+			</th>
+			</tr>
+			
+			<tr>
+			<th>
+                <asp:ImageButton ID="btn_submit0" runat="server" ImageUrl="~/Images/submit.png" Width="100px" OnClick="btn_submit_Click" />
 			</th>
 			</tr>
 			

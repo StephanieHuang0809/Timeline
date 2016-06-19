@@ -94,6 +94,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\DAL\RegisterDAL.cs" />
+    <Content Include="App_Code\DAL\ScheduleDAL.cs" />
+    <Content Include="App_Code\BLL\ScheduleBLL.cs" />
+    <Content Include="App_Code\DAL\EventDAL.cs" />
+    <Content Include="App_Code\BLL\EventBLL.cs" />
+    <Content Include="App_Code\BLL\User.cs" />
     <Compile Include="App_Code\DBManager.cs" />
     <Content Include="App_Code\BLL\RegisterBLL.cs" />
     <Compile Include="App_Page\corporateHome.aspx.cs">

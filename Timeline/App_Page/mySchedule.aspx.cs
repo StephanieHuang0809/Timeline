@@ -13,5 +13,10 @@ namespace Timeline
         {
 
         }
+
+        protected void btn_submit_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
     }
 }
