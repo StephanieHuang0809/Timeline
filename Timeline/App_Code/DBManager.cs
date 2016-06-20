@@ -5,10 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace Timeline.App_Code
-{
-    public class DBManager
-    {
+
+	public class DBManager
+	{
         public DBManager()
         {
         }
@@ -25,4 +24,3 @@ namespace Timeline.App_Code
             return new SqlConnection(getConnectString());
         }
     }
-}

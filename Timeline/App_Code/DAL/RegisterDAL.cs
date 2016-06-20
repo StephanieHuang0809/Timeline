@@ -5,12 +5,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace Timeline.App_Code.DAL
+namespace dal
 {
-    public class RegiszterDAL
+
+    public class RegisterDAL
     {
         public void register(
-        int userId,
         String firstName,
         String lastName,
         String gender,
@@ -18,7 +18,8 @@ namespace Timeline.App_Code.DAL
         String email,
         String password,
         String role
-       ){
+       )
+        {
             SqlConnection conn = DBManager.getSqlConnection();
             conn.Open();
 
@@ -33,7 +34,7 @@ namespace Timeline.App_Code.DAL
                              "@birthday, " +
                              "@email, " +
                              "@password, " +
-                             "@role);SELECT SCOPE_IDENTITY()";//get the applicationId
+                             "@role);SELECT SCOPE_IDENTITY()";//get the userId
 
 
                 var cmd = new SqlCommand(sql, conn);
@@ -71,7 +72,7 @@ namespace Timeline.App_Code.DAL
             }
 
             conn.Close();
-        } 
+        }
 
     }
 }

@@ -99,8 +99,7 @@
     <Content Include="App_Code\DAL\EventDAL.cs" />
     <Content Include="App_Code\BLL\EventBLL.cs" />
     <Content Include="App_Code\BLL\User.cs" />
-    <Compile Include="App_Code\DBManager.cs" />
-    <Content Include="App_Code\BLL\RegisterBLL.cs" />
+    <Content Include="App_Code\DBManager.cs" />
     <Compile Include="App_Page\corporateHome.aspx.cs">
       <DependentUpon>corporateHome.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -108,6 +107,7 @@
     <Compile Include="App_Page\corporateHome.aspx.designer.cs">
       <DependentUpon>corporateHome.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\BLL\RegisterBLL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

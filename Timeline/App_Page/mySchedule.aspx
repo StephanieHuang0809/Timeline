@@ -80,12 +80,14 @@ td {
 	weekday[5] = "Fri";
 	weekday[6] = "Sat";
   
-  var tableData = {
-	year:2016,
-	month:6,
-	days:[12,13,14,15,16,17,18],
-	timeCell:{12:["9:00","10:00"],13:["12:00"],14:[],15:[],16:[],17:[],18:[]}
-  }
+	var tableData = {
+	    year: 2016,
+	    month: 6,
+	    tableRowCell: ["9:00", "9:30", "10:00", "11:00", "12:00", "13:00", "14:00", "14:30", "15:00", "16:00", "17:00"],  /* show the verticle scale */
+	    days: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21],                                                            /* show the horizal  scale */
+	    timeCell: { 12: ["9:00", "10:00"], 13: ["12:00"], 14: [], 15: [], 16: [], 17: [], 18: [], 19: [], 20: ["12:00"], 21: ["14:00"] }
+
+	}
   
  
     $(function () {
@@ -109,24 +111,53 @@ td {
 			});
 		}
 	
-		var init=function(){
-			var n = new Date(); 
-			n.setYear(tableData.year);
-			n.setMonth(tableData.month-1);	
-			$.each(tableData.days,function(index,value){ //index - i++ , value - each value in days
-				n.setDate(value);
-				$("#our_table tr").filter(':first').children(':nth-child('+(index+2)+')').text(value+" "+weekday[n.getDay()]+"");
-			})
-			
-			var timecells = tableData.timeCell;
-			$.each(timecells,function(key,value){ //key - day, value - time (array)
-				if(value.length>0){
-					$.each(value,function(){
-						setTimeCell(key,this);
-					});
-				}
-			})
-		}(); // () - call init function immediately which is same as init();
+		function drawTable() {
+		    var titleRowHtml = "<th></th>";
+		    var bodyRowHtml = "<th></th>";
+		    $.each(tableData.days, function (index, value) {
+		        titleRowHtml += "<th></th>";
+		        bodyRowHtml += "<td></td>"
+		    })
+
+		    $("#our_table").append("<tr>" + titleRowHtml + "</tr>");
+		    for (var i = 0; i < tableData.tableRowCell.length; i++) {
+		        if (i % 2 == 0) {
+		            $("#our_table").append("<tr  class=\"\">" + bodyRowHtml + "</tr>");
+		        } else {
+		            $("#our_table").append("<tr  class=\"alt\">" + bodyRowHtml + "</tr>");
+		        }
+		    }
+		};
+
+		drawTable();
+
+		function drawTimeLabel() {
+		    $('#our_table tr th:first-child').each(function (index, value) {
+		        if (index > 0) {
+		            $(this).text(tableData.tableRowCell[index - 1]);
+		        }
+		    });
+		}
+
+		drawTimeLabel();
+		var init = function () {
+		    var n = new Date();
+		    n.setYear(tableData.year);
+		    n.setMonth(tableData.month - 1);
+		    $.each(tableData.days, function (index, value) {
+		        n.setDate(value);
+		        $("#our_table tr").filter(':first').children(':nth-child(' + (index + 2) + ')').text(value + " " + weekday[n.getDay()] + "");
+		    })
+
+		    var timecells = tableData.timeCell;
+		    $.each(timecells, function (key, value) {
+		        if (value.length > 0) {
+		            $.each(value, function () {
+		                setTimeCell(key, this);
+		            });
+		        }
+		    })
+		}();
 		
 	
 	

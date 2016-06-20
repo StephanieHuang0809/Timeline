@@ -7,6 +7,6 @@ namespace Timeline.App_Code.BLL
 {
     public class ScheduleBLL
     {
-
+        
     }
 }

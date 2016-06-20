@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 
 namespace Timeline
 {
@@ -53,7 +55,7 @@ namespace Timeline
 
         private bool SiteSpecificAuthenticationMethod(string emailAddress, string Password)
         {
-            SqlConnection con = DBManager.getSqlConnection();
+            SqlConnection con = getSqlConnection();
             con.Open();
             bool isAuth = false;
 
@@ -80,5 +82,17 @@ namespace Timeline
             con.Close();
             return isAuth;
         }
+
+        public static string getConnectString()
+        {
+            return ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        }
+
+
+        public static SqlConnection getSqlConnection()
+        {
+            return new SqlConnection(getConnectString());
+        }
     }
 }
+

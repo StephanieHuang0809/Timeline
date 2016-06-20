@@ -12,6 +12,7 @@ namespace Timeline.App_Code.DAL
         public void mySchedule(
        int userId,
        String freeSlot,
+       String firstName,
        String lastName,
        String gender,
        DateTime? birthday,
