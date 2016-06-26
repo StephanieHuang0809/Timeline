@@ -1,4 +1,3 @@
-C:\Projects\Timeline\Timeline\obj\Debug\Timeline.csprojResolveAssemblyReference.cache
 C:\Projects\Timeline\Timeline\bin\roslyn\csc.exe
 C:\Projects\Timeline\Timeline\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Projects\Timeline\Timeline\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
