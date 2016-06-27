@@ -13,6 +13,15 @@ namespace Timeline {
     public partial class mySchedule {
         
         /// <summary>
+        /// lb_dateFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_dateFrom;
+        
+        /// <summary>
         /// tb_dateFrom control.
         /// </summary>
         /// <remarks>
@@ -22,13 +31,13 @@ namespace Timeline {
         protected global::System.Web.UI.WebControls.TextBox tb_dateFrom;
         
         /// <summary>
-        /// btn_dateFrom control.
+        /// lb_dateTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_dateFrom;
+        protected global::System.Web.UI.WebControls.Label lb_dateTo;
         
         /// <summary>
         /// tb_dateTo control.
@@ -40,111 +49,57 @@ namespace Timeline {
         protected global::System.Web.UI.WebControls.TextBox tb_dateTo;
         
         /// <summary>
-        /// btn_dateTo control.
+        /// btn_view control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_dateTo;
+        protected global::System.Web.UI.WebControls.ImageButton btn_view;
         
         /// <summary>
-        /// HyperLink1 control.
+        /// btn_edit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        protected global::System.Web.UI.WebControls.ImageButton btn_edit;
         
         /// <summary>
-        /// btn_submit0 control.
+        /// btn_howToUse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_submit0;
+        protected global::System.Web.UI.WebControls.ImageButton btn_howToUse;
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// saveChanges control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl saveChanges;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// btn_submit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.ImageButton btn_submit;
         
         /// <summary>
-        /// Button1 control.
+        /// btn_cancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// HiddenFieldYear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldYear;
-        
-        /// <summary>
-        /// HiddenFieldMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldMonth;
-        
-        /// <summary>
-        /// HiddenFieldTableRowCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldTableRowCell;
-        
-        /// <summary>
-        /// HiddenFieldDays control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldDays;
-        
-        /// <summary>
-        /// HiddenFieldTimeCell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldTimeCell;
+        protected global::System.Web.UI.WebControls.ImageButton btn_cancel;
     }
 }

@@ -9,5 +9,7 @@ namespace Timeline.AppCode.Domain
     {
        public int year;
        public int month;
+       public DateTime start;
+       public DateTime to;
     }
 }

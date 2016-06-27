@@ -13,28 +13,33 @@ namespace Timeline
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.saveChanges.Visible = false;
+        }
 
+        protected void btn_edit_Click(object sender, ImageClickEventArgs e)
+        {
+            this.saveChanges.Visible = true;
+        }
+
+        protected void btn_view_Click(object sender, ImageClickEventArgs e)
+        {
+            this.saveChanges.Visible = false;
         }
 
         protected void btn_submit_Click(object sender, ImageClickEventArgs e)
         {
-
+            this.saveChanges.Visible = false;
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void btn_cancel_Click(object sender, ImageClickEventArgs e)
         {
-            Label1.Text = "Refreshed at " + DateTime.Now.ToString();
-            this.HiddenFieldYear.Value = "2016";
-            this.HiddenFieldMonth.Value = "6";
-            this.HiddenFieldTableRowCell.Value = " [\"9:00\", \"9:30\", \"10:00\"]";
-            this.HiddenFieldDays.Value = "[12, 13, 14, 15, 16, 17, 18, 19, 20, 21]";
-            this.HiddenFieldTimeCell.Value = "{ 12: [\"9:00\", \"10:00\"], 13: [\"12:00\"], 14: [], 15: [], 16: [], 17: [], 18: [], 19: [], 20: [\"12:00\"], 21: [\"14:00\"]}";
-  
+            this.saveChanges.Visible = false;
         }
 
         [System.Web.Services.WebMethod]
-        public static string GetCurrentTime(string name)
+        public static string GetCurrentTime(String start, String end)
         {
+
             //    var tableData = {
             //   year: 2016,
             //  month: 6,
@@ -43,38 +48,17 @@ namespace Timeline
             //  timeCell: { 12: ["9:00", "10:00"], 13: ["12:00"], 14: [], 15: [], 16: [], 17: [], 18: [], 19: [], 20: ["12:00"], 21: ["14:00"]}
             //  }
 
-            var tableData = new Dictionary<String, Object>();
-            tableData.Add("year",2016);
-            tableData.Add("month",6);
-            var tableRowCellList = new List<String>();
-            tableRowCellList.Add("9:00");
-            tableRowCellList.Add("9:30");
-            tableRowCellList.Add("10:00");
-            tableRowCellList.Add("10:30");
-            tableRowCellList.Add("11:00");
-            tableRowCellList.Add("11:30");
-            tableRowCellList.Add("12:00");
-            tableRowCellList.Add("12:30");
-            tableRowCellList.Add("13:00");
-            tableData.Add("tableRowCell", tableRowCellList);
-           
-            tableData.Add("days",new int[] { 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 });
+            var timeTable = new TimeTable();
+           // timeTable.start = Util.StringToDate("20/05/2015");
+           // timeTable.to = Util.StringToDate("20/05/2015");
 
-            var timeCellDic = new Dictionary<int,String[]>();
-            timeCellDic.Add(12,new String[]{ "9:00", "10:00"});
-            timeCellDic.Add(13, new String[] { "9:00" });
-            tableData.Add("timeCell", timeCellDic);
-
-            var timeTable = new TimeTable
-            {
-                year = 2016,
-                month = 6
-            };
             String jsonString = JSONHelper.ToJSON(timeTable);
 
-            return jsonString +"The Current Time is: " + DateTime.Now.ToString();
+            return jsonString;
         }
 
+       
 
+       
     }
 }

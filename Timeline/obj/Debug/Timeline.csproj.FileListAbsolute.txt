@@ -17,3 +17,4 @@ C:\Projects\Timeline\Timeline\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlat
 C:\Projects\Timeline\Timeline\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Projects\Timeline\Timeline\obj\Debug\Timeline.dll
 C:\Projects\Timeline\Timeline\obj\Debug\Timeline.pdb
+C:\Projects\Timeline\Timeline\obj\Debug\Timeline.csprojResolveAssemblyReference.cache

@@ -85,9 +85,16 @@
     <Content Include="css\jquery-ui-1.11.4.custom\jquery-ui.structure.min.css" />
     <Content Include="css\jquery-ui-1.11.4.custom\jquery-ui.theme.css" />
     <Content Include="css\jquery-ui-1.11.4.custom\jquery-ui.theme.min.css" />
+    <Content Include="Images\blueCancel.png" />
     <Content Include="Images\calendar.png" />
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\editButtonBlack.png" />
+    <Content Include="Images\Help.png" />
+    <Content Include="Images\login.png" />
+    <Content Include="Images\save.png" />
     <Content Include="Images\submit.png" />
     <Content Include="AppPage\login.aspx" />
+    <Content Include="Images\view.png" />
     <Content Include="js\jquery-1.9.1.js" />
     <Content Include="js\jquery-ui-1.10.3.custom.js" />
     <Content Include="packages.config" />

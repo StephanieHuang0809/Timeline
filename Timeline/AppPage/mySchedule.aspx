@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Root.Master" AutoEventWireup="true" CodeBehind="mySchedule.aspx.cs" Inherits="Timeline.mySchedule" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
- <!--    <script   src="https://code.jquery.com/jquery-3.0.0.js"   integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo="   crossorigin="anonymous"></script>-->
+    <!--    <script   src="https://code.jquery.com/jquery-3.0.0.js"   integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo="   crossorigin="anonymous"></script>-->
   <style type="text/css" media="screen">
  #our_table{
     width:70%;
@@ -61,15 +61,21 @@ td {
     padding: 6px 6px 6px 12px;
 }
 	
-    .auto-style1 {
-        height: 32px;
-    }
-    .auto-style2 {
-        height: 29px;
-    }
-	
-  </style>
+    </style>
     <script type="text/javascript" charset="utf-8">
+
+        function stringToDate(_date, _format, _delimiter) {
+            var formatLowerCase = _format.toLowerCase();
+            var formatItems = formatLowerCase.split(_delimiter);
+            var dateItems = _date.split(_delimiter);
+            var monthIndex = formatItems.indexOf("mm");
+            var dayIndex = formatItems.indexOf("dd");
+            var yearIndex = formatItems.indexOf("yyyy");
+            var month = parseInt(dateItems[monthIndex]);
+            month -= 1;
+            var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+            return formatedDate;
+        }
   
   var weekday = new Array(7);
 	weekday[0]=  "Sun";
@@ -82,19 +88,49 @@ td {
   
 
 	var tableData = {
+	    start: "06/12/2016",//will replace by selected value
+	    end: "06/22/2016",//will replace by selected value
 	    year: 2016,
 	    month: 6,
-	    tableRowCell: ["9:00", "9:30", "10:00", "11:00", "12:00", "13:00", "14:00", "14:30", "15:00", "16:00", "17:00"],  /* show the verticle scale */
-	    days: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21],                                                            /* show the horizal  scale */
+	    tableRowCell: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:00", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "00:00", "00:30", "01:00", "01:30", "02:00", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",  "06:00","06:30", "07:00", "07:30"],  /* show the verticle scale */
+	    days: [],// this value will be auto set base on start and end date.                                                            /* show the horizal  scale */
 	    timeCell: { 12: ["9:00", "10:00"], 13: ["12:00"], 14: [], 15: [], 16: [], 17: [], 18: [], 19: [], 20: ["12:00"], 21: ["14:00"] }
-
 	}
   
  
 	$(function () {
-	    $("#tb_dateFrom2").datepicker();
-	    $("#tb_dateFrom").datepicker();
-	    $("#dateTo").datepicker();
+	    $("#<%=this.tb_dateFrom.ClientID%>").datepicker();
+	    $("#<%=this.tb_dateTo.ClientID%>").datepicker();
+
+        var inputStart = $("#<%=this.tb_dateFrom.ClientID%>").val();
+	    var inputEnd = $("#<%=this.tb_dateTo.ClientID%>").val();
+
+	    if (inputStart == "") {
+
+	        tableData.start = $.datepicker.formatDate('mm/dd/yy', new Date());
+	    } else {
+	        tableData.start = inputStart;
+	    }
+
+	    if (inputEnd == "") {
+	        var endtmp = new Date();
+	        endtmp.setDate(endtmp.getDate() + 7);
+	        tableData.end = $.datepicker.formatDate('mm/dd/yy', endtmp);
+	    } else {
+	        tableData.end = inputEnd;
+	    }
+
+	    //caculate tableData.days
+	    var startDt = stringToDate(tableData.start, "MM/dd/yyyy", "/");
+	    var endDt = stringToDate(tableData.end, "MM/dd/yyyy", "/");
+
+	    var dti = startDt;
+	    while (dti <= endDt) {
+	        tableData.days.push(dti.getDate());
+	        dti.setDate(dti.getDate() + 1);
+	        // alert(dti.getDate());
+	    }
+
 
 		/**
 		 * highlight a cell by give a date and a time string
@@ -228,21 +264,19 @@ td {
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p>
+    <p style="font-family: 'Comic Sans MS'; font-size: xx-large; font-weight: 900; color: #FFFFFF">
         My Schedule</p>
 
-        Date Range:
-    <input id="tb_dateFrom2" type="text"/>
-        <asp:TextBox ID="tb_dateFrom" runat="server"></asp:TextBox>
-&nbsp;<asp:ImageButton ID="btn_dateFrom" runat="server" Height="30px" ImageUrl="~/Images/calendar.png" ToolTip="Pick a date" />
-&nbsp;to
-        <asp:TextBox ID="tb_dateTo" runat="server"></asp:TextBox>
-&nbsp;<asp:ImageButton ID="btn_dateTo" runat="server" Height="30px" ImageUrl="~/Images/calendar.png" ToolTip="Pick a date" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    
-        <asp:HyperLink ID="HyperLink1" runat="server">How to use?</asp:HyperLink>
-    
-    <p>
+       <asp:Label ID="lb_dateFrom" runat="server" Text=" Date From" ForeColor="White" Font-Bold="True" Font-Names="Arial"></asp:Label>
+   
+        <asp:TextBox ID="tb_dateFrom" runat="server" Height="25px" ToolTip="Click to select start date"></asp:TextBox>
+&nbsp;&nbsp;<asp:Label ID="lb_dateTo" runat="server" Text="To" Font-Names="Arial" ForeColor="White" Font-Bold="True"></asp:Label>
+&nbsp;
+        <asp:TextBox ID="tb_dateTo" runat="server" Height="25px" ToolTip="Click to select end date"></asp:TextBox>
+&nbsp;<asp:ImageButton ID="btn_view" runat="server" Height="25px" ImageUrl="~/Images/view.png" ToolTip="View Selected Dates" BorderStyle="None" ImageAlign="AbsBottom" OnClick="btn_view_Click" />
+&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Schedule" />
+    &nbsp;&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_howToUse" runat="server" Height="35px" ImageAlign="AbsBottom" ImageUrl="~/Images/Help.png" ToolTip="Help" />
+&nbsp;<p>
         &nbsp;</p>
 
         <table id="our_table" border="0">
@@ -271,36 +305,19 @@ td {
 			<td class="auto-style1"></td>
 			</tr> -->
 			</table>
-			
-			<table id="tbl_menu">
+			<div id="saveChanges" runat="server" style ="text-align:center">
+			<table id="tbl_menu">	
 			<tr>
 			<th>
-				<button id="btn_submit">Submit</button>
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/save.png"  OnClick="btn_submit_Click"  ImageAlign="AbsBottom" ToolTip="Save Changes" Visible="true" Height="30px" Width="80px"/>
+                &nbsp;&nbsp;&nbsp;
+                <asp:ImageButton ID="btn_cancel" runat="server"  ImageAlign="AbsBottom" ImageUrl="~/Images/cancel.png" OnClick="btn_cancel_Click" ToolTip="Cancel Changes" Visible="true" Height="30px" Width="80px" />
+                <br />
+                <br />     
 			</th>
 			</tr>
-			
-			<tr>
-			<th>
-                <asp:ImageButton ID="btn_submit0" runat="server" ImageUrl="~/Images/submit.png" Width="100px" OnClick="btn_submit_Click" />
-			    <button id="btn_test">ajax test</button>
-                <br />
-                <br />
-                <asp:ScriptManager ID="ScriptManager1" runat="server">
-                </asp:ScriptManager>
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>
-                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
-                         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                        <asp:HiddenField ID="HiddenFieldYear" runat="server" />
-                        <asp:HiddenField ID="HiddenFieldMonth" runat="server" />
-                        <asp:HiddenField ID="HiddenFieldTableRowCell" runat="server" />
-                        <asp:HiddenField ID="HiddenFieldDays" runat="server" />
-                        <asp:HiddenField ID="HiddenFieldTimeCell" runat="server" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-               
-			</th>
-			</tr>
-			
 			</table>
+                </div>
 </asp:Content>

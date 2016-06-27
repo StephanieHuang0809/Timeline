@@ -280,12 +280,10 @@
 	</script>
     -->
     <style type="text/css">
-        .auto-style1 {
-            margin-left: 120px;
-        }
-        
-       
-    </style>
+    .auto-style1 {
+        width: 100px;
+    }
+</style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -309,22 +307,22 @@
     Welcome to T:meLine</p>
     <table id="registration" border="0">
         <tr><td>First Name :</td><td><asp:TextBox ID="tb_firstName" runat="server"></asp:TextBox></td>
-            <td></td>
+            <td class="auto-style1"></td>
             <td>Last Name :</td><td><asp:TextBox ID="tb_lastName" runat="server"></asp:TextBox></td></tr>
         <tr><td>Gender :</td><td><asp:RadioButton ID="rb_female" runat="server" Text="Female" ValidationGroup="gender" />
 &nbsp;&nbsp;&nbsp;
         <asp:RadioButton ID="rb_male" runat="server" Text="Male" ValidationGroup="gender" /></td>
-            <td></td>
+            <td class="auto-style1"></td>
             <td>Birthday :</td><td><asp:TextBox ID="tb_birthday" runat="server"></asp:TextBox>
-        <asp:ImageButton ID="btn_calendar" runat="server" Height="30px" ImageUrl="~/Images/calendar.png" /></td></tr>
-        <tr><td>Email :</td><td><asp:TextBox ID="tb_email" runat="server"></asp:TextBox></td>
-            <td></td><td></td><td></td></tr>
+            </td></tr>
+        <tr><td>Occupation :</td><td>&nbsp;</td>
+            <td class="auto-style1"></td><td>Email :</td><td><asp:TextBox ID="tb_email" runat="server"></asp:TextBox></td></tr>
         <tr><td>Password :</td><td><asp:TextBox ID="tb_password" runat="server"></asp:TextBox></td>
-            <td></td>
+            <td class="auto-style1"></td>
             <td>Confirmed Password :</td><td><asp:TextBox ID="tb_confirmedPassword" runat="server"></asp:TextBox></td></tr>
         <tr><td colspan="5"><asp:CheckBox ID="cb_agree" runat="server" Text="I agree to all the terms and conditions and the terms of use." /></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td></tr>
-         <tr><td></td><td></td><td> <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/submit.png" Width="100px" OnClick="btn_submit_Click" /></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td class="auto-style1"></td><td></td><td></td></tr>
+         <tr><td></td><td></td><td class="auto-style1"> <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/submit.png" Width="100px" OnClick="btn_submit_Click" /></td><td>&nbsp;</td><td></td></tr>
     </table>
    
 
