@@ -308,6 +308,10 @@
           $(function () {
               $("#<%=this.tb_birthday.ClientID%>").datepicker();
           });
+
+          function CheckBoxRequired_ClientValidate(sender, e) {
+              e.IsValid = jQuery(".AcceptedAgreement input:checkbox").is(':checked');
+          }
       </script>
 </asp:Content>
 
@@ -333,12 +337,12 @@
     <table id="registration" border="0" style="width:85%;" >
         <tr><td width="12%">First Name :</td><td class="auto-style2" width="15%"><asp:TextBox ID="tb_firstName" runat="server"></asp:TextBox></td>
             <td class="auto-style1">
-                <asp:RequiredFieldValidator ID="rfv_firstName" runat="server" ErrorMessage="Please enter first name!" ControlToValidate="tb_firstName" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfv_firstName" runat="server" ErrorMessage="Please enter first name!" ControlToValidate="tb_firstName" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td>
            </tr>
         <tr> <td>Last Name :</td><td><asp:TextBox ID="tb_lastName" runat="server"></asp:TextBox></td>
             <td>
-            <asp:RequiredFieldValidator ID="rfv_lastName" runat="server" ErrorMessage="Please enter last name!" ControlToValidate="tb_lastName" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="rfv_lastName" runat="server" ErrorMessage="Please enter last name!" ControlToValidate="tb_lastName" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td></tr>
         <tr><td>Gender :</td><td class="auto-style2"><asp:RadioButton ID="rb_female" runat="server" Text="Female" ValidationGroup="gender" Checked="True" GroupName="rb_gender" />      
 &nbsp;&nbsp;&nbsp;
@@ -348,28 +352,30 @@
             </tr>
         <tr><td>Birthday :</td><td><asp:TextBox ID="tb_birthday" runat="server" ></asp:TextBox>
             </td><td>
-                <asp:RequiredFieldValidator ID="rfv_birthday" runat="server" ErrorMessage="Please enter birthday!" ControlToValidate="tb_birthday" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfv_birthday" runat="server" ErrorMessage="Please enter birthday!" ControlToValidate="tb_birthday" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td></tr>
         <tr><td>Occupation :</td><td class="auto-style2">
             <asp:TextBox ID="tb_occupation" runat="server"></asp:TextBox>
             </td>
             <td class="auto-style1">
-                <asp:RequiredFieldValidator ID="rfv_occupation" runat="server" ErrorMessage="Please enter occupation" ControlToValidate="tb_occupation" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfv_occupation" runat="server" ErrorMessage="Please enter occupation" ControlToValidate="tb_occupation" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td></tr>
         <tr><td>Email :</td><td><asp:TextBox ID="tb_email" runat="server" TextMode="Email"></asp:TextBox></td><td>
-            <asp:RequiredFieldValidator ID="rfv_email" runat="server" ErrorMessage="Please enter email!" ControlToValidate="tb_email" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="rfv_email" runat="server" ErrorMessage="Please enter email!" ControlToValidate="tb_email" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td></tr>
         <tr><td>Password :</td><td class="auto-style2"><asp:TextBox ID="tb_password" runat="server" TextMode="Password"></asp:TextBox></td>
             <td class="auto-style1">
-                <asp:RequiredFieldValidator ID="rfv_password" runat="server" ErrorMessage="Please enter password!" ControlToValidate="tb_password" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfv_password" runat="server" ErrorMessage="Please enter password!" ControlToValidate="tb_password" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td>
            </tr>
         <tr> <td>Confirmed Password :</td><td><asp:TextBox ID="tb_confirmedPassword" runat="server" TextMode="Password"></asp:TextBox></td><td>
-            <asp:RequiredFieldValidator ID="rfv_confirmPassword" runat="server" ErrorMessage="Please confirm password!" ControlToValidate="tb_confirmedPassword" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="rfv_confirmPassword" runat="server" ErrorMessage="Please confirm password!" ControlToValidate="tb_confirmedPassword" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td></tr>
         <tr><td colspan="3"><asp:CheckBox ID="cb_agree" runat="server" Text="I agree to all the terms and conditions and the terms of use." OnCheckedChanged="cb_agree_CheckedChanged" /></td></tr>
-        <tr><td></td><td></td><td></td></tr>
-         <tr><td></td><td class="auto-style2"> <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/submit.png" Width="100px" OnClick="btn_submit_Click" ImageAlign="AbsBottom" /></td><td class="auto-style3"> &nbsp;</td></tr>
+        <tr><td colspan="3"><asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"
+    OnServerValidate="CheckBoxRequired_ServerValidate"
+    ClientValidationFunction="CheckBoxRequired_ClientValidate" Font-Bold="True" Font-Names="Arial" ForeColor="#CC3300">You must agree to terms and conditions to proceed.</asp:CustomValidator></td></tr>
+         <tr><td></td><td class="auto-style2"> <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/register.png" Width="100px" OnClick="btn_submit_Click" ImageAlign="AbsBottom" /></td><td class="auto-style3"> &nbsp;</td></tr>
     </table>
    
 

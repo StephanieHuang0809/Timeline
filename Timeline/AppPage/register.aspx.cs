@@ -48,5 +48,10 @@ namespace Timeline
                 this.btn_submit.CssClass = "opacity2";
             }
         }
+
+        protected void CheckBoxRequired_ServerValidate(object sender, ServerValidateEventArgs e)
+        {
+            e.IsValid = cb_agree.Checked;
+        }
     }
 }
