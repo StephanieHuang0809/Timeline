@@ -29,10 +29,24 @@ namespace Timeline
             {
                 registerBLL.gender = "M";
             }
-          //  registerBLL.birthday = this.tb_birthday.Text;
+            registerBLL.birthday = Convert.ToDateTime(this.tb_birthday.Text);
+            registerBLL.occupation = this.tb_occupation.Text;
             registerBLL.email = this.tb_email.Text;
             registerBLL.password = this.tb_password.Text;
             registerBLL.role = "P";
+        }
+
+        protected void cb_agree_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.cb_agree.Checked) {
+                this.btn_submit.Enabled = true;
+                this.btn_submit.CssClass = "opacity1";
+            }
+            else if (!this.cb_agree.Checked)
+            {
+                this.btn_submit.Enabled = false;
+                this.btn_submit.CssClass = "opacity2";
+            }
         }
     }
 }

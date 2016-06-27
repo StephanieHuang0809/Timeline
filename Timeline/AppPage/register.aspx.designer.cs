@@ -49,6 +49,15 @@ namespace Timeline {
         protected global::System.Web.UI.WebControls.TextBox tb_firstName;
         
         /// <summary>
+        /// rfv_firstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_firstName;
+        
+        /// <summary>
         /// tb_lastName control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace Timeline {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tb_lastName;
+        
+        /// <summary>
+        /// rfv_lastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_lastName;
         
         /// <summary>
         /// rb_female control.
@@ -85,6 +103,33 @@ namespace Timeline {
         protected global::System.Web.UI.WebControls.TextBox tb_birthday;
         
         /// <summary>
+        /// rfv_birthday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_birthday;
+        
+        /// <summary>
+        /// tb_occupation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_occupation;
+        
+        /// <summary>
+        /// rfv_occupation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_occupation;
+        
+        /// <summary>
         /// tb_email control.
         /// </summary>
         /// <remarks>
@@ -92,6 +137,15 @@ namespace Timeline {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tb_email;
+        
+        /// <summary>
+        /// rfv_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_email;
         
         /// <summary>
         /// tb_password control.
@@ -103,6 +157,15 @@ namespace Timeline {
         protected global::System.Web.UI.WebControls.TextBox tb_password;
         
         /// <summary>
+        /// rfv_password control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_password;
+        
+        /// <summary>
         /// tb_confirmedPassword control.
         /// </summary>
         /// <remarks>
@@ -110,6 +173,15 @@ namespace Timeline {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tb_confirmedPassword;
+        
+        /// <summary>
+        /// rfv_confirmPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_confirmPassword;
         
         /// <summary>
         /// cb_agree control.

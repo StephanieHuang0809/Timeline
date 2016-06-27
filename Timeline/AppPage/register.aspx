@@ -281,9 +281,34 @@
     -->
     <style type="text/css">
     .auto-style1 {
-        width: 100px;
+            width: 147px;
+        }
+    .opacity1{
+        opacity:0.5;
+        filter:alpha(opacity = 40);
     }
-</style>
+    .opacity2{
+        opacity:1;
+        filter:alpha(opacity = 100);
+    }
+        .auto-style2 {
+            width: 18%;
+        }
+
+        #registration tbody td{
+            font-family:Arial;
+            color:white;
+        }
+        .auto-style3 {
+            width: 147px;
+            position: center;
+        }
+    </style>
+      <script type="text/javascript" charset="utf-8">
+          $(function () {
+              $("#<%=this.tb_birthday.ClientID%>").datepicker();
+          });
+      </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -305,24 +330,46 @@
         </div> -->
      <p style="font-family: 'Comic Sans MS'; font-size: xx-large; font-weight: 900; color: #FFFFFF">
     Welcome to T:meLine</p>
-    <table id="registration" border="0">
-        <tr><td>First Name :</td><td><asp:TextBox ID="tb_firstName" runat="server"></asp:TextBox></td>
-            <td class="auto-style1"></td>
-            <td>Last Name :</td><td><asp:TextBox ID="tb_lastName" runat="server"></asp:TextBox></td></tr>
-        <tr><td>Gender :</td><td><asp:RadioButton ID="rb_female" runat="server" Text="Female" ValidationGroup="gender" />
-&nbsp;&nbsp;&nbsp;
-        <asp:RadioButton ID="rb_male" runat="server" Text="Male" ValidationGroup="gender" /></td>
-            <td class="auto-style1"></td>
-            <td>Birthday :</td><td><asp:TextBox ID="tb_birthday" runat="server"></asp:TextBox>
+    <table id="registration" border="0" style="width:85%;" >
+        <tr><td width="12%">First Name :</td><td class="auto-style2" width="15%"><asp:TextBox ID="tb_firstName" runat="server"></asp:TextBox></td>
+            <td class="auto-style1">
+                <asp:RequiredFieldValidator ID="rfv_firstName" runat="server" ErrorMessage="Please enter first name!" ControlToValidate="tb_firstName" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            </td>
+           </tr>
+        <tr> <td>Last Name :</td><td><asp:TextBox ID="tb_lastName" runat="server"></asp:TextBox></td>
+            <td>
+            <asp:RequiredFieldValidator ID="rfv_lastName" runat="server" ErrorMessage="Please enter last name!" ControlToValidate="tb_lastName" ForeColor="#CC3300"></asp:RequiredFieldValidator>
             </td></tr>
-        <tr><td>Occupation :</td><td>&nbsp;</td>
-            <td class="auto-style1"></td><td>Email :</td><td><asp:TextBox ID="tb_email" runat="server"></asp:TextBox></td></tr>
-        <tr><td>Password :</td><td><asp:TextBox ID="tb_password" runat="server"></asp:TextBox></td>
-            <td class="auto-style1"></td>
-            <td>Confirmed Password :</td><td><asp:TextBox ID="tb_confirmedPassword" runat="server"></asp:TextBox></td></tr>
-        <tr><td colspan="5"><asp:CheckBox ID="cb_agree" runat="server" Text="I agree to all the terms and conditions and the terms of use." /></td></tr>
-        <tr><td></td><td></td><td class="auto-style1"></td><td></td><td></td></tr>
-         <tr><td></td><td></td><td class="auto-style1"> <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/submit.png" Width="100px" OnClick="btn_submit_Click" /></td><td>&nbsp;</td><td></td></tr>
+        <tr><td>Gender :</td><td class="auto-style2"><asp:RadioButton ID="rb_female" runat="server" Text="Female" ValidationGroup="gender" Checked="True" GroupName="rb_gender" />      
+&nbsp;&nbsp;&nbsp;
+        <asp:RadioButton ID="rb_male" runat="server" Text="Male" ValidationGroup="gender" GroupName="rb_gender" /></td>
+            <td class="auto-style1">
+                &nbsp;</td>
+            </tr>
+        <tr><td>Birthday :</td><td><asp:TextBox ID="tb_birthday" runat="server" ></asp:TextBox>
+            </td><td>
+                <asp:RequiredFieldValidator ID="rfv_birthday" runat="server" ErrorMessage="Please enter birthday!" ControlToValidate="tb_birthday" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            </td></tr>
+        <tr><td>Occupation :</td><td class="auto-style2">
+            <asp:TextBox ID="tb_occupation" runat="server"></asp:TextBox>
+            </td>
+            <td class="auto-style1">
+                <asp:RequiredFieldValidator ID="rfv_occupation" runat="server" ErrorMessage="Please enter occupation" ControlToValidate="tb_occupation" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            </td></tr>
+        <tr><td>Email :</td><td><asp:TextBox ID="tb_email" runat="server" TextMode="Email"></asp:TextBox></td><td>
+            <asp:RequiredFieldValidator ID="rfv_email" runat="server" ErrorMessage="Please enter email!" ControlToValidate="tb_email" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            </td></tr>
+        <tr><td>Password :</td><td class="auto-style2"><asp:TextBox ID="tb_password" runat="server" TextMode="Password"></asp:TextBox></td>
+            <td class="auto-style1">
+                <asp:RequiredFieldValidator ID="rfv_password" runat="server" ErrorMessage="Please enter password!" ControlToValidate="tb_password" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            </td>
+           </tr>
+        <tr> <td>Confirmed Password :</td><td><asp:TextBox ID="tb_confirmedPassword" runat="server" TextMode="Password"></asp:TextBox></td><td>
+            <asp:RequiredFieldValidator ID="rfv_confirmPassword" runat="server" ErrorMessage="Please confirm password!" ControlToValidate="tb_confirmedPassword" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+            </td></tr>
+        <tr><td colspan="3"><asp:CheckBox ID="cb_agree" runat="server" Text="I agree to all the terms and conditions and the terms of use." OnCheckedChanged="cb_agree_CheckedChanged" /></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+         <tr><td></td><td class="auto-style2"> <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/submit.png" Width="100px" OnClick="btn_submit_Click" ImageAlign="AbsBottom" /></td><td class="auto-style3"> &nbsp;</td></tr>
     </table>
    
 
