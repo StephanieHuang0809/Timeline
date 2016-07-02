@@ -34,6 +34,8 @@ namespace Timeline
             registerBLL.email = this.tb_email.Text;
             registerBLL.password = this.tb_password.Text;
             registerBLL.role = "P";
+
+            registerBLL.register();
         }
 
         protected void cb_agree_CheckedChanged(object sender, EventArgs e)

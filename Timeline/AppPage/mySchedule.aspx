@@ -22,8 +22,7 @@
 
 
 th {
-    font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
-        sans-serif;
+    font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,sans-serif;
     color: #F2EDEB;
     border-right: 1px solid #C1DAD7;
     border-bottom: 1px solid #C1DAD7;
@@ -59,9 +58,9 @@ td {
     border-right: 1px solid #C1DAD7;
     border-bottom: 1px solid #C1DAD7;
     padding: 6px 6px 6px 12px;
-}
-	
+}	
     </style>
+
     <script type="text/javascript" charset="utf-8">
 
         function stringToDate(_date, _format, _delimiter) {
@@ -86,15 +85,15 @@ td {
 	weekday[5] = "Fri";
 	weekday[6] = "Sat";
   
+       
+
 
 	var tableData = {
-	    start: "06/12/2016",//will replace by selected value
-	    end: "06/22/2016",//will replace by selected value
-	    year: 2016,
-	    month: 6,
+	    //start://startDateStr will replace by selected value
+	    //end: //will replace by selected value
 	    tableRowCell: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:00", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "00:00", "00:30", "01:00", "01:30", "02:00", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",  "06:00","06:30", "07:00", "07:30"],  /* show the verticle scale */
 	    days: [],// this value will be auto set base on start and end date.                                                            /* show the horizal  scale */
-	    timeCell: { 12: ["9:00", "10:00"], 13: ["12:00"], 14: [], 15: [], 16: [], 17: [], 18: [], 19: [], 20: ["12:00"], 21: ["14:00"] }
+	    timeCell: {  }
 	}
   
  
@@ -126,7 +125,7 @@ td {
 
 	    var dti = startDt;
 	    while (dti <= endDt) {
-	        tableData.days.push(dti.getDate());
+	        tableData.days.push($.datepicker.formatDate('mm/dd/yy', dti));
 	        dti.setDate(dti.getDate() + 1);
 	        // alert(dti.getDate());
 	    }
@@ -138,7 +137,7 @@ td {
 		var setTimeCell=function(day,timeString){
 			$("#our_table tr").filter(':first').children().each(function(){
 				var $this = $(this);
-				if($this.text()==day){
+				if($this.text().substring(0,10)==day){
 					var columnIndex = $this.index();
 					$("#our_table tr").each(function(){
 						$this = $(this);
@@ -181,15 +180,13 @@ td {
 		}
 
 		drawTimeLabel();
-		var init = function () {
-		    var n = new Date();
-		    n.setYear(tableData.year);
-		    n.setMonth(tableData.month - 1);
+		var init = function () {//initialise title
 		    $.each(tableData.days, function (index, value) {
-		        n.setDate(value);
-		        $("#our_table tr").filter(':first').children(':nth-child(' + (index + 2) + ')').text(value + " " + weekday[n.getDay()] + "");
-		    })
+		        var vDt = $.datepicker.parseDate('mm/dd/yy', value);
+		        $("#our_table tr").filter(':first').children(':nth-child(' + (index + 2) + ')').text(value + " " + weekday[vDt.getDay()] + "");
+		    }) //first:first row; children:each cell in table
 
+            //highlight cell
 		    var timecells = tableData.timeCell;
 		    $.each(timecells, function (key, value) {
 		        if (value.length > 0) {
@@ -223,24 +220,26 @@ td {
         });
 		
 		$('#btn_submit').click(function(){
-			 $( ".highlighted" ).each(function() {
-					
+			 $( ".highlighted" ).each(function() {		
 				   var time = $(this).siblings().filter(':first').text();
 				   var col_index = $(this).index()+1;
 				   var day=$(this).parent().siblings().filter(':first').children(':nth-child('+col_index+')').text();
 					
-					var selectedDatetime = day + "/" + tableData.month + " " + time;
-				   
+				   var selectedDatetime = day + "/" + tableData.month + " " + time;
 					alert(selectedDatetime);
                 });
-			
-			
 		});
 
 		function updateTimeTable(data){
 		    alert(data.d);
 		    return false;
 		}
+
+       
+
+        function OnSuccess(response) {
+            alert(response.d);
+        }
 
 		$('#btn_test').click(function () {
 		    $.ajax({
@@ -273,6 +272,8 @@ td {
 &nbsp;&nbsp;<asp:Label ID="lb_dateTo" runat="server" Text="To" Font-Names="Arial" ForeColor="White" Font-Bold="True"></asp:Label>
 &nbsp;
         <asp:TextBox ID="tb_dateTo" runat="server" Height="25px" ToolTip="Click to select end date"></asp:TextBox>
+    <input type="button" id="btn_test" value="Test" />
+    
 &nbsp;<asp:ImageButton ID="btn_view" runat="server" Height="25px" ImageUrl="~/Images/view.png" ToolTip="View Selected Dates" BorderStyle="None" ImageAlign="AbsBottom" OnClick="btn_view_Click" />
 &nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Schedule" />
     &nbsp;&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_howToUse" runat="server" Height="35px" ImageAlign="AbsBottom" ImageUrl="~/Images/Help.png" ToolTip="Help" />

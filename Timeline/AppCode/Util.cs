@@ -22,6 +22,7 @@ namespace Timeline
             return str.Replace("\"", "").Length == 0;
         }
 
+
         public static DateTime? StringToDate(String dateStr)
         {
             if (IsBlank(dateStr)) return null;

@@ -5,15 +5,42 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Timeline.AppCode;
+using Timeline.AppCode.BLL;
 using Timeline.AppCode.Domain;
 
 namespace Timeline
 {
     public partial class mySchedule : System.Web.UI.Page
     {
+        
+        public String timeCellStr;
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             this.saveChanges.Visible = false;
+            if (!IsPostBack)
+            {
+                this.tb_dateFrom.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now);
+                this.tb_dateTo.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now); ;
+
+             /*   ScheduleBLL scheduleBLL = new ScheduleBLL();
+                scheduleBLL.userId = (Int32)Session["userId"];
+                scheduleBLL.readSchedule();
+                List<Schedule> dss = scheduleBLL.scheduleList;
+                foreach(Schedule ss in dss)
+                {
+                    Console.WriteLine(ss.freeSlotTimeFrom);
+                    Console.WriteLine(ss.freeSlotTimeTo);
+                }
+
+
+                */
+
+            }
+
+
         }
 
         protected void btn_edit_Click(object sender, ImageClickEventArgs e)
@@ -23,6 +50,19 @@ namespace Timeline
 
         protected void btn_view_Click(object sender, ImageClickEventArgs e)
         {
+            ScheduleBLL scheduleBLL = new ScheduleBLL();
+            // scheduleBLL.userId = (Int32)Session["userId"];
+             scheduleBLL.userId = 1;
+             scheduleBLL.readSchedule();
+            List<Schedule> dss = scheduleBLL.scheduleList;
+            
+            foreach (Schedule ss in dss)
+            {
+                Console.WriteLine(ss.freeSlotTimeFrom);
+                Console.WriteLine(ss.freeSlotTimeTo);
+            }
+
+            this.timeCellStr = "\"06/13/2016\": [\"09:00\", \"10:00\"]";
             this.saveChanges.Visible = false;
         }
 
@@ -37,28 +77,12 @@ namespace Timeline
         }
 
         [System.Web.Services.WebMethod]
-        public static string GetCurrentTime(String start, String end)
+        public static string GetCurrentTime(string name)
         {
-
-            //    var tableData = {
-            //   year: 2016,
-            //  month: 6,
-            //  tableRowCell: ["9:00", "9:30", "10:00", "11:00", "12:00", "13:00", "14:00", "14:30", "15:00", "16:00", "17:00"],  /* show the verticle scale */
-            //      days: [],                                                            /* show the horizal  scale */
-            //  timeCell: { 12: ["9:00", "10:00"], 13: ["12:00"], 14: [], 15: [], 16: [], 17: [], 18: [], 19: [], 20: ["12:00"], 21: ["14:00"]}
-            //  }
-
-            var timeTable = new TimeTable();
-           // timeTable.start = Util.StringToDate("20/05/2015");
-           // timeTable.to = Util.StringToDate("20/05/2015");
-
-            String jsonString = JSONHelper.ToJSON(timeTable);
-
-            return jsonString;
+            return "Hello " + name + Environment.NewLine + "The Current Time is: "
+                + DateTime.Now.ToString();
         }
 
-       
 
-       
     }
 }

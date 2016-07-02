@@ -40,7 +40,7 @@ namespace Timeline.AppCode.DAL
 
 
                 var cmd = new SqlCommand(sql, conn);
-                var param = new SqlParameter[11];
+                var param = new SqlParameter[8];
                 param[0] = new SqlParameter("firstName", SqlDbType.VarChar, 50);
                 param[1] = new SqlParameter("lastName", SqlDbType.VarChar, 50);
                 param[2] = new SqlParameter("gender", SqlDbType.VarChar, 50);

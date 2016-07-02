@@ -372,11 +372,11 @@
             <asp:RequiredFieldValidator ID="rfv_confirmPassword" runat="server" ErrorMessage="Please confirm password!" ControlToValidate="tb_confirmedPassword" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td></tr>
         <tr><td colspan="3"><asp:CheckBox ID="cb_agree" runat="server" Text="I agree to all the terms and conditions and the terms of use." OnCheckedChanged="cb_agree_CheckedChanged" /></td></tr>
-        <tr><td colspan="3"><asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"
+        <tr><td colspan="3"><asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="false"
     OnServerValidate="CheckBoxRequired_ServerValidate"
     ClientValidationFunction="CheckBoxRequired_ClientValidate" Font-Bold="True" Font-Names="Arial" ForeColor="#CC3300">You must agree to terms and conditions to proceed.</asp:CustomValidator></td></tr>
          <tr><td></td><td class="auto-style2"> <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/register.png" Width="100px" OnClick="btn_submit_Click" ImageAlign="AbsBottom" /></td><td class="auto-style3"> &nbsp;</td></tr>
-    </table>
+    <%--</table>--%>
    
 
 </asp:Content>

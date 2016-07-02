@@ -60,7 +60,7 @@ namespace Timeline
             bool isAuth = false;
 
             this.isCorporate = false;
-            string sql = "select A.firstName, A.lastName, A.role" +
+            string sql = "select A.Id, A.firstName, A.lastName, A.role" +
 
                                 " From USER_INFO A Where A.email='" + emailAddress + "' and A.password='" + Password + "'";
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -70,8 +70,9 @@ namespace Timeline
 
             if (dr.Read())
             {
-                Session["userName"] = dr.GetString(0) + dr.GetString(1);
-                Session["role"] = dr.GetString(2);
+                Session["userId"] = dr.GetInt32(0);
+                Session["userName"] = dr.GetString(1) + dr.GetString(2);
+                Session["role"] = dr.GetString(3);
 
                 isAuth = true;
 
