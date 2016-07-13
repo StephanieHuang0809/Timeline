@@ -15,15 +15,13 @@ namespace Timeline
         
         public String timeCellStr;
 
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             this.saveChanges.Visible = false;
             if (!IsPostBack)
             {
                 this.tb_dateFrom.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now);
-                this.tb_dateTo.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now); ;
+                this.tb_dateTo.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now.AddDays(6)); ;
 
              /*   ScheduleBLL scheduleBLL = new ScheduleBLL();
                 scheduleBLL.userId = (Int32)Session["userId"];
@@ -34,13 +32,8 @@ namespace Timeline
                     Console.WriteLine(ss.freeSlotTimeFrom);
                     Console.WriteLine(ss.freeSlotTimeTo);
                 }
-
-
                 */
-
             }
-
-
         }
 
         protected void btn_edit_Click(object sender, ImageClickEventArgs e)
@@ -53,16 +46,15 @@ namespace Timeline
             ScheduleBLL scheduleBLL = new ScheduleBLL();
             // scheduleBLL.userId = (Int32)Session["userId"];
              scheduleBLL.userId = 1;
-             scheduleBLL.readSchedule();
-            List<Schedule> dss = scheduleBLL.scheduleList;
+             scheduleBLL.readSchedule(Util.StringToDate(this.tb_dateFrom.Text), Util.StringToDate(this.tb_dateTo.Text));
+            List<Schedule> scheduleList = scheduleBLL.scheduleList;
             
-            foreach (Schedule ss in dss)
+            foreach (Schedule schedule in scheduleList)
             {
-                Console.WriteLine(ss.freeSlotTimeFrom);
-                Console.WriteLine(ss.freeSlotTimeTo);
+                Console.WriteLine(schedule.freeSlotTimeFrom);
+                Console.WriteLine(schedule.freeSlotTimeTo);
             }
 
-            this.timeCellStr = "\"06/13/2016\": [\"09:00\", \"10:00\"]";
             this.saveChanges.Visible = false;
         }
 
@@ -76,13 +68,63 @@ namespace Timeline
             this.saveChanges.Visible = false;
         }
 
-        [System.Web.Services.WebMethod]
-        public static string GetCurrentTime(string name)
+        protected void btn_howToUse_Click(object sender, ImageClickEventArgs e)
         {
-            return "Hello " + name + Environment.NewLine + "The Current Time is: "
+
+        }
+
+        //This method is just for testing
+        [System.Web.Services.WebMethod]
+        public static string GetCurrentUserTimeCell(string name, string startDate, string endDate)
+        {
+            return "GetCurrentTime " + name + " " + startDate + " " + endDate + Environment.NewLine + "The Current Time is: "
                 + DateTime.Now.ToString();
         }
 
+        [System.Web.Services.WebMethod]
+        public static string saveTimeCells(List<String> timecells)
+        {
+            ScheduleBLL bll = new ScheduleBLL();
+            bll.userId = 1;
+            bll.update(timecells);
+
+            return "Successfully saved";
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string GetCurrentTime(string name, string startDate, string endDate)
+        {
+            ScheduleBLL scheduleBLL = new ScheduleBLL();
+            // scheduleBLL.userId = (Int32)Session["userId"];
+            scheduleBLL.userId = 1;
+            scheduleBLL.readSchedule(null,null);
+            List<Schedule> scheduleList = scheduleBLL.scheduleList;
+            List<string> allcells = new List<string>();//E.g 8:00 - 10:00 Then in allcells: 8:00, 8:30, 9:00, 9:30, 10:00
+            foreach (Schedule schedule in scheduleList)
+            {
+                List<String> cells = convertTimeLinetoTimeCell(schedule.freeSlotTimeFrom, schedule.freeSlotTimeTo);
+                allcells.AddRange(cells);
+            }
+
+            String json = allcells.ToJSON();
+
+            return json;
+        }
+
+        private static List<String> convertTimeLinetoTimeCell(DateTime start, DateTime end)
+        {
+            List<String> result = new List<string>();
+
+            DateTime dt = start;
+            while (dt < end)
+            {
+                var dtStr = String.Format("{0:MM/dd/yyyy HH:mm}", dt);
+                dt = dt.AddMinutes(30);
+                result.Add(dtStr);
+            }
+
+            return result;
+        }
 
     }
 }

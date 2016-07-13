@@ -22,12 +22,19 @@ namespace Timeline
             return str.Replace("\"", "").Length == 0;
         }
 
+        public static DateTime? StringToDateTime(String dateStr)
+        {
+            if (IsBlank(dateStr)) return null;
+
+            DateTime MyDateTime = DateTime.ParseExact(dateStr, "MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
+            return MyDateTime;
+        }
 
         public static DateTime? StringToDate(String dateStr)
         {
             if (IsBlank(dateStr)) return null;
 
-            DateTime MyDateTime = DateTime.ParseExact(dateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime MyDateTime = DateTime.ParseExact(dateStr, "MM/dd/yyyy", CultureInfo.InvariantCulture);
             return MyDateTime;
         }
 

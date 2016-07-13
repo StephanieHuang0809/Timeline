@@ -1,7 +1,103 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Root.Master" AutoEventWireup="true" CodeBehind="mySchedule.aspx.cs" Inherits="Timeline.mySchedule" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin.Master" AutoEventWireup="true" CodeBehind="mySchedule.aspx.cs" Inherits="Timeline.mySchedule" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!--    <script   src="https://code.jquery.com/jquery-3.0.0.js"   integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo="   crossorigin="anonymous"></script>-->
   <style type="text/css" media="screen">
+  h1 {
+  text-align: center;
+  font-family: Tahoma, Arial, sans-serif;
+  color: #06D85F;
+  margin: 80px 0;
+}
+
+.box {
+  width: 15%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #06D85F;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 10%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+#squareFree {
+    width:50px;
+    height:50px;
+    background:#FAAC58;
+}
+
  #our_table{
     width:70%;
     border-collapse:collapse;
@@ -62,6 +158,7 @@ td {
     </style>
 
     <script type="text/javascript" charset="utf-8">
+        var isEditing = false;
 
         function stringToDate(_date, _format, _delimiter) {
             var formatLowerCase = _format.toLowerCase();
@@ -84,18 +181,35 @@ td {
 	weekday[4] = "Thu";
 	weekday[5] = "Fri";
 	weekday[6] = "Sat";
-  
-       
-
 
 	var tableData = {
 	    //start://startDateStr will replace by selected value
 	    //end: //will replace by selected value
-	    tableRowCell: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:00", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "00:00", "00:30", "01:00", "01:30", "02:00", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",  "06:00","06:30", "07:00", "07:30"],  /* show the verticle scale */
+	    tableRowCell: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:00", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "00:00", "00:30", "01:00", "01:30", "02:00", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30"],  /* show the verticle scale */
 	    days: [],// this value will be auto set base on start and end date.                                                            /* show the horizal  scale */
-	    timeCell: {  }
+	    timeCell: [ /*"06/20/2016 10:00", "06/20/2016 11:00"*/], //this value will be set by ajax call
+	    toSave: []
 	}
-  
+
+	getTimeCellData = function (startMMddyyyy, endMMddyyyy) {
+	    $.ajax({
+	        type: "POST",
+	        url: "mySchedule.aspx/GetCurrentTime",
+	        data: '{name: "stephanie",startDate: "' + startMMddyyyy + '", endDate:"' + endMMddyyyy + '" }',
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        async: false,
+	        success: function (response) {
+	           // alert(response.d);
+	            var obj = eval("(" + response.d + ')'); //response.d : a string returned by GetCurrentTime() //eval: to convert string to obj
+	            tableData.timeCell = obj;
+	           // alert("ajax: "+tableData.timeCell);
+	        },
+	        failure: function (response) {
+	            alert(response.d);
+	        }
+	    });
+	}
  
 	$(function () {
 	    $("#<%=this.tb_dateFrom.ClientID%>").datepicker();
@@ -186,15 +300,14 @@ td {
 		        $("#our_table tr").filter(':first').children(':nth-child(' + (index + 2) + ')').text(value + " " + weekday[vDt.getDay()] + "");
 		    }) //first:first row; children:each cell in table
 
-            //highlight cell
+		    getTimeCellData(tableData.start, tableData.end);
 		    var timecells = tableData.timeCell;
-		    $.each(timecells, function (key, value) {
-		        if (value.length > 0) {
-		            $.each(value, function () {
-		                setTimeCell(key, this);
-		            });
-		        }
-		    })
+		    // alert("timecells:" + timecells);
+		    $.each(timecells, function (index, value) {
+		        var arr = value.split(" ");
+		        setTimeCell(arr[0], arr[1]);
+		    }
+		    );
 		}();
 		
 	
@@ -202,8 +315,10 @@ td {
       var isMouseDown = false;
       $("#our_table td")
         .mousedown(function () {
-          isMouseDown = true;
-          $(this).toggleClass("highlighted");
+            if (isEditing == true) {
+                isMouseDown = true;
+                $(this).toggleClass("highlighted");
+            }
           return false; // prevent text selection
         })
         .mouseover(function () {
@@ -219,23 +334,42 @@ td {
           isMouseDown = false;
         });
 		
-		$('#btn_submit').click(function(){
-			 $( ".highlighted" ).each(function() {		
-				   var time = $(this).siblings().filter(':first').text();
-				   var col_index = $(this).index()+1;
-				   var day=$(this).parent().siblings().filter(':first').children(':nth-child('+col_index+')').text();
-					
-				   var selectedDatetime = day + "/" + tableData.month + " " + time;
-					alert(selectedDatetime);
-                });
-		});
+      $('#btn_submit_test').click(function () {
+          tableData.toSave = [];
+          //For each highlighted cell, add it to tableData
+          $(".highlighted").each(function () {
+              var time = $(this).siblings().filter(':first').text();
+              var col_index = $(this).index() + 1;
+              var day = $(this).parent().siblings().filter(':first').children(':nth-child(' + col_index + ')').text().substring(0, 10);
+              var selectedDatetime = day + " " + time;
+              tableData.toSave.push(selectedDatetime);
+          });
+          //Convert javascrip object (tableData.toSave) to string (JSON)
+          var jsonTimeCellstr = JSON.stringify(tableData.toSave);
+          alert(jsonTimeCellstr);
+          $.ajax({
+              type: "POST",
+              url: "mySchedule.aspx/saveTimeCells",
+              // data: { timecells: tableData.toSave },
+              data: '{timecells:' + jsonTimeCellstr + '}',
+              contentType: "application/json; charset=utf-8",//response
+              dataType: "json",//request
+              async: false,//sync: so that when data is retrieved, the table is ready to highlight cells
+              success: function (response) {
+                  alert(response.d);//For testing purpose
+              },
+              failure: function (response) {
+                  alert(response.d);
+              }
+          });
+      });
+
 
 		function updateTimeTable(data){
 		    alert(data.d);
 		    return false;
 		}
-
-       
+   
 
         function OnSuccess(response) {
             alert(response.d);
@@ -258,7 +392,12 @@ td {
 		});
 
 		
-    });
+	});
+
+        $('#<%= btn_howToUse.ClientID %>').click(function () {
+            alert("Hello");
+            $('#popup1').show();
+            });
   </script>
 </asp:Content>
 
@@ -272,14 +411,31 @@ td {
 &nbsp;&nbsp;<asp:Label ID="lb_dateTo" runat="server" Text="To" Font-Names="Arial" ForeColor="White" Font-Bold="True"></asp:Label>
 &nbsp;
         <asp:TextBox ID="tb_dateTo" runat="server" Height="25px" ToolTip="Click to select end date"></asp:TextBox>
-    <input type="button" id="btn_test" value="Test" />
+   <!-- <input type="button" id="btn_test" value="Test" />-->
     
 &nbsp;<asp:ImageButton ID="btn_view" runat="server" Height="25px" ImageUrl="~/Images/view.png" ToolTip="View Selected Dates" BorderStyle="None" ImageAlign="AbsBottom" OnClick="btn_view_Click" />
 &nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Schedule" />
-    &nbsp;&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_howToUse" runat="server" Height="35px" ImageAlign="AbsBottom" ImageUrl="~/Images/Help.png" ToolTip="Help" />
-&nbsp;<p>
-        &nbsp;</p>
-
+    &nbsp;&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_howToUse" runat="server" Height="35px" ImageAlign="AbsBottom" ImageUrl="~/Images/Help.png" ToolTip="Help"  />
+   <!-- <input type="image" name="img" src="../Images/Help.png"onclick="#popup1"  style="height:35px; width:35px" title="Help"/> -->
+&nbsp;<p> &nbsp;</p><!--
+<div class="box" style="float:right;position:fixed">
+    <a class="button" href="#popup1">My Schedule</a><br />
+	<a class="button" href="#popup1">Event List</a><br />
+    <a class="button" href="#popup1">Friend List</a><br />
+</div>
+    
+<div id="popup1" class="overlay">
+	<div class="popup" style="text-align:center">
+		<h2>How to Use</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+            <p><div id="squareFree"></div>Free Slot</p>
+			Select your free slots by clicking on the relevant time slots.
+		</div>
+	</div>
+</div>-->
+       
+<div style="float:left">
         <table id="our_table" border="0">
 			<!--<tr>
 			<th class="auto-style2"></th><th class="auto-style2"></th><th class="auto-style2"></th><th class="auto-style2"></th><th class="auto-style2"></th><th class="auto-style2"></th><th class="auto-style2"></th><th class="auto-style2"></th>
@@ -306,6 +462,7 @@ td {
 			<td class="auto-style1"></td>
 			</tr> -->
 			</table>
+    </div>
 			<div id="saveChanges" runat="server" style ="text-align:center">
 			<table id="tbl_menu">	
 			<tr>
@@ -319,6 +476,6 @@ td {
                 <br />     
 			</th>
 			</tr>
-			</table>
+			</table><input id="btn_submit_test" type="button" value="btn_submit_test" />
                 </div>
 </asp:Content>
