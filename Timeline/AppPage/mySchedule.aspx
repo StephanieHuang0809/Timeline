@@ -2,7 +2,50 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!--    <script   src="https://code.jquery.com/jquery-3.0.0.js"   integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo="   crossorigin="anonymous"></script>-->
   <style type="text/css" media="screen">
-  h1 {
+  /*Button Style*/
+      @import "compass/css3";
+  .btn-big-red {
+          background-color: #C63702;
+          background-image: linear-gradient( 167deg, rgba(white, 0.1) 50%, rgba(black, 0) 55%), linear-gradient( top, rgba(white, 0.15), rgba(black, 0));
+          border-radius: 6px;
+          box-shadow: 0 0 0 1px #C63702 inset, 0 0 0 2px rgba(white, 0.15) inset, 0 8px 0 0 #AD3002, 0 8px 0 1px rgba(black, 0.4), 0 8px 8px 1px rgba(black, 0.5);
+          color: #FFF;
+          display: inline-block;
+          font-family: "Lucida Grande", Arial, sans-serif;
+          font-size: 18px;
+          font-weight: bold;
+          height: 50px;
+          letter-spacing: -1px;
+          line-height: 50px;
+          margin: 30px 0 10px;
+          position: relative;
+          text-align: center;
+          text-shadow: 0 1px 1px rgba(black, 0.5);
+          text-decoration: none !important;
+          top: 0;
+          width: 100px;
+          @include transition(0.15s);
+      }
+  .btn-big-red:hover, .btn-big-red:focus {
+    background-color: #D13902;
+    box-shadow: 
+      0 0 0 1px #C63702 inset,
+      0 0 0 2px rgba(white, 0.15) inset,
+      0 10px 0 0 #AD3002,
+      0 10px 0 1px rgba(black, 0.4),
+      0 10px 8px 1px rgba(black, 0.6);
+      top: -2px;
+  }
+  .btn-big-red:active {
+    box-shadow: 
+      0 0 0 1px #AD3002 inset,
+      0 0 0 2px rgba(white, 0.15) inset,
+      0 0 0 1px rgba(black, 0.4);
+    @include transform(translateY(10px));      
+  }
+
+ /*Popup window style*/
+ h1 {
   text-align: center;
   font-family: Tahoma, Arial, sans-serif;
   color: #06D85F;
@@ -21,17 +64,19 @@
 }
 
 .button {
-  font-size: 1em;
+  font-size: 15px;
+  font-weight:bold;
   padding: 10px;
-  color: #fff;
-  border: 2px solid #06D85F;
+  color: #190707;
+  background-color:white;
+  border: 2px solid #FFBF00;
   border-radius: 20px/50px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease-out;
 }
 .button:hover {
-  background: #06D85F;
+  background: #FACC2E;
 }
 
 .overlay {
@@ -98,6 +143,7 @@
     background:#FAAC58;
 }
 
+/*Table style*/
  #our_table{
     width:70%;
     border-collapse:collapse;
@@ -310,7 +356,13 @@ td {
 		    );
 		}();
 		
-	
+	 $('#<%= btn_edit.ClientID %>').click(function () {
+            isEditing = true;
+        });
+
+         $('#<%= btn_view.ClientID %>').click(function () {
+            isEditing = false;
+        });
 	
       var isMouseDown = false;
       $("#our_table td")
@@ -397,7 +449,7 @@ td {
         $('#<%= btn_howToUse.ClientID %>').click(function () {
             alert("Hello");
             $('#popup1').show();
-            });
+        });
   </script>
 </asp:Content>
 
@@ -464,18 +516,12 @@ td {
 			</table>
     </div>
 			<div id="saveChanges" runat="server" style ="text-align:center">
-			<table id="tbl_menu">	
-			<tr>
-			<th>
-                <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/save.png"  OnClick="btn_submit_Click"  ImageAlign="AbsBottom" ToolTip="Save Changes" Visible="true" Height="30px" Width="80px"/>
+
+                <asp:Button ID="btn_save" CssClass="button" Height="50px" Width="100px" runat="server" Text="Save" OnClick="btn_save_Click" ToolTip="Save Changes"/>
                 &nbsp;&nbsp;&nbsp;
-                <asp:ImageButton ID="btn_cancel" runat="server"  ImageAlign="AbsBottom" ImageUrl="~/Images/cancel.png" OnClick="btn_cancel_Click" ToolTip="Cancel Changes" Visible="true" Height="30px" Width="80px" />
+                <asp:Button ID="btn_cance" CssClass="button" Height="50px" Width="100px" runat="server" Text="Cancel" OnClick="btn_cancel_Click" ToolTip="Cancel Changes"/>
                 <br />
-                <br />     
-			</th>
-			</tr>
-			</table><input id="btn_submit_test" type="button" value="btn_submit_test" />
+                <br />
+                <input id="btn_submit_test" type="button" class="btn-big-red" value="Save" />
                 </div>
 </asp:Content>

@@ -142,8 +142,8 @@
     <Compile Include="AppCode\DAL\RegisterDAL.cs" />
     <Compile Include="AppCode\DAL\ScheduleDAL.cs" />
     <Compile Include="AppCode\BLL\ScheduleBLL.cs" />
-    <Content Include="AppCode\DAL\EventDAL.cs" />
-    <Content Include="AppCode\BLL\EventBLL.cs" />
+    <Compile Include="AppCode\DAL\EventDAL.cs" />
+    <Compile Include="AppCode\BLL\EventBLL.cs" />
     <Compile Include="AppCode\DBManager.cs" />
     <Compile Include="AppCode\BLL\RegisterBLL.cs" />
     <Compile Include="AppCode\Domain\TimeTable.cs" />

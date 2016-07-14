@@ -85,21 +85,21 @@ namespace Timeline {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl saveChanges;
         
         /// <summary>
-        /// btn_submit control.
+        /// btn_save control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_submit;
+        protected global::System.Web.UI.WebControls.Button btn_save;
         
         /// <summary>
-        /// btn_cancel control.
+        /// btn_cance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_cancel;
+        protected global::System.Web.UI.WebControls.Button btn_cance;
     }
 }

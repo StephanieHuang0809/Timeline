@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using Timeline.AppCode.Domain;
 
 namespace Timeline.AppCode.DAL
 {
@@ -27,7 +28,7 @@ namespace Timeline.AppCode.DAL
 
 
                 var cmd = new SqlCommand(sql, conn);
-                var param = new SqlParameter[11];
+                var param = new SqlParameter[5];
                 param[0] = new SqlParameter("name", SqlDbType.VarChar, 50);
                 param[1] = new SqlParameter("location", SqlDbType.VarChar, 50);
                 param[2] = new SqlParameter("from", SqlDbType.DateTime);
@@ -48,6 +49,7 @@ namespace Timeline.AppCode.DAL
                 }
 
                 cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

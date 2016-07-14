@@ -58,12 +58,12 @@ namespace Timeline
             this.saveChanges.Visible = false;
         }
 
-        protected void btn_submit_Click(object sender, ImageClickEventArgs e)
+        protected void btn_save_Click(object sender, EventArgs e)
         {
             this.saveChanges.Visible = false;
         }
 
-        protected void btn_cancel_Click(object sender, ImageClickEventArgs e)
+        protected void btn_cancel_Click(object sender, EventArgs e)
         {
             this.saveChanges.Visible = false;
         }

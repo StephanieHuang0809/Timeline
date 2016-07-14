@@ -335,7 +335,7 @@
      <p style="font-family: 'Comic Sans MS'; font-size: xx-large; font-weight: 900; color: #FFFFFF">
     Welcome to T:meLine</p>
     <table id="registration" border="0" style="width:85%;" >
-        <tr><td width="12%">First Name :</td><td class="auto-style2" width="15%"><asp:TextBox ID="tb_firstName" runat="server"></asp:TextBox></td>
+        <tr><td style="width:12%">First Name :</td><td class="auto-style2" style="width:15%"><asp:TextBox ID="tb_firstName" runat="server"></asp:TextBox></td>
             <td class="auto-style1">
                 <asp:RequiredFieldValidator ID="rfv_firstName" runat="server" ErrorMessage="Please enter first name!" ControlToValidate="tb_firstName" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td>
@@ -376,7 +376,7 @@
     OnServerValidate="CheckBoxRequired_ServerValidate"
     ClientValidationFunction="CheckBoxRequired_ClientValidate" Font-Bold="True" Font-Names="Arial" ForeColor="#CC3300">You must agree to terms and conditions to proceed.</asp:CustomValidator></td></tr>
          <tr><td></td><td class="auto-style2"> <asp:ImageButton ID="btn_submit" runat="server" ImageUrl="~/Images/register.png" Width="100px" OnClick="btn_submit_Click" ImageAlign="AbsBottom" /></td><td class="auto-style3"> &nbsp;</td></tr>
-    <%--</table>--%>
+    </table>
    
 
 </asp:Content>
