@@ -111,7 +111,8 @@
          <asp:Label ID="lb_intro" runat="server" Text="Select an event from the Event List below: " ForeColor="White" Font-Bold="True" Font-Names="Arial"></asp:Label>
     </p>
      <div id="list_event" style="float:left">
-
+         <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource_Events"></asp:ListView>
+         <asp:SqlDataSource ID="SqlDataSource_Events" runat="server"></asp:SqlDataSource>
      </div>
      <div id="new_event" class="popup" style="float:right;width:45%;height:60%;margin-right:5%">
          <h2 style="text-align:center">New Event</h2>

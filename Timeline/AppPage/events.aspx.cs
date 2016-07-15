@@ -23,7 +23,10 @@ namespace Timeline
         protected void btn_create_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
-            //EventBLL registerBLL = new EventBLL();
+            EventBLL eventBLL = new EventBLL();
+            //eventBLL.ownerUserId = (Int32)Session["userId"];
+            eventBLL.ownerUserId = 1;
+            
         }
 
         protected void btn_cancel_Click(object sender, EventArgs e)

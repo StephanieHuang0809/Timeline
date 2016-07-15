@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppPage\events.aspx" />
+    <Content Include="AppPage\groupEvent.aspx" />
     <Content Include="css\jquery-ui-1.11.4.custom\external\jquery\jquery.js" />
     <Content Include="css\jquery-ui-1.11.4.custom\images\ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
     <Content Include="css\jquery-ui-1.11.4.custom\images\ui-bg_dots-small_65_a6a6a6_2x2.png" />
@@ -139,11 +140,11 @@
     <Compile Include="AfterLogin.Master.designer.cs">
       <DependentUpon>AfterLogin.Master</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\BLL\EventBLL.cs" />
     <Compile Include="AppCode\DAL\RegisterDAL.cs" />
     <Compile Include="AppCode\DAL\ScheduleDAL.cs" />
     <Compile Include="AppCode\BLL\ScheduleBLL.cs" />
     <Compile Include="AppCode\DAL\EventDAL.cs" />
-    <Compile Include="AppCode\BLL\EventBLL.cs" />
     <Compile Include="AppCode\DBManager.cs" />
     <Compile Include="AppCode\BLL\RegisterBLL.cs" />
     <Compile Include="AppCode\Domain\TimeTable.cs" />
@@ -163,6 +164,13 @@
     </Compile>
     <Compile Include="AppPage\events.aspx.designer.cs">
       <DependentUpon>events.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppPage\groupEvent.aspx.cs">
+      <DependentUpon>groupEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppPage\groupEvent.aspx.designer.cs">
+      <DependentUpon>groupEvent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

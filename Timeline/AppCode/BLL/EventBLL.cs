@@ -7,22 +7,20 @@ using Timeline.AppCode.Domain;
 
 namespace Timeline.AppCode.BLL
 {
-    public class Event
+    public class EventBLL
     {
         public int ownerUserId { set; get; }
         public String name { set; get; }
         public String location { set; get; }
         public DateTime? from { set; get; }
         public DateTime? to { set; get; }
+        public String status { set; get}
         public List<User> participants { set; get; }
 
-        public void createEvent(String name,String location, DateTime from, DateTime to, List<User> participants)
+        public void createEvent(String name, String location, DateTime from, DateTime to, String status, int ownerUserId, List<User> participants)
         {
             EventDAL eventDal = new EventDAL();
-            eventDal.createEvent(name,location,from,to,participants);
+            eventDal.createEvent(name, location, from, to, status, ownerUserId, participants);
         }
-
     }
-
-    
 }
