@@ -469,23 +469,18 @@ td {
 &nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Schedule" />
     &nbsp;&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_howToUse" runat="server" Height="35px" ImageAlign="AbsBottom" ImageUrl="~/Images/Help.png" ToolTip="Help"  />
    <!-- <input type="image" name="img" src="../Images/Help.png"onclick="#popup1"  style="height:35px; width:35px" title="Help"/> -->
-&nbsp;<p> &nbsp;</p><!--
-<div class="box" style="float:right;position:fixed">
-    <a class="button" href="#popup1">My Schedule</a><br />
-	<a class="button" href="#popup1">Event List</a><br />
-    <a class="button" href="#popup1">Friend List</a><br />
-</div>
-    
+&nbsp;<p> &nbsp;</p>
+
 <div id="popup1" class="overlay">
 	<div class="popup" style="text-align:center">
 		<h2>How to Use</h2>
 		<a class="close" href="#">&times;</a>
 		<div class="content">
-            <p><div id="squareFree"></div>Free Slot</p>
+            <div id="squareFree"></div>Free Slot<br />
 			Select your free slots by clicking on the relevant time slots.
 		</div>
 	</div>
-</div>-->
+</div>
        
 <div style="float:left">
         <table id="our_table" border="0">

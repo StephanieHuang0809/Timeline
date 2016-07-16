@@ -10,7 +10,7 @@
 namespace Timeline.AppPage {
     
     
-    public partial class events {
+    public partial class eventList {
         
         /// <summary>
         /// lb_intro control.
@@ -22,13 +22,13 @@ namespace Timeline.AppPage {
         protected global::System.Web.UI.WebControls.Label lb_intro;
         
         /// <summary>
-        /// ListView1 control.
+        /// DetailsView_Events control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView ListView1;
+        protected global::System.Web.UI.WebControls.DetailsView DetailsView_Events;
         
         /// <summary>
         /// SqlDataSource_Events control.
@@ -146,5 +146,59 @@ namespace Timeline.AppPage {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_cancel;
+        
+        /// <summary>
+        /// lb_idealLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_idealLocation;
+        
+        /// <summary>
+        /// ddl_idealLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_idealLocation;
+        
+        /// <summary>
+        /// lb_interests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_interests;
+        
+        /// <summary>
+        /// ddl_interests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_interests;
+        
+        /// <summary>
+        /// btn_ok control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_ok;
+        
+        /// <summary>
+        /// btn_cancelSuggestion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_cancelSuggestion;
     }
 }

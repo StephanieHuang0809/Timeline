@@ -7,12 +7,18 @@
     $(function () {
         $("#<%=this.tb_dateFrom.ClientID%>").datepicker();
 	    $("#<%=this.tb_dateTo.ClientID%>").datepicker();
-    })
+    });
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <p style="font-family: 'Comic Sans MS'; font-size:medium; font-weight: 900; color: #FFFFFF">
-       Event: <asp:label runat="server"></asp:label></p>
+       Event: <asp:label runat="server" ID="lb_eventName"></asp:label>&nbsp;&nbsp;&nbsp;
+       Location: <asp:label runat="server" ID="lb_location"></asp:label>&nbsp;&nbsp;&nbsp;
+       <asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Event" />
+    <br />
+       Date: <asp:label runat="server" ID="lb_date"></asp:label>&nbsp;&nbsp;&nbsp;
+       Time: <asp:label runat="server" ID="lb_time"></asp:label>
+    </p>
     <br />
     <asp:Label ID="lb_dateFrom" runat="server" Text=" Date From" ForeColor="White" Font-Bold="True" Font-Names="Arial"></asp:Label>
    
@@ -29,4 +35,5 @@
     <div id="chat">
 
     </div>
-</asp:Content>
+    <asp:SqlDataSource ID="SqlDataSource_Events" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.Id, E.eventName, E.eventDateFrom FROM EVENT_INFO E INNER JOIN EVENT_PARTICIPANTS P ON E.Id = P.eventId INNER JOIN USER_INFO U ON P.userId = U.Id WHERE U.Id = 1"></asp:SqlDataSource>
+    </asp:Content>

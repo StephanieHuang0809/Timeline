@@ -79,8 +79,8 @@
     <div class="left">
   <ul>
     <li><a href="mySchedule.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/calendar.png" Width="30px" Height="30" ID="nav_schedule" BorderStyle="None" /></a></li>
-    <li><a href="events.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/gathering.png" Width="30px" Height="30" ID="nav_events" BorderStyle="None" /></a></li>
-   <li><a href="events.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/friends.png" Width="30px" Height="30" ID="nav_friends" BorderStyle="None" /></a></li>
+    <li><a href="eventList.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/gathering.png" Width="30px" Height="30" ID="nav_events" BorderStyle="None" /></a></li>
+   <li><a href="eventList.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/friends.png" Width="30px" Height="30" ID="nav_friends" BorderStyle="None" /></a></li>
   </ul>
   
   <a href="#" class="open">&rarr;</a>

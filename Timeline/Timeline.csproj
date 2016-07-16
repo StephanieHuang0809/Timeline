@@ -66,7 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppPage\events.aspx" />
+    <Content Include="AppPage\eventList.aspx" />
     <Content Include="AppPage\groupEvent.aspx" />
     <Content Include="css\jquery-ui-1.11.4.custom\external\jquery\jquery.js" />
     <Content Include="css\jquery-ui-1.11.4.custom\images\ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
@@ -158,12 +158,12 @@
     <Compile Include="AppPage\corporateHome.aspx.designer.cs">
       <DependentUpon>corporateHome.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AppPage\events.aspx.cs">
-      <DependentUpon>events.aspx</DependentUpon>
+    <Compile Include="AppPage\eventList.aspx.cs">
+      <DependentUpon>eventList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AppPage\events.aspx.designer.cs">
-      <DependentUpon>events.aspx</DependentUpon>
+    <Compile Include="AppPage\eventList.aspx.designer.cs">
+      <DependentUpon>eventList.aspx</DependentUpon>
     </Compile>
     <Compile Include="AppPage\groupEvent.aspx.cs">
       <DependentUpon>groupEvent.aspx</DependentUpon>

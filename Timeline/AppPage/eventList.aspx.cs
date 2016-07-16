@@ -4,19 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Timeline.AppCode;
 using Timeline.AppCode.BLL;
-using Timeline.AppCode.Domain;
 
-namespace Timeline
+namespace Timeline.AppPage
 {
-    public partial class events : System.Web.UI.Page
+    public partial class eventList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-            }
 
         }
 
@@ -27,17 +22,23 @@ namespace Timeline
             //eventBLL.ownerUserId = (Int32)Session["userId"];
             eventBLL.ownerUserId = 1;
             
+
         }
 
         protected void btn_cancel_Click(object sender, EventArgs e)
         {
-            foreach (var item in Page.Controls)
-            {
-                if (item is TextBox)
-                {
-                    ((TextBox)item).Text = "";
-                }
-            }
+
         }
+
+        protected void btn_ok_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btn_cancelSuggestion_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

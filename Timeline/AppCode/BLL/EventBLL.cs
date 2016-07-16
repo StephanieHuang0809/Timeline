@@ -14,7 +14,7 @@ namespace Timeline.AppCode.BLL
         public String location { set; get; }
         public DateTime? from { set; get; }
         public DateTime? to { set; get; }
-        public String status { set; get}
+        public String status { set; get; }
         public List<User> participants { set; get; }
 
         public void createEvent(String name, String location, DateTime from, DateTime to, String status, int ownerUserId, List<User> participants)
