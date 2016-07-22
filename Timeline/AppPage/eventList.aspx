@@ -128,9 +128,10 @@
                  <asp:BoundField DataField="Id" HeaderText="Event ID" Visible="False" />
                  <asp:TemplateField ShowHeader="False">
                      <ItemTemplate>
-                         <asp:HyperLink ID="HyperLink1" runat="server" Text='<%# Eval("eventName") %>' NavigateUrl='<%# "~/AppPage/groupEvent.aspx?id="+Eval("Id") %>' ToolTip="View event"></asp:HyperLink>
+                         <asp:HyperLink ID="hl_eventName" runat="server" Text='<%# Eval("eventName") %>' NavigateUrl='<%# "~/AppPage/groupEvent.aspx?id="+Eval("Id") %>' ToolTip="View event"></asp:HyperLink>
                          &nbsp;-
-                         <asp:Label ID="lb_startDate" runat="server" Text='<%# Eval("eventDateFrom") %>' ToolTip="Start Date"></asp:Label>
+                         <asp:Label ID="lb_startDate" runat="server" Text='<%# string.Format("{0:MM/dd/yyyy}",  Convert.ToDateTime(Eval("eventDateFrom")))  %>' ToolTip="Start Date"></asp:Label>
+                         &nbsp;<asp:ImageButton ID="btn_removeEvent" runat="server"  ImageUrl="~/Images/remove.png" Width="25px" Height="25px" ImageAlign="AbsBottom" Style="float:right"/>
                      </ItemTemplate>
                      <ControlStyle ForeColor="Black" />
                  </asp:TemplateField>

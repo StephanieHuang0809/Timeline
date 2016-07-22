@@ -160,40 +160,54 @@ td {
 		 * highlight a cell by give a date and a time string
 		 */
 	    var setTimeCell = function (day, timeString, userName, codeCode, lapNumber, lapNames) {
-	        this.showLapInfo = function () {
-	            $this = $(this);
-	            var divObj = $this.parent.find("div").closest();
-	            divObj.show();
+	        var lapDivNumber = 0;
+	        var setTimeCell = function (day, timeString, userName, codeCode, lapNumber, lapNames) {
+	            this.showLapInfo = function (divObj) {
+
+	                var htmlDiv = $(divObj);
+
+	                if (htmlDiv.is(':visible')) {
+	                    htmlDiv.hide();
+	                } else {
+	                    htmlDiv.show();
+	                }
+
+	            }
+	            console.log("day:" + day + " timeString:" + timeString);
+	            $("#our_table tr").filter(':first').children().each(function () {
+	                var $this = $(this);
+	                if ($this.text().substring(0, 10) == day) {
+	                    var columnIndex = $this.index();
+	                    $("#our_table tr").each(function () {
+	                        $this = $(this);
+	                        var firstCellString = $this.find('th').text();
+	                        if (firstCellString == timeString) {
+	                            var rowIndex = $this.index();
+	                            //$this.children(':nth-child('+(columnIndex+1)+')').toggleClass("{ color: #261F1D;background-color: #E5C37E;}");
+	                            $this.children(':nth-child(' + (columnIndex + 1) + ')').toggleClass("highlighted");
+	                            var lapValue = $this.children(':nth-child(' + (columnIndex + 1) + ')').text();
+	                            if (lapValue != null && lapValue < lapNumber && lapNumber != 1) {
+	                                var tdshow = $this.children(':nth-child(' + (columnIndex + 1) + ')');
+	                                //$this.children(':nth-child(' + (columnIndex + 1) + ')').text(lapNumber + userName + lapNames);
+	                                tdshow.text();
+	                                //userName + lapNames
+	                                //<div style="visibility:visible">ddddd</div>
+	                                var lapDivName = "overLapDiv" + lapDivNumber++;
+	                                var listr = "<li>" + userName + "</li>";
+	                                $.each(lapNames, function (i, v) {
+	                                    listr += "<li>" + v + "</li>";
+	                                })
+
+	                                var newDiv = "<div id=\"" + lapDivName + "\" style='display:none'><lu>" + listr + "</lu></div>";
+
+	                                tdshow.append(newDiv);
+	                                tdshow.append('<a href="javascript:showLapInfo(' + lapDivName + ');">' + lapNumber + '</a>');
+	                            }
+	                        }
+	                    });
+	                }
+	            });
 	        }
-	        console.log("day:"+day + " timeString:"+timeString);
-			$("#our_table tr").filter(':first').children().each(function(){
-				var $this = $(this);
-				if($this.text().substring(0,10)==day){
-					var columnIndex = $this.index();
-					$("#our_table tr").each(function(){
-						$this = $(this);
-						var firstCellString = $this.find('th').text();
-						if(firstCellString==timeString){
-							var rowIndex = $this.index();
-							//$this.children(':nth-child('+(columnIndex+1)+')').toggleClass("{ color: #261F1D;background-color: #E5C37E;}");
-							$this.children(':nth-child(' + (columnIndex + 1) + ')').toggleClass("highlighted");
-							var lapValue = $this.children(':nth-child(' + (columnIndex + 1) + ')').text();
-							if (lapValue != null && lapValue < lapNumber && lapNumber != 1) {
-							    var tdshow = $this.children(':nth-child(' + (columnIndex + 1) + ')');
-							    //$this.children(':nth-child(' + (columnIndex + 1) + ')').text(lapNumber + userName + lapNames);
-							    tdshow.text();
-
-							    //userName + lapNames
-							    //<div style="visibility:visible">ddddd</div>
-							    var newDiv = "<div style='visibility:visible'>" + userName + lapNames + "</div>";
-							    tdshow.append(newDiv);
-
-							    tdshow.append('<a href="#" onclick="showLapInfo();">' + lapNumber + '</a>');
-							}
-						}
-					});
-				}
-			});
 		}
 	
 		function drawTable() {
@@ -335,7 +349,7 @@ td {
   </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p style="font-family: 'Comic Sans MS'; font-size:medium; font-weight: 900; color: #FFFFFF">
+    <p style="font-family: 'Comic Sans MS'; font-size:large; font-weight: 900; color: #FFFFFF">
        Event: <asp:label runat="server" ID="lb_eventName"></asp:label>&nbsp;&nbsp;&nbsp;
        Location: <asp:label runat="server" ID="lb_location"></asp:label>&nbsp;&nbsp;&nbsp;
        <asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Event" />
@@ -351,7 +365,7 @@ td {
 &nbsp;
     <asp:TextBox ID="tb_dateTo" runat="server" Height="25px" ToolTip="Click to select end date"></asp:TextBox>
 &nbsp;<asp:ImageButton ID="btn_view" runat="server" Height="25px" ImageUrl="~/Images/view.png" ToolTip="View Selected Dates" BorderStyle="None" ImageAlign="AbsBottom" OnClick="btn_view_Click" />
-    <br />
+    <br /><br />
     <div id="groupSchedule">
         <table id="our_table" border="0">
 			<!--<tr>
@@ -381,15 +395,16 @@ td {
 			</table>
     </div>
     <br />
-    <div id="div_chat">
-<table>
+     <p style="font-family: 'Comic Sans MS'; font-size:large; font-weight: 900; color: #FFFFFF">Message Board</p>
+<div id="div_chat" style="width:83%">
+<table style="width:85%">
             <tr>
                 <td>
                     <table id="tbl_chatlogs" style="width:100%;border:none">
-                        <tr>
-                            <td style="width:20%"></td>
-                            <td style="width:20%"></td>
-                            <td style="width:60%"></td>
+                        <tr style="border:none">
+                            <td style="width:15%;border:none"></td>
+                            <td style="width:20%;border:none"></td>
+                            <td style="width:65%;border:none"></td>
                         </tr>
                     </table>
                 </td>
@@ -398,12 +413,12 @@ td {
                 <td>
                     <input id="txt_send" type="text" size="50" />
                     <input id="btn_send" type="button" value="Send" />
-                </td>
+                    <asp:HiddenField ID="hd_eventId" runat="server"  />
 
-                <asp:HiddenField ID="hd_eventId" runat="server"  />
+                </td>
 
             </tr>
         </table>
-    </div>
+    </div><br /><br />
     <asp:SqlDataSource ID="SqlDataSource_Events" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.Id, E.eventName, E.eventDateFrom FROM EVENT_INFO E INNER JOIN EVENT_PARTICIPANTS P ON E.Id = P.eventId INNER JOIN USER_INFO U ON P.userId = U.Id WHERE U.Id = 1"></asp:SqlDataSource>
     </asp:Content>

@@ -101,6 +101,7 @@
     <Content Include="Images\outings.png" />
     <Content Include="Images\party.png" />
     <Content Include="Images\register.png" />
+    <Content Include="Images\remove.png" />
     <Content Include="Images\save.png" />
     <Content Include="Images\submit.png" />
     <Content Include="AppPage\login.aspx" />
