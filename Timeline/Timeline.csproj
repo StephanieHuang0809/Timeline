@@ -140,13 +140,19 @@
     <Compile Include="AfterLogin.Master.designer.cs">
       <DependentUpon>AfterLogin.Master</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\BLL\ChatBLL.cs" />
     <Compile Include="AppCode\BLL\EventBLL.cs" />
+    <Compile Include="AppCode\BLL\FriendBLL.cs" />
+    <Compile Include="AppCode\DAL\ChatDAL.cs" />
+    <Compile Include="AppCode\DAL\FriendDAL.cs" />
     <Compile Include="AppCode\DAL\RegisterDAL.cs" />
     <Compile Include="AppCode\DAL\ScheduleDAL.cs" />
     <Compile Include="AppCode\BLL\ScheduleBLL.cs" />
     <Compile Include="AppCode\DAL\EventDAL.cs" />
     <Compile Include="AppCode\DBManager.cs" />
     <Compile Include="AppCode\BLL\RegisterBLL.cs" />
+    <Compile Include="AppCode\Domain\Chat.cs" />
+    <Compile Include="AppCode\Domain\TimeCell.cs" />
     <Compile Include="AppCode\Domain\TimeTable.cs" />
     <Compile Include="AppCode\Domain\User.cs" />
     <Compile Include="AppCode\JSONHelper.cs" />

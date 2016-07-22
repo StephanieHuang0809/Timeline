@@ -184,6 +184,24 @@ namespace Timeline.AppPage {
         protected global::System.Web.UI.WebControls.DropDownList ddl_interests;
         
         /// <summary>
+        /// DetailsView_CorporateEvents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DetailsView DetailsView_CorporateEvents;
+        
+        /// <summary>
+        /// SqlDataSource_Corporate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_Corporate;
+        
+        /// <summary>
         /// btn_ok control.
         /// </summary>
         /// <remarks>

@@ -21,7 +21,10 @@ namespace Timeline.AppPage
             EventBLL eventBLL = new EventBLL();
             //eventBLL.ownerUserId = (Int32)Session["userId"];
             eventBLL.ownerUserId = 1;
-            
+            eventBLL.name = this.tb_name.Text;
+            eventBLL.location = this.tb_location.Text;
+            eventBLL.from = Convert.ToDateTime(this.tb_dateFrom.Text);
+            eventBLL.to = Convert.ToDateTime(this.tb_dateTo.Text);
 
         }
 

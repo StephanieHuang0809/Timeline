@@ -12,6 +12,7 @@ namespace Timeline.AppCode.Domain
         public string firstName { set; get; }
         public string lastName { set; get; }
         public string role { set; get; }
+        public string email { set; get; }
 
         public void loadSelf()
         {

@@ -38,6 +38,13 @@ namespace Timeline
             return MyDateTime;
         }
 
+        public static DateTime? StringToDateTimeHHmmSS(String dateStr)
+        {
+            if (IsBlank(dateStr)) return null;
+
+            DateTime MyDateTime = DateTime.ParseExact(dateStr, "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+            return MyDateTime;
+        }
 
         public static bool checkAllBlankInput(string[] inputs)
         {
