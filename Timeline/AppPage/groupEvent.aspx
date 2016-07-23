@@ -159,56 +159,65 @@ td {
 		/**
 		 * highlight a cell by give a date and a time string
 		 */
+	    var lapDivNumber = 0;
 	    var setTimeCell = function (day, timeString, userName, codeCode, lapNumber, lapNames) {
-	        var lapDivNumber = 0;
-	        var setTimeCell = function (day, timeString, userName, codeCode, lapNumber, lapNames) {
-	            this.showLapInfo = function (divObj) {
+	        this.showLapInfo = function (divObj) {
 
-	                var htmlDiv = $(divObj);
+	            var htmlDiv = $(divObj);
 
-	                if (htmlDiv.is(':visible')) {
-	                    htmlDiv.hide();
-	                } else {
-	                    htmlDiv.show();
-	                }
-
+	            if (htmlDiv.is(':visible')) {
+	                htmlDiv.hide();
+	            } else {
+	                htmlDiv.show();
 	            }
-	            console.log("day:" + day + " timeString:" + timeString);
-	            $("#our_table tr").filter(':first').children().each(function () {
-	                var $this = $(this);
-	                if ($this.text().substring(0, 10) == day) {
-	                    var columnIndex = $this.index();
-	                    $("#our_table tr").each(function () {
-	                        $this = $(this);
-	                        var firstCellString = $this.find('th').text();
-	                        if (firstCellString == timeString) {
-	                            var rowIndex = $this.index();
-	                            //$this.children(':nth-child('+(columnIndex+1)+')').toggleClass("{ color: #261F1D;background-color: #E5C37E;}");
-	                            $this.children(':nth-child(' + (columnIndex + 1) + ')').toggleClass("highlighted");
-	                            var lapValue = $this.children(':nth-child(' + (columnIndex + 1) + ')').text();
-	                            if (lapValue != null && lapValue < lapNumber && lapNumber != 1) {
-	                                var tdshow = $this.children(':nth-child(' + (columnIndex + 1) + ')');
-	                                //$this.children(':nth-child(' + (columnIndex + 1) + ')').text(lapNumber + userName + lapNames);
-	                                tdshow.text();
-	                                //userName + lapNames
-	                                //<div style="visibility:visible">ddddd</div>
-	                                var lapDivName = "overLapDiv" + lapDivNumber++;
-	                                var listr = "<li>" + userName + "</li>";
-	                                $.each(lapNames, function (i, v) {
-	                                    listr += "<li>" + v + "</li>";
-	                                })
 
-	                                var newDiv = "<div id=\"" + lapDivName + "\" style='display:none'><lu>" + listr + "</lu></div>";
-
-	                                tdshow.append(newDiv);
-	                                tdshow.append('<a href="javascript:showLapInfo(' + lapDivName + ');">' + lapNumber + '</a>');
-	                            }
-	                        }
-	                    });
-	                }
-	            });
 	        }
-		}
+	        console.log("day:" + day + " timeString:" + timeString);
+	        $("#our_table tr").filter(':first').children().each(function () {
+	            var $this = $(this);
+	            if ($this.text().substring(0, 10) == day) {
+	                var columnIndex = $this.index();
+	                $("#our_table tr").each(function () {
+	                    $this = $(this);
+	                    var firstCellString = $this.find('th').text();
+	                    if (firstCellString == timeString) {
+	                        var rowIndex = $this.index();
+	                        
+	                        var toToggleTD = $this.children(':nth-child(' + (columnIndex + 1) + ')');
+	                        if (toToggleTD.hasClass('highlighted')) {
+                                toggleClass("highlighted");
+	                        }
+	                        
+	                        var lapValue = $this.children(':nth-child(' + (columnIndex + 1) + ')').text();
+	                        if (lapValue != null && lapValue != "" && lapValue < lapNumber && lapNumber != 1) {
+	                            var tdshow = $this.children(':nth-child(' + (columnIndex + 1) + ')');
+	                            //$this.children(':nth-child(' + (columnIndex + 1) + ')').text(lapNumber + userName + lapNames);
+	                            tdshow.text();
+	                            //userName + lapNames
+	                            //<div style="visibility:visible">ddddd</div>
+	                            var lapDivName = "overLapDiv" + lapDivNumber++;
+	                            var listr = "<li>" + userName + "</li>";
+	                            $.each(lapNames, function (i, v) {
+	                                listr += "<li>" + v + "</li>";
+	                            })
+
+
+
+
+	                            var newDiv = "<div id=\"" + lapDivName + "\" style='display:none'><lu>" + listr + "</lu></div>";
+
+	                            tdshow.append(newDiv);
+
+
+
+
+	                            tdshow.append('<a href="javascript:showLapInfo(' + lapDivName + ');">' + lapNumber + '</a>');
+	                        }
+	                    }
+	                });
+	            }
+	        });
+	    }
 	
 		function drawTable() {
 		    var titleRowHtml = "<th></th>";
@@ -259,7 +268,7 @@ td {
 		
 	
 	
-      var isMouseDown = false;
+    /*  var isMouseDown = false;
       $("#our_table td")
         .mousedown(function () {
           isMouseDown = true;
@@ -283,7 +292,7 @@ td {
       $(document)
         .mouseup(function () {
           isMouseDown = false;
-        });
+        });*/
 
 
       window.setInterval(function () {

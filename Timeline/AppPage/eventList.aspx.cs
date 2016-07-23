@@ -25,7 +25,19 @@ namespace Timeline.AppPage
             eventBLL.location = this.tb_location.Text;
             eventBLL.from = Convert.ToDateTime(this.tb_dateFrom.Text);
             eventBLL.to = Convert.ToDateTime(this.tb_dateTo.Text);
+            eventBLL.status = this.ddl_status.SelectedValue.ToString();
 
+            foreach (GridViewRow row in this.gv_friends.Rows)
+            {
+                CheckBox check = row.Cells[3].FindControl("cb_select") as CheckBox;
+                if (check.Checked)
+                {
+                    string friendId = row.Cells[0].Text;
+                    eventBLL.participantIdList.Add(Convert.ToInt32(friendId));
+                }
+            }
+
+           // eventBLL.createEvent();
         }
 
         protected void btn_cancel_Click(object sender, EventArgs e)

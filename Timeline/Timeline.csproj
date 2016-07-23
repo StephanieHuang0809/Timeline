@@ -98,6 +98,7 @@
     <Content Include="Images\gathering.png" />
     <Content Include="Images\Help.png" />
     <Content Include="Images\login.png" />
+    <Content Include="Images\notification.png" />
     <Content Include="Images\outings.png" />
     <Content Include="Images\party.png" />
     <Content Include="Images\register.png" />

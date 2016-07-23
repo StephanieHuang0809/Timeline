@@ -66,6 +66,20 @@ namespace Timeline
             return true;
         }
 
+        public static string randomColorCode()
+        {
+            Random rd = new Random();
+            int red = rd.Next(0, 255);
+            int green = rd.Next(0, 255);
+            int blue = rd.Next(0, 255);
 
+            string hexStrRed = red.ToString("X2");
+            string hexStrGreen = red.ToString("X2");
+            string hexStrBlue = red.ToString("X2");
+
+            string colorCode = hexStrRed + hexStrGreen + hexStrBlue;
+
+            return colorCode;
+        }
     }
 }

@@ -162,12 +162,31 @@
                  <td style="width:10px"><asp:Label ID="lb_dateTo" runat="server" Text=" To "></asp:Label></td>
                  <td style="width:20%"><asp:TextBox ID="tb_dateTo" runat="server"></asp:TextBox></td>
              </tr>
-             <tr><td colspan="4"><asp:HyperLink ID="hl_inviteFriends" runat="server" ForeColor="Black" Font-Underline="True" >Invite Friends</asp:HyperLink></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-             </tr>
+             <tr>
+                 <td>Status: </td>
+                 <td style="width:20%">
+                     <asp:DropDownList ID="ddl_status" runat="server">
+                         <asp:ListItem>Pending</asp:ListItem>
+                         <asp:ListItem>Confirmed</asp:ListItem>
+                     </asp:DropDownList>
+                 </td></tr>
+             <tr><td>&nbsp;</td></tr>
          </table>
+          <h5 style="text-align:left">Invite Friends</h5>
+         <asp:GridView ID="gv_friends" runat="server" AutoGenerateColumns="False" DataKeyNames="Id,Id1" DataSourceID="SqlDataSource_Friends" Width="206px">
+             <Columns>
+                 <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" Visible="False" />
+                 <asp:BoundField DataField="firstName" HeaderText="firstName" SortExpression="firstName" />
+                 <asp:BoundField DataField="lastName" HeaderText="lastName" SortExpression="lastName" />
+                 <asp:TemplateField>
+                     <ItemTemplate>
+                         <asp:CheckBox ID="cb_select" runat="server" />
+                     </ItemTemplate>
+                 </asp:TemplateField>
+             </Columns>
+         </asp:GridView>
+         <br />
+         <asp:SqlDataSource ID="SqlDataSource_Friends" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT U.Id, U.firstName, U.lastName, U.gender, U.birthday, U.email, U.occupation, F.Id, F.userId, F.userFriendId FROM USER_INFO U INNER JOIN FRIENDS F ON U.Id = F.userFriendId WHERE F.userId = 1" ></asp:SqlDataSource>
          <br /><br /><br /><br /><br />
          <div id="button" style="text-align:center">
                 <asp:Button ID="btn_create" CssClass="button" Height="50px" Width="100px" runat="server" Text="Create" ToolTip="Create Event" OnClick="btn_create_Click"/>
@@ -197,7 +216,7 @@
                      </asp:DropDownList></td>
              </tr>
              <tr><td colspan="2">
-                 <asp:DetailsView ID="DetailsView_CorporateEvents" runat="server" Height="50px" Width="282px" AutoGenerateRows="False" DataSourceID="SqlDataSource_Corporate" >
+                 <asp:DetailsView ID="DetailsView_CorporateEvents" runat="server" Height="50px" Width="284px" AutoGenerateRows="False" DataSourceID="SqlDataSource_Corporate" >
                      <EmptyDataTemplate>
                          Sorry, no results are found.
                      </EmptyDataTemplate>
@@ -217,7 +236,6 @@
                      </Fields>
                  </asp:DetailsView>
                  </td>
-                 <td></td>
              </tr>
          </table>
          <asp:SqlDataSource ID="SqlDataSource_Corporate" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.eventName, E.eventLocation, E.locationRegion, E.category, E.dateFrom, E.dateTo, E.url, C.name, C.email, C.website  FROM CORPORATE C INNER JOIN CORPORATE_EVENT E ON C.Id = E.userId"></asp:SqlDataSource>
@@ -228,4 +246,5 @@
                 <asp:Button ID="btn_cancelSuggestion" CssClass="button" Height="50px" Width="100px" runat="server" Text="Cancel" OnClick="btn_cancelSuggestion_Click" />
          </div>
      </div>
+ 
 </asp:Content>

@@ -10,7 +10,7 @@ namespace Timeline.AppCode.DAL
 {
     public class EventDAL
     {
-        public void createEvent(String name, String location, DateTime from, DateTime to, String status, int ownerUserId, List<User> participants)
+        public void createEvent(String name, String location, DateTime from, DateTime to, String status, int ownerUserId, List<int> participantIdList)
         {
             SqlConnection conn = DBManager.getSqlConnection();
             conn.Open();
@@ -52,7 +52,26 @@ namespace Timeline.AppCode.DAL
                 }
 
                 cmd.CommandType = CommandType.Text;
+                int eventId = (int)cmd.ExecuteScalar();//return eventId once event is created
+                sql = "INSERT EVENT_PARTICIPANTS (eventId,userId,colorCode)" +
+                           " VALUES ( " +
+                           "@eventId, " +
+                           "@userId, " +
+                           "@colorCode)";
+
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("eventId", eventId);
+                cmd.Parameters.AddWithValue("userId", ownerUserId);
+                cmd.Parameters.AddWithValue("colorCode", Util.randomColorCode());
                 cmd.ExecuteNonQuery();
+
+                foreach (int participantId in participantIdList)
+                {
+                    cmd.Parameters.AddWithValue("eventId",eventId);
+                    cmd.Parameters.AddWithValue("userId",participantId);
+                    cmd.Parameters.AddWithValue("colorCode",Util.randomColorCode());
+                    cmd.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
