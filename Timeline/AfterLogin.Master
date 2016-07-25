@@ -81,6 +81,7 @@
             height:100%;
             background:#171717;
             transition: width ease .5s;
+            z-index:100;
         }
 
         body.open-nav {
@@ -190,6 +191,7 @@
     <li><a href="eventList.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/gathering.png" Width="30px" Height="30" ID="nav_events" BorderStyle="None" /></a></li>
     <li><a href="#" id='friendListIcon' onclick="retrieve();"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/friends.png" Width="30px" Height="30" ID="nav_friends" BorderStyle="None" /></a></li>
     <li><a href="#" id='notification' onclick="retrieve();"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/notification.png" Width="30px" Height="30" ID="Image1" BorderStyle="None" /></a></li>
+    <li><a href="login.aspx" onclick="clearSession();"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/logout.png" Width="30px" Height="30" ID="nav_logout" BorderStyle="None" /></a></li>
   </ul>
 </div>
 

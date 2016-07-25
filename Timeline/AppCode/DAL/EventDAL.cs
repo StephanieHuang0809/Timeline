@@ -14,11 +14,11 @@ namespace Timeline.AppCode.DAL
         {
             SqlConnection conn = DBManager.getSqlConnection();
             conn.Open();
-
+            SqlCommand cmd = null;
             try
             {
                 // Start a local transaction.
-                string sql = "INSERT EVENT_INFO (name, location, from, to, status, ownerUserId)" +
+                string sql = "INSERT EVENT_INFO (eventName, EventLocation, eventDateFrom, EventDateTo, status, ownerUserId)" +
                              " VALUES ( " +
                              "@name, " +
                              "@location, " +
@@ -28,7 +28,7 @@ namespace Timeline.AppCode.DAL
                              "@ownerUserId);SELECT SCOPE_IDENTITY()";//get the event Id
 
 
-                var cmd = new SqlCommand(sql, conn);
+                 cmd = new SqlCommand(sql, conn);
                 var param = new SqlParameter[6];
                 param[0] = new SqlParameter("name", SqlDbType.VarChar, 50);
                 param[1] = new SqlParameter("location", SqlDbType.VarChar, 50);
@@ -52,7 +52,10 @@ namespace Timeline.AppCode.DAL
                 }
 
                 cmd.CommandType = CommandType.Text;
-                int eventId = (int)cmd.ExecuteScalar();//return eventId once event is created
+               
+                object newId = cmd.ExecuteScalar();
+                int eventId = int.Parse(((Decimal)newId).ToString());
+
                 sql = "INSERT EVENT_PARTICIPANTS (eventId,userId,colorCode)" +
                            " VALUES ( " +
                            "@eventId, " +
@@ -67,6 +70,7 @@ namespace Timeline.AppCode.DAL
 
                 foreach (int participantId in participantIdList)
                 {
+                    cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("eventId",eventId);
                     cmd.Parameters.AddWithValue("userId",participantId);
                     cmd.Parameters.AddWithValue("colorCode",Util.randomColorCode());
@@ -75,6 +79,7 @@ namespace Timeline.AppCode.DAL
             }
             catch (Exception ex)
             {
+                
                 System.Diagnostics.Debug.WriteLine(@"Commit Exception Type: {0}", ex.GetType());
                 System.Diagnostics.Debug.WriteLine(@"Message: {0}", ex.Message);
                 throw ex;

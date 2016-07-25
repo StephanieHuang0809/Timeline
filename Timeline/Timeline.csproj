@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppPage\corporateHome.aspx" />
     <Content Include="AppPage\eventList.aspx" />
     <Content Include="AppPage\groupEvent.aspx" />
     <Content Include="css\jquery-ui-1.11.4.custom\external\jquery\jquery.js" />
@@ -97,10 +98,13 @@
     <Content Include="Images\friends.png" />
     <Content Include="Images\gathering.png" />
     <Content Include="Images\Help.png" />
+    <Content Include="Images\home.png" />
     <Content Include="Images\login.png" />
+    <Content Include="Images\logout.png" />
     <Content Include="Images\notification.png" />
     <Content Include="Images\outings.png" />
     <Content Include="Images\party.png" />
+    <Content Include="Images\profile.png" />
     <Content Include="Images\register.png" />
     <Content Include="Images\remove.png" />
     <Content Include="Images\save.png" />
@@ -113,6 +117,7 @@
     <Content Include="Root.Master" />
     <Content Include="css\jquery-ui-1.11.4.custom\.DS_Store" />
     <Content Include="AfterLogin.Master" />
+    <Content Include="AfterCorporateLogin.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -125,7 +130,6 @@
     <Content Include="App_Data\timeline_log.ldf">
       <DependentUpon>timeline.mdf</DependentUpon>
     </Content>
-    <Content Include="AppPage\corporateHome.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\fingers.jpg" />
     <Content Include="AppPage\mySchedule.aspx" />
@@ -135,6 +139,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfterCorporateLogin.master.cs">
+      <DependentUpon>AfterCorporateLogin.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterCorporateLogin.master.designer.cs">
+      <DependentUpon>AfterCorporateLogin.master</DependentUpon>
+    </Compile>
     <Compile Include="AfterLogin.Master.cs">
       <DependentUpon>AfterLogin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

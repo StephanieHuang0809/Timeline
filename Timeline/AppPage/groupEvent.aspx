@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin.Master" AutoEventWireup="true" CodeBehind="groupEvent.aspx.cs" Inherits="Timeline.AppPage.groupEvent" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-  <style type="text/css" media="screen">
+    <style type="text/css" media="screen">
  #our_table{
     width:70%;
     border-collapse:collapse;
@@ -58,6 +58,22 @@ td {
     border-bottom: 1px solid #C1DAD7;
     padding: 6px 6px 6px 12px;
 }	
+
+.button {
+  font-size: 15px;
+  font-weight:bold;
+  padding: 10px;
+  color: #190707;
+  background-color:white;
+  border: 2px solid #FFBF00;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #FACC2E;
+}
     </style>
 
   <script type="text/javascript" charset="utf-8">
@@ -170,8 +186,8 @@ td {
 	            } else {
 	                htmlDiv.show();
 	            }
-
 	        }
+
 	        console.log("day:" + day + " timeString:" + timeString);
 	        $("#our_table tr").filter(':first').children().each(function () {
 	            var $this = $(this);
@@ -184,10 +200,10 @@ td {
 	                        var rowIndex = $this.index();
 	                        
 	                        var toToggleTD = $this.children(':nth-child(' + (columnIndex + 1) + ')');
-	                        if (toToggleTD.hasClass('highlighted')) {
+	                        if (!toToggleTD.hasClass('highlighted')) {
                                 toggleClass("highlighted");
 	                        }
-	                        
+
 	                        var lapValue = $this.children(':nth-child(' + (columnIndex + 1) + ')').text();
 	                        if (lapValue != null && lapValue != "" && lapValue < lapNumber && lapNumber != 1) {
 	                            var tdshow = $this.children(':nth-child(' + (columnIndex + 1) + ')');
@@ -200,17 +216,8 @@ td {
 	                            $.each(lapNames, function (i, v) {
 	                                listr += "<li>" + v + "</li>";
 	                            })
-
-
-
-
 	                            var newDiv = "<div id=\"" + lapDivName + "\" style='display:none'><lu>" + listr + "</lu></div>";
-
 	                            tdshow.append(newDiv);
-
-
-
-
 	                            tdshow.append('<a href="javascript:showLapInfo(' + lapDivName + ');">' + lapNumber + '</a>');
 	                        }
 	                    }
@@ -405,8 +412,8 @@ td {
     </div>
     <br />
      <p style="font-family: 'Comic Sans MS'; font-size:large; font-weight: 900; color: #FFFFFF">Message Board</p>
-<div id="div_chat" style="width:83%">
-<table style="width:85%">
+<div id="div_chat" style="width:70%;height:200px;overflow:scroll">
+<table style="width:100%;height:100%">
             <tr>
                 <td>
                     <table id="tbl_chatlogs" style="width:100%;border:none">
@@ -418,16 +425,21 @@ td {
                     </table>
                 </td>
             </tr>
-            <tr>
+           <!-- <tr>
                 <td>
                     <input id="txt_send" type="text" size="50" />
                     <input id="btn_send" type="button" value="Send" />
                     <asp:HiddenField ID="hd_eventId" runat="server"  />
 
                 </td>
-
-            </tr>
+            </tr>-->
         </table>
-    </div><br /><br />
+    </div><br />
+    <div id="sendMsg" style="width:70%;text-align:center">
+         <input id="txt_send" type="text" style="width:100%;height:80px;overflow:scroll" />
+        <p><input id="btn_send" type="button" value="Send Message" class="button"/></p>
+         <asp:HiddenField ID="hf_eventId" runat="server"  />
+    </div>
+    <br /><br />
     <asp:SqlDataSource ID="SqlDataSource_Events" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.Id, E.eventName, E.eventDateFrom FROM EVENT_INFO E INNER JOIN EVENT_PARTICIPANTS P ON E.Id = P.eventId INNER JOIN USER_INFO U ON P.userId = U.Id WHERE U.Id = 1"></asp:SqlDataSource>
     </asp:Content>

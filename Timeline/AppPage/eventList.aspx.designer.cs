@@ -22,13 +22,13 @@ namespace Timeline.AppPage {
         protected global::System.Web.UI.WebControls.Label lb_intro;
         
         /// <summary>
-        /// DetailsView_Events control.
+        /// gv_events control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView DetailsView_Events;
+        protected global::System.Web.UI.WebControls.GridView gv_events;
         
         /// <summary>
         /// SqlDataSource_Events control.
@@ -166,40 +166,58 @@ namespace Timeline.AppPage {
         protected global::System.Web.UI.WebControls.Button btn_cancel;
         
         /// <summary>
-        /// lb_idealLocation control.
+        /// btn_okCreated control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lb_idealLocation;
+        protected global::System.Web.UI.WebControls.Button btn_okCreated;
         
         /// <summary>
-        /// ddl_idealLocation control.
+        /// lb_region control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_idealLocation;
+        protected global::System.Web.UI.WebControls.Label lb_region;
         
         /// <summary>
-        /// lb_interests control.
+        /// ddl_region control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lb_interests;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_region;
         
         /// <summary>
-        /// ddl_interests control.
+        /// lb_category control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_interests;
+        protected global::System.Web.UI.WebControls.Label lb_category;
+        
+        /// <summary>
+        /// ddl_category control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_category;
+        
+        /// <summary>
+        /// gv_corporateEvents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_corporateEvents;
         
         /// <summary>
         /// DetailsView_CorporateEvents control.
@@ -211,13 +229,22 @@ namespace Timeline.AppPage {
         protected global::System.Web.UI.WebControls.DetailsView DetailsView_CorporateEvents;
         
         /// <summary>
-        /// SqlDataSource_Corporate control.
+        /// SqlDataSource_CorporateEvents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_Corporate;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_CorporateEvents;
+        
+        /// <summary>
+        /// SqlDataSource_Corporates control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_Corporates;
         
         /// <summary>
         /// btn_ok control.

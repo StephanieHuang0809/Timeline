@@ -4,46 +4,6 @@
   <style type="text/css" media="screen">
   /*Button Style*/
       @import "compass/css3";
-  .btn-big-red {
-          background-color: #C63702;
-          background-image: linear-gradient( 167deg, rgba(white, 0.1) 50%, rgba(black, 0) 55%), linear-gradient( top, rgba(white, 0.15), rgba(black, 0));
-          border-radius: 6px;
-          box-shadow: 0 0 0 1px #C63702 inset, 0 0 0 2px rgba(white, 0.15) inset, 0 8px 0 0 #AD3002, 0 8px 0 1px rgba(black, 0.4), 0 8px 8px 1px rgba(black, 0.5);
-          color: #FFF;
-          display: inline-block;
-          font-family: "Lucida Grande", Arial, sans-serif;
-          font-size: 18px;
-          font-weight: bold;
-          height: 50px;
-          letter-spacing: -1px;
-          line-height: 50px;
-          margin: 30px 0 10px;
-          position: relative;
-          text-align: center;
-          text-shadow: 0 1px 1px rgba(black, 0.5);
-          text-decoration: none !important;
-          top: 0;
-          width: 100px;
-          @include transition(0.15s);
-      }
-  .btn-big-red:hover, .btn-big-red:focus {
-    background-color: #D13902;
-    box-shadow: 
-      0 0 0 1px #C63702 inset,
-      0 0 0 2px rgba(white, 0.15) inset,
-      0 10px 0 0 #AD3002,
-      0 10px 0 1px rgba(black, 0.4),
-      0 10px 8px 1px rgba(black, 0.6);
-      top: -2px;
-  }
-  .btn-big-red:active {
-    box-shadow: 
-      0 0 0 1px #AD3002 inset,
-      0 0 0 2px rgba(white, 0.15) inset,
-      0 0 0 1px rgba(black, 0.4);
-    @include transform(translateY(10px));      
-  }
-
  /*Popup window style*/
  h1 {
   text-align: center;
@@ -162,7 +122,6 @@
     border:1px solid #999999;
 }
 
-
 th {
     font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,sans-serif;
     color: #F2EDEB;
@@ -201,7 +160,8 @@ td {
     border-bottom: 1px solid #C1DAD7;
     padding: 6px 6px 6px 12px;
 }	
-    </style>
+
+</style>
 
     <script type="text/javascript" charset="utf-8">
         var isEditing = false;

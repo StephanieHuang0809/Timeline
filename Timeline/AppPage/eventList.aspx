@@ -92,23 +92,69 @@
     width: 70%;
   }
 }
-         .auto-style1 {
-             width: 18px;
-         }
-             .auto-style2 {
-                 width: 85%;
+.auto-style1 {
+      width: 18px;
+}
+.auto-style2 {
+      width: 85%;
+}
+.auto-style4 {
+      border-radius: 5px;
+      width: 40%;
+      position: relative;
+      transition: all 5s ease-in-out;
+      float: right;
+      height: 569px;
+      left: 0px;
+      margin: 70px auto;
+      padding: 20px;
+      background: #fff;
+                 top: 14px;
              }
-             .auto-style3 {
-                 width: 10px;
+.okCreated {
+       border-radius: 5px;
+       width: 200px;
+       position: relative;
+       transition: all 5s ease-in-out;
+       height: 120px;
+       z-index: 20;
+       visibility: hidden;
+       left: 8px;
+       top: -398px;
+       margin: 70px auto;
+       padding: 20px;
+       background: #fff;
              }
-     </style>
+             
+           
+.suggestedEvents {
+                 border-radius: 5px;
+                 width: 40%;
+                 position: relative;
+                 transition: all 5s ease-in-out;
+                 float: right;
+                 height: 562px;
+                 z-index: 10;
+                 visibility:visible;
+                 left: 244px;
+                 top: -130px;
+                 margin: 70px auto;
+                 padding: 20px;
+                 background: #fff;
+             }
+             
+             .auto-style5 {
+                 width: 100%;
+             }
+             
+         </style>
 
 <script type="text/javascript" charset="utf-8">
     $(function () {
         $("#<%=this.tb_dateFrom.ClientID%>").datepicker();
         $("#<%=this.tb_dateTo.ClientID%>").datepicker();
-        $("#<%=this.ddl_idealLocation.ClientID%>").selectmenu();
-        $("#<%=this.ddl_interests.ClientID%>").selectmenu();
+        $("#<%=this.ddl_region.ClientID%>").selectmenu();
+        $("#<%=this.ddl_category.ClientID%>").selectmenu();
     });
 </script>
 </asp:Content>
@@ -118,39 +164,43 @@
     <p>
          <asp:Label ID="lb_intro" runat="server" Text="Select an event from the Event List below: " ForeColor="White" Font-Bold="True" Font-Names="Arial"></asp:Label>
     </p>
-     <div id="list_event" style="float:left;width:45%;height:80%">
-         <asp:DetailsView ID="DetailsView_Events" runat="server" Height="50px" DataSourceID="SqlDataSource_Events" AutoGenerateRows="False" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal" Width="420px">
-             <EditRowStyle BackColor="#339966" Font-Bold="True" />
-             <EmptyDataTemplate>
-                 You don&#39;t have any events in the list.
-             </EmptyDataTemplate>
-             <Fields>
-                 <asp:BoundField DataField="Id" HeaderText="Event ID" Visible="False" />
-                 <asp:TemplateField ShowHeader="False">
+     <div id="list_event" style="float:left;width:35%;height:80%;overflow:auto;margin-top:2%">
+         <asp:GridView ID="gv_events" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource_Events" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="0px" CellPadding="4" GridLines="Horizontal" Width="100%" ShowHeader="False">
+             <Columns>
+                 <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" ShowHeader="False" SortExpression="Id" Visible="False">
+                 <ControlStyle ForeColor="Black" />
+                 </asp:BoundField>
+                 <asp:TemplateField HeaderText="Event Name" ShowHeader="False" ItemStyle-Width="45%">
                      <ItemTemplate>
-                         <asp:HyperLink ID="hl_eventName" runat="server" Text='<%# Eval("eventName") %>' NavigateUrl='<%# "~/AppPage/groupEvent.aspx?id="+Eval("Id") %>' ToolTip="View event"></asp:HyperLink>
-                         &nbsp;-
-                         <asp:Label ID="lb_startDate" runat="server" Text='<%# string.Format("{0:MM/dd/yyyy}",  Convert.ToDateTime(Eval("eventDateFrom")))  %>' ToolTip="Start Date"></asp:Label>
-                         &nbsp;<asp:ImageButton ID="btn_removeEvent" runat="server"  ImageUrl="~/Images/remove.png" Width="25px" Height="25px" ImageAlign="AbsBottom" Style="float:right"/>
+                         <asp:HyperLink ID="hl_events" runat="server" NavigateUrl='<%# "~/AppPage/groupEvent.aspx?id="+Eval("Id") %>' Text='<%# Eval("eventName") %>' ToolTip='<%# "Click to view this event" %>' ForeColor="Black"></asp:HyperLink>
                      </ItemTemplate>
-                     <ControlStyle ForeColor="Black" />
+                     <ControlStyle Font-Underline="True" ForeColor="Black" />
                  </asp:TemplateField>
-             </Fields>
+                 <asp:BoundField DataField="eventDateFrom" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date" ShowHeader="False" SortExpression="eventDateFrom" />
+                 <asp:ButtonField ButtonType="Button" Text="Remove" ItemStyle-HorizontalAlign="Right"/>
+             </Columns>
+             <EmptyDataTemplate>
+                 There is no events in the list.
+             </EmptyDataTemplate>
              <FooterStyle BackColor="White" ForeColor="#333333" />
              <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
              <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />
              <RowStyle BackColor="White" ForeColor="#333333" />
-         </asp:DetailsView>
+             <SelectedRowStyle BackColor="#339966" Font-Bold="True" ForeColor="White" />
+             <SortedAscendingCellStyle BackColor="#F7F7F7" />
+             <SortedAscendingHeaderStyle BackColor="#487575" />
+             <SortedDescendingCellStyle BackColor="#E5E5E5" />
+             <SortedDescendingHeaderStyle BackColor="#275353" />
+         </asp:GridView>
          <asp:SqlDataSource ID="SqlDataSource_Events" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.Id, E.eventName, E.eventDateFrom FROM EVENT_INFO E INNER JOIN EVENT_PARTICIPANTS P ON E.Id = P.eventId INNER JOIN USER_INFO U ON P.userId = U.Id WHERE U.Id = 1"></asp:SqlDataSource>
      </div>
     
-     <div id="new_event" class="popup" style="float:right;width:45%;height:60%;margin-right:5%">
-         <h2 style="text-align:center">New Event</h2>
+     <div id="new_event" class="auto-style4" style="margin-right:5%;margin-top:1%">
+         <h2 style="text-align:center;color:black">New Event</h2>
          <table id="tbl_newEvent" border="0" class="auto-style2">
              <tr><td><asp:Label ID="lb_name" runat="server" Text="Name: "></asp:Label></td>
                  <td><asp:TextBox ID="tb_name" runat="server"></asp:TextBox></td>
                  <td colspan="2"><asp:HyperLink ID="hl_suggestedEvents" runat="server" ForeColor="Black" Font-Underline="True">Suggested Events?</asp:HyperLink></td>
-                 <td></td>
              </tr>
              <tr><td><asp:Label ID="lb_location" runat="server" Text="Location: "></asp:Label></td>
                  <td><asp:TextBox ID="tb_location" runat="server"></asp:TextBox></td>
@@ -164,7 +214,7 @@
              </tr>
              <tr>
                  <td>Status: </td>
-                 <td style="width:20%">
+                 <td>
                      <asp:DropDownList ID="ddl_status" runat="server">
                          <asp:ListItem>Pending</asp:ListItem>
                          <asp:ListItem>Confirmed</asp:ListItem>
@@ -172,51 +222,103 @@
                  </td></tr>
              <tr><td>&nbsp;</td></tr>
          </table>
-          <h5 style="text-align:left">Invite Friends</h5>
-         <asp:GridView ID="gv_friends" runat="server" AutoGenerateColumns="False" DataKeyNames="Id,Id1" DataSourceID="SqlDataSource_Friends" Width="206px">
+          <h4>Select from the list below to invite friends: </h4>
+         <div style ="height:150px;width:65%;overflow:auto;">
+         <asp:GridView ID="gv_friends" runat="server" AutoGenerateColumns="False" DataKeyNames="Id,Id1" DataSourceID="SqlDataSource_Friends" Width="100%" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="0px" CellPadding="4" GridLines="Horizontal" ShowHeader="False">
              <Columns>
                  <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" Visible="False" />
-                 <asp:BoundField DataField="firstName" HeaderText="firstName" SortExpression="firstName" />
-                 <asp:BoundField DataField="lastName" HeaderText="lastName" SortExpression="lastName" />
-                 <asp:TemplateField>
+                 <asp:TemplateField HeaderText="Name" SortExpression="firstName">
+                     <ItemTemplate>
+                         <asp:Label ID="lb_firstName" runat="server" Text='<%# Eval("firstName") %>'></asp:Label>
+                         &nbsp;<asp:Label ID="lb_lastName" runat="server" Text='<%# Eval("lastName") %>'></asp:Label>
+                     </ItemTemplate>
+                 </asp:TemplateField>
+                 <asp:TemplateField ItemStyle-Width="30%" ItemStyle-HorizontalAlign="Right">
                      <ItemTemplate>
                          <asp:CheckBox ID="cb_select" runat="server" />
                      </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Right" Width="30%"></ItemStyle>
+                 </asp:TemplateField>
+                 <asp:TemplateField Visible="True">
+                     <ItemTemplate>
+                         <asp:HiddenField ID="hf_friendId" runat="server" Value='<%# Eval("Id") %>' />
+                     </ItemTemplate>
                  </asp:TemplateField>
              </Columns>
-         </asp:GridView>
+             <FooterStyle BackColor="White" ForeColor="#333333" />
+             <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
+             <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />
+             <RowStyle BackColor="White" ForeColor="#333333" />
+             <SelectedRowStyle BackColor="#339966" Font-Bold="True" ForeColor="White" />
+             <SortedAscendingCellStyle BackColor="#F7F7F7" />
+             <SortedAscendingHeaderStyle BackColor="#487575" />
+             <SortedDescendingCellStyle BackColor="#E5E5E5" />
+             <SortedDescendingHeaderStyle BackColor="#275353" />
+         </asp:GridView></div>
          <br />
          <asp:SqlDataSource ID="SqlDataSource_Friends" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT U.Id, U.firstName, U.lastName, U.gender, U.birthday, U.email, U.occupation, F.Id, F.userId, F.userFriendId FROM USER_INFO U INNER JOIN FRIENDS F ON U.Id = F.userFriendId WHERE F.userId = 1" ></asp:SqlDataSource>
-         <br /><br /><br /><br /><br />
+         <br /><br />
          <div id="button" style="text-align:center">
                 <asp:Button ID="btn_create" CssClass="button" Height="50px" Width="100px" runat="server" Text="Create" ToolTip="Create Event" OnClick="btn_create_Click"/>
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btn_cancel" CssClass="button" Height="50px" Width="100px" runat="server" Text="Cancel" ToolTip="Cancel Event" OnClick="btn_cancel_Click"/>
          </div>
+          <div id="eventCreated" class="okCreated" style="text-align:center;margin:0 auto;">
+               <br /><h3 style="text-align:center">Event is being created !</h3><br />
+              <asp:Button ID="btn_okCreated" CssClass="button" Height="40px" Width="80px" runat="server" Text="OK" OnClick="btn_okCreated_Click"/>
+          </div>
      </div>
-    <div id="suggested_events" class="popup" style="float:right;width:45%;height:60%;margin-right:5%">
-         <h2 style="text-align:center">Suggested Events</h2>
-         <table id="tbl_suggestedEvents" border="0" style="width:85%;">
-             <tr><td><asp:Label ID="lb_idealLocation" runat="server" Text="Location: "></asp:Label></td>
-                 <td class="auto-style3"><asp:DropDownList ID="ddl_idealLocation" runat="server" Width="200px">
-                     <asp:ListItem>East</asp:ListItem>
-                     <asp:ListItem>West</asp:ListItem>
-                     <asp:ListItem>South</asp:ListItem>
-                     <asp:ListItem>North</asp:ListItem>
-                     <asp:ListItem>Central</asp:ListItem>
-                     <asp:ListItem Selected="True">Islandwide</asp:ListItem>
+    <div id="suggested_events" class="suggestedEvents" style="margin-right:5%;">
+         <h2 style="text-align:center;color:black">Suggested Events</h2>
+         <table id="tbl_suggestedEvents" border="0" class="auto-style5">
+             <tr><td><asp:Label ID="lb_region" runat="server" Text="Region: "></asp:Label></td>
+                 <td><asp:DropDownList ID="ddl_region" runat="server" Width="180px">
+                     <asp:ListItem Value="Islandwide">Islandwide</asp:ListItem>
+                     <asp:ListItem Value="East">East</asp:ListItem>
+                     <asp:ListItem Value="West">West</asp:ListItem>
+                     <asp:ListItem Value="South">South</asp:ListItem>
+                     <asp:ListItem Value="North">North</asp:ListItem>
+                     <asp:ListItem Value="Central">Central</asp:ListItem>
                      </asp:DropDownList></td>
              </tr>
-             <tr><td><asp:Label ID="lb_interests" runat="server" Text="Interests: "></asp:Label></td>
-                 <td class="auto-style3"><asp:DropDownList ID="ddl_interests" runat="server" Width="200px">
-                     <asp:ListItem>Dining</asp:ListItem>
-                     <asp:ListItem>Movies</asp:ListItem>
-                     <asp:ListItem>Shopping</asp:ListItem>
-                     <asp:ListItem>Sports</asp:ListItem>
+             <tr><td><asp:Label ID="lb_category" runat="server" Text="Category: "></asp:Label></td>
+                 <td><asp:DropDownList ID="ddl_category" runat="server" Width="180px">
+                     <asp:ListItem Value="Dining">Dining</asp:ListItem>
+                     <asp:ListItem Value="Moviews">Movies</asp:ListItem>
+                     <asp:ListItem Value="Shopping">Shopping</asp:ListItem>
+                     <asp:ListItem Value="Sports">Sports</asp:ListItem>
                      </asp:DropDownList></td>
              </tr>
-             <tr><td colspan="2">
-                 <asp:DetailsView ID="DetailsView_CorporateEvents" runat="server" Height="50px" Width="284px" AutoGenerateRows="False" DataSourceID="SqlDataSource_Corporate" >
+             <tr><td colspan="2" style="width:100%">
+                 <div id="corporateEvents" style="width:100%;height:150px;overflow:scroll">
+                 <asp:GridView ID="gv_corporateEvents" runat="server"   DataKeyNames="Id" AutoGenerateColumns="False" 
+                     BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="0px" CellPadding="4" 
+                     DataSourceID="SqlDataSource_CorporateEvents" GridLines="Horizontal" ShowHeader="False" Width="100%">
+                     <Columns>
+                         <asp:CommandField ShowSelectButton="True" />
+                         <asp:BoundField DataField="name" HeaderText="Corporate Name" SortExpression="name" />
+                         <asp:BoundField DataField="eventName" HeaderText="Event Name" SortExpression="eventName" />
+                         <asp:BoundField DataField="eventLocation" HeaderText="Location" SortExpression="eventLocation" />
+                         <asp:BoundField DataField="locationRegion" HeaderText="Region" SortExpression="locationRegion" Visible="False" />
+                         <asp:BoundField DataField="category" HeaderText="Category" SortExpression="category" Visible="False" />
+                         <asp:BoundField DataField="Id" HeaderText="Corporate ID" Visible="False" />
+                     </Columns>
+                     <EmptyDataTemplate>
+                         Sorry, no results are found.
+                     </EmptyDataTemplate>
+                     <FooterStyle BackColor="White" ForeColor="#333333" />
+                     <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
+                     <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />
+                     <RowStyle BackColor="White" ForeColor="#333333" />
+                     <SelectedRowStyle BackColor="#339966" Font-Bold="True" ForeColor="White" />
+                     <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                     <SortedAscendingHeaderStyle BackColor="#487575" />
+                     <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                     <SortedDescendingHeaderStyle BackColor="#275353" />
+                     </asp:GridView></div><br />
+                 <asp:DetailsView ID="DetailsView_CorporateEvents" runat="server" Height="50px" Width="100%" 
+                     DataKeyNames="Id" AutoGenerateRows="False" DataSourceID="SqlDataSource_Corporates" AllowPaging="True" >
                      <EmptyDataTemplate>
                          Sorry, no results are found.
                      </EmptyDataTemplate>
@@ -226,25 +328,35 @@
                          <ControlStyle ForeColor="Black" />
                          </asp:HyperLinkField>
                          <asp:BoundField DataField="eventLocation" HeaderText="Location: " SortExpression="eventLocation" />
-                         <asp:BoundField DataField="locationRegion" HeaderText="locationRegion" SortExpression="locationRegion" Visible="False" />
-                         <asp:BoundField DataField="category" HeaderText="category" SortExpression="category" Visible="False" />
                          <asp:BoundField DataField="dateFrom" DataFormatString="{0:dd/MM/yyyy}" ApplyFormatInEditMode="true" HeaderText="From: " SortExpression="dateFrom" />
                          <asp:BoundField DataField="dateTo" DataFormatString="{0:dd/MM/yyyy}" ApplyFormatInEditMode="true" HeaderText="To: " SortExpression="dateTo" />
-                         <asp:BoundField DataField="url" HeaderText="url" SortExpression="url" Visible="False" />
+                         <asp:BoundField DataField="category" HeaderText="category" SortExpression="category" Visible="False" />
+                         <asp:BoundField DataField="locationRegion" HeaderText="locationRegion" SortExpression="locationRegion" Visible="False" />
+                         <asp:BoundField DataField="url" HeaderText="Event Link" SortExpression="url" Visible="False" />
                          <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" Visible="False" />
-                         <asp:BoundField DataField="website" HeaderText="website" SortExpression="website" Visible="False" />
+                         <asp:BoundField DataField="website" HeaderText="Company Website" SortExpression="website" Visible="False" />
                      </Fields>
                  </asp:DetailsView>
                  </td>
              </tr>
          </table>
-         <asp:SqlDataSource ID="SqlDataSource_Corporate" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.eventName, E.eventLocation, E.locationRegion, E.category, E.dateFrom, E.dateTo, E.url, C.name, C.email, C.website  FROM CORPORATE C INNER JOIN CORPORATE_EVENT E ON C.Id = E.userId"></asp:SqlDataSource>
-         <br /><br /><br /><br /><br />
+         <asp:SqlDataSource ID="SqlDataSource_CorporateEvents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.eventName, E.eventLocation, E.locationRegion, E.category, E.dateFrom, E.dateTo, E.url, C.name, C.email, C.website, C.Id  FROM CORPORATE C INNER JOIN CORPORATE_EVENT E ON C.Id = E.userId WHERE E.locationRegion=@region AND E.category=@category">
+       <SelectParameters>
+		   <%--  <asp:ControlParameter Name="Id" ControlID="gv_corporateEvents" />--%>
+           <asp:ControlParameter ControlID="ddl_region" Name="region" PropertyName="SelectedValue" Type="String" />
+            <asp:ControlParameter ControlID="ddl_category" Name="category" PropertyName="SelectedValue" Type="String" />
+		 </SelectParameters>
+         </asp:SqlDataSource>
+         <asp:SqlDataSource ID="SqlDataSource_Corporates" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.eventName, E.eventLocation, E.locationRegion, E.category, E.dateFrom, E.dateTo, E.url, C.name, C.email, C.website, C.Id  FROM CORPORATE C INNER JOIN CORPORATE_EVENT E ON C.Id = E.userId WHERE C.Id=@CorporateId">
+             <SelectParameters>
+                 <asp:ControlParameter ControlID="gv_corporateEvents" Name="CorporateId" />
+             </SelectParameters>
+         </asp:SqlDataSource>
+         <br /><br />
          <div style="text-align:center">
                 <asp:Button ID="btn_ok" CssClass="button" Height="50px" Width="100px" runat="server" Text="Ok" OnClick="btn_ok_Click" />
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btn_cancelSuggestion" CssClass="button" Height="50px" Width="100px" runat="server" Text="Cancel" OnClick="btn_cancelSuggestion_Click" />
          </div>
      </div>
- 
 </asp:Content>

@@ -1,0 +1,103 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Root.Master" AutoEventWireup="true" CodeBehind="AfterCorporateLogin.master.cs" Inherits="Timeline.AfterCorporateLogin" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+        <style type="text/css" media="screen">
+        * {
+            box-sizing: border-box; 
+        }
+
+        h2 {
+            text-align: center;
+            font-family: Tahoma, Arial, sans-serif;
+            color: white;
+            margin: 15px 0;
+        }
+
+        .left {
+            position: fixed;
+            padding: 10px;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height:100%;
+            background:#171717;
+            transition: width ease .5s;
+            z-index:100;
+            color:white;
+        }
+
+        body.open-nav {
+            width: 250px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+             margin-bottom:25px;
+        }
+  
+  
+        a {
+            color:white;
+            text-decoration:none;
+            border-bottom:1px solid transparent;
+            transition:color ease .35s, border-bottom-color ease .35s;
+        }
+
+        a:hover {
+            color:white;
+            border-bottom-color:white; 
+            transform:scale(1.2);
+        }
+    
+        .open {
+            font-size:1.75rem;
+            font-weight:700;
+            border:0;
+        }
+
+
+        .right {
+            position: relative;
+            margin-left: 75px;
+            transition: margin-left ease .5s;
+        }
+  
+        .right.body.open-nav  {
+            margin-left:275px; 
+        }
+    </style>
+     <script type="text/javascript" charset="utf-8">
+         // click on the ".open" link (the right arrow in the nav)
+         // var obj = new JQuery(".left a.open");
+         $(".left a.open").on("click", function (e) {
+             // stop default browser behavior
+             e.preventDefault();
+             // get the <body>. Does it currently have a class of "open-nav"? If it does, remove the class, which will collapse the left column.' If it does not have a class of "open-nav", add it, which will expand the left column.
+             $("body").toggleClass("open-nav");
+         });
+        
+         $(function clearSession() {
+             sessionStorage.clear();
+         });
+     </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <div class="left">
+  <ul>
+    <li><a href="corporateHome.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/home.png" Width="30px" Height="30" ID="nav_home" BorderStyle="None" /></a></li>
+    <li><a href="corporateHome.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/profile.png" Width="30px" Height="30" ID="nav_profile" BorderStyle="None" /></a></li>
+    <li><a href="login.aspx" onclick="clearSession();"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/logout.png" Width="30px" Height="30" ID="nav_logout" BorderStyle="None" /></a></li>
+  </ul>
+</div>
+ <div class="right">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+   
+    </asp:ContentPlaceHolder></div>
+</asp:Content>

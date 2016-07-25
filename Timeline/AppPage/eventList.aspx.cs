@@ -29,20 +29,61 @@ namespace Timeline.AppPage
 
             foreach (GridViewRow row in this.gv_friends.Rows)
             {
-                CheckBox check = row.Cells[3].FindControl("cb_select") as CheckBox;
+                
+
+                if (row.Cells[2].FindControl("cb_select") == null)
+                   {
+                       continue;
+                   }
+                    CheckBox check = row.Cells[2].FindControl("cb_select") as CheckBox;
+                
                 if (check.Checked)
                 {
-                    string friendId = row.Cells[0].Text;
+                    HiddenField hd = row.Cells[3].FindControl("hf_friendId") as HiddenField;
+                    string friendId = hd.Value;
                     eventBLL.participantIdList.Add(Convert.ToInt32(friendId));
                 }
             }
 
-           // eventBLL.createEvent();
+                    eventBLL.createEvent();
         }
 
         protected void btn_cancel_Click(object sender, EventArgs e)
         {
+            clearTextBoxes(this);
+            checkboxclear();
+        }
 
+        public void clearTextBoxes(Control parent)
+        {
+            foreach (Control x in parent.Controls)
+            {
+                if ((x.GetType() == typeof(TextBox)))
+                {
+                    ((TextBox)(x)).Text = "";
+                }
+                if (x.HasControls())
+                {
+                    clearTextBoxes(x);
+                }
+            }
+        }
+
+        public void checkboxclear()
+        {
+            foreach (GridViewRow row in this.gv_friends.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox chkrow = (CheckBox)row.FindControl("cb_select");
+                    if (chkrow.Checked)
+                        chkrow.Checked = false;
+                }
+            }
+
+            //CheckBox chkrow1 = (CheckBox)this.gv_friends.HeaderRow.FindControl("ChbGridHead");
+           // if (chkrow1.Checked)
+             //   chkrow1.Checked = false;
         }
 
         protected void btn_ok_Click(object sender, EventArgs e)
@@ -55,5 +96,10 @@ namespace Timeline.AppPage
 
         }
 
+        protected void btn_okCreated_Click(object sender, EventArgs e)
+        {
+            clearTextBoxes(this);
+            checkboxclear();
+        }
     }
 }
