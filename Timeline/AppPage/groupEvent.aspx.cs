@@ -17,9 +17,22 @@ namespace Timeline.AppPage
 
             if (!IsPostBack)
             {
-                this.hd_eventId.Value = "1";
-                this.tb_dateFrom.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now);
-                this.tb_dateTo.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now.AddDays(6));
+                this.hd_eventId.Value=Request.QueryString["id"];
+
+                EventBLL eventBll = new EventBLL();
+                Timeline.AppCode.Domain.Event myEvent = null;
+                if (Request.QueryString["id"] != null)
+                {
+                    myEvent = eventBll.getEvent(int.Parse(Request.QueryString["id"]));
+
+                }
+                else
+                {
+                    myEvent = eventBll.getEvent(7);
+                }
+               
+                this.tb_dateFrom.Text = String.Format("{0:MM/dd/yyyy}", myEvent.from);
+                this.tb_dateTo.Text = String.Format("{0:MM/dd/yyyy}", myEvent.to);
 
             }
         }
@@ -31,7 +44,7 @@ namespace Timeline.AppPage
 
         protected void btn_edit_Click(object sender, ImageClickEventArgs e)
         {
-
+            Response.Redirect("~/AppPage/editEvent.aspx?id="+ Request.QueryString["id"]);
         }
 
         [System.Web.Services.WebMethod]
@@ -41,7 +54,7 @@ namespace Timeline.AppPage
             // scheduleBLL.userId = (Int32)Session["userId"];
             scheduleBLL.userId = 1;
             //scheduleBLL.readSchedule(Util.StringToDate(startDate),Util.StringToDate(endDate));
-            scheduleBLL.readGroupSchedule(1, null, null);
+            scheduleBLL.readGroupSchedule(1, Util.StringToDate(startDate), Util.StringToDate(endDate));
             List<Schedule> dss = scheduleBLL.scheduleList;
             List<string> allcells = new List<string>();
             List<TimeCell> tmCells = new List<TimeCell>();

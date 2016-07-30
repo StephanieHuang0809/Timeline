@@ -92,7 +92,7 @@
      <div class="left">
   <ul>
     <li><a href="corporateHome.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/home.png" Width="30px" Height="30" ID="nav_home" BorderStyle="None" /></a></li>
-    <li><a href="corporateHome.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/profile.png" Width="30px" Height="30" ID="nav_profile" BorderStyle="None" /></a></li>
+    <li><a href="corporateProfile.aspx"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/profile.png" Width="30px" Height="30" ID="nav_profile" BorderStyle="None" /></a></li>
     <li><a href="login.aspx" onclick="clearSession();"><asp:Image runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/logout.png" Width="30px" Height="30" ID="nav_logout" BorderStyle="None" /></a></li>
   </ul>
 </div>

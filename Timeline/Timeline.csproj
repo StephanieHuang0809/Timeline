@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppPage\corporateHome.aspx" />
+    <Content Include="AppPage\corporateProfile.aspx" />
+    <Content Include="AppPage\editEvent.aspx" />
     <Content Include="AppPage\eventList.aspx" />
     <Content Include="AppPage\groupEvent.aspx" />
     <Content Include="css\jquery-ui-1.11.4.custom\external\jquery\jquery.js" />
@@ -165,6 +167,7 @@
     <Compile Include="AppCode\DBManager.cs" />
     <Compile Include="AppCode\BLL\RegisterBLL.cs" />
     <Compile Include="AppCode\Domain\Chat.cs" />
+    <Compile Include="AppCode\Domain\Event.cs" />
     <Compile Include="AppCode\Domain\TimeCell.cs" />
     <Compile Include="AppCode\Domain\TimeTable.cs" />
     <Compile Include="AppCode\Domain\User.cs" />
@@ -176,6 +179,20 @@
     </Compile>
     <Compile Include="AppPage\corporateHome.aspx.designer.cs">
       <DependentUpon>corporateHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppPage\corporateProfile.aspx.cs">
+      <DependentUpon>corporateProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppPage\corporateProfile.aspx.designer.cs">
+      <DependentUpon>corporateProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppPage\editEvent.aspx.cs">
+      <DependentUpon>editEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppPage\editEvent.aspx.designer.cs">
+      <DependentUpon>editEvent.aspx</DependentUpon>
     </Compile>
     <Compile Include="AppPage\eventList.aspx.cs">
       <DependentUpon>eventList.aspx</DependentUpon>

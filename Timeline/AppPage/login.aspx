@@ -16,7 +16,6 @@
         <TextBoxStyle BackColor="White" Width="190px" />
         <TitleTextStyle Font-Bold="True" Font-Names="Comic Sans MS" Font-Size="60px" HorizontalAlign="Center" VerticalAlign="Top" />
         </asp:Login>
-        
     <br />
    <p style="font-family:Arial;color:white">New user? Click <asp:HyperLink ID="hl_register" runat="server" ForeColor="White" NavigateUrl="~/AppPage/register.aspx" Font-Bold="True" Font-Names="Arial" Font-Size="X-Large">here</asp:HyperLink>.
     <br /></p> </div>

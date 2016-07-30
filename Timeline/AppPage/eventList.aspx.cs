@@ -86,20 +86,23 @@ namespace Timeline.AppPage
              //   chkrow1.Checked = false;
         }
 
-        protected void btn_ok_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btn_cancelSuggestion_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btn_okCreated_Click(object sender, EventArgs e)
         {
             clearTextBoxes(this);
             checkboxclear();
+            Response.Redirect("~/AppPage/eventList.aspx?id=" + Request.QueryString["id"]);
         }
+
+        protected void ddl_region_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.gv_corporateEvents.DataBind();   
+        }
+
+        protected void ddl_category_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.gv_corporateEvents.DataBind();
+
+        }
+
     }
 }

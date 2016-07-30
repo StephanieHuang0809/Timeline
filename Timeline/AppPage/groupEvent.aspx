@@ -71,13 +71,18 @@ td {
   cursor: pointer;
   transition: all 0.3s ease-out;
 }
+
 .button:hover {
   background: #FACC2E;
 }
+        .auto-style1 {
+            height: 37px;
+        }
     </style>
 
   <script type="text/javascript" charset="utf-8">
 
+       var glb_groupId = <%=Request.QueryString["id"]%>;
   function stringToDate(_date, _format, _delimiter) {
             var formatLowerCase = _format.toLowerCase();
             var formatItems = formatLowerCase.split(_delimiter);
@@ -120,15 +125,15 @@ td {
 	}
    
 	getTimeCellData = function (startMMddyyyy, endMMddyyyy) {
+	    //alert(glb_groupId);
 	    $.ajax({
 	        type: "POST",
 	        url: "groupEvent.aspx/GetCurrentTime",
-	        data: '{groupId: "1",startDate: "'+startMMddyyyy+'", endDate:"'+endMMddyyyy+'" }',
+	        data: '{groupId: "'+glb_groupId+'",startDate: "'+startMMddyyyy+'", endDate:"'+endMMddyyyy+'" }',
 	        contentType: "application/json; charset=utf-8",
 	        dataType: "json",
 	        async: false,
 	        success: function (response) {
-	            alert(response.d);
 	            var obj = eval("(" + response.d + ')');
 	            tableData.timeCell = obj;
 	        },
@@ -201,11 +206,11 @@ td {
 	                        
 	                        var toToggleTD = $this.children(':nth-child(' + (columnIndex + 1) + ')');
 	                        if (!toToggleTD.hasClass('highlighted')) {
-                                toggleClass("highlighted");
+	                            toToggleTD.toggleClass("highlighted");
 	                        }
 
 	                        var lapValue = $this.children(':nth-child(' + (columnIndex + 1) + ')').text();
-	                        if (lapValue != null && lapValue != "" && lapValue < lapNumber && lapNumber != 1) {
+	                        if (lapValue != null && lapValue < lapNumber && lapNumber != 1) {
 	                            var tdshow = $this.children(':nth-child(' + (columnIndex + 1) + ')');
 	                            //$this.children(':nth-child(' + (columnIndex + 1) + ')').text(lapNumber + userName + lapNames);
 	                            tdshow.text();
@@ -305,11 +310,11 @@ td {
       window.setInterval(function () {
           var msg = $('#tbl_chatlogs tr:last td:first').text();
           if (msg == null || msg == "" || msg == "undefine") msg = "01/01/2000 00:00:00";
-
+          
           $.ajax({
               type: "POST",
               url: "groupEvent.aspx/GetMsg",
-              data: '{groupId: "1",msg: "' + msg + '"}',
+              data: '{groupId: "'+glb_groupId+'",msg: "' + msg + '"}',
               contentType: "application/json; charset=utf-8",
               dataType: "json",
               async: true,
@@ -347,7 +352,7 @@ td {
             $.ajax({
                 type: "POST",
                 url: "groupEvent.aspx/SendMsg",
-                data: '{groupId: "1",msg: "' + msg + '"}',
+                data: '{groupId: "'+glb_groupId+'",msg: "' + msg + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -366,12 +371,12 @@ td {
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <p style="font-family: 'Comic Sans MS'; font-size:large; font-weight: 900; color: #FFFFFF">
-       Event: <asp:label runat="server" ID="lb_eventName"></asp:label>&nbsp;&nbsp;&nbsp;
-       Location: <asp:label runat="server" ID="lb_location"></asp:label>&nbsp;&nbsp;&nbsp;
+       Event: <asp:label runat="server" ID="lb_eventName">Skating</asp:label>&nbsp;&nbsp;&nbsp;
+       Location: <asp:label runat="server" ID="lb_location">Kallang</asp:label>&nbsp;&nbsp;&nbsp;
        <asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Event" />
     <br />
-       Date: <asp:label runat="server" ID="lb_date"></asp:label>&nbsp;&nbsp;&nbsp;
-       Time: <asp:label runat="server" ID="lb_time"></asp:label>
+       Date: <asp:label runat="server" ID="lb_date">07/30/2016</asp:label>&nbsp;&nbsp;&nbsp;
+       Time: <asp:label runat="server" ID="lb_time">15:00:00 - 17:00:00</asp:label>
     </p>
     <br />
     <asp:Label ID="lb_dateFrom" runat="server" Text=" Date From" ForeColor="White" Font-Bold="True" Font-Names="Arial"></asp:Label>

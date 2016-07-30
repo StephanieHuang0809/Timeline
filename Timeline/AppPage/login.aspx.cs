@@ -62,25 +62,51 @@ namespace Timeline
             bool isAuth = false;
 
             this.isCorporate = false;
-            string sql = "select A.Id, A.firstName, A.lastName, A.role" +
 
-                                " From USER_INFO A Where A.email='" + emailAddress + "' and A.password='" + Password + "'";
-            SqlCommand cmd = new SqlCommand(sql, con);
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            Session["email"] = emailAddress;
-
-            if (dr.Read())
+            if (!this.Login1.UserName.StartsWith("TL"))
             {
-                Session["userId"] = dr.GetInt32(0);
-                Session["userName"] = dr.GetString(1) + dr.GetString(2);
-                Session["role"] = dr.GetString(3);
+                string sql = "select A.Id, A.firstName, A.lastName, A.role" +
 
-                isAuth = true;
+                                    " From USER_INFO A Where A.email='" + emailAddress + "' and A.password='" + Password + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlDataReader dr = cmd.ExecuteReader();
 
+                Session["email"] = emailAddress;
+
+                if (dr.Read())
+                {
+                    Session["userId"] = dr.GetInt32(0);
+                    Session["userName"] = dr.GetString(1) + dr.GetString(2);
+                    Session["role"] = dr.GetString(3);
+
+                    isAuth = true;
+
+                }
+                dr.Close();
             }
-            dr.Close();
+            else
+            {
+                this.isCorporate = true;
 
+                string sql = "select C.Id, C.name, C.username" +
+
+                                    " From CORPORATE C Where C.username='" + emailAddress + "' and C.password='" + Password + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                Session["email"] = emailAddress;
+
+                if (dr.Read())
+                {
+                    Session["userId"] = dr.GetInt32(0);
+                    Session["userName"] = dr.GetString(1);
+                    Session["role"] = "C";
+
+                    isAuth = true;
+
+                }
+                dr.Close();
+            }
 
             con.Close();
             return isAuth;

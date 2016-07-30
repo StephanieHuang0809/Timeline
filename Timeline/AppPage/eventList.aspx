@@ -114,7 +114,7 @@
 .okCreated {
        border-radius: 5px;
        width: 200px;
-       position: relative;
+       position: absolute;
        transition: all 5s ease-in-out;
        height: 120px;
        z-index: 20;
@@ -130,17 +130,17 @@
 .suggestedEvents {
                  border-radius: 5px;
                  width: 40%;
-                 position: relative;
+                 position: absolute;
                  transition: all 5s ease-in-out;
                  float: right;
-                 height: 562px;
+                 height: 570px;
                  z-index: 10;
                  visibility:visible;
                  left: 244px;
                  top: -130px;
-                 margin: 70px auto;
+                 margin: 265px auto;
                  padding: 20px;
-                 background: #fff;
+                 background:#F2F2F2;
              }
              
              .auto-style5 {
@@ -156,6 +156,17 @@
         $("#<%=this.ddl_region.ClientID%>").selectmenu();
         $("#<%=this.ddl_category.ClientID%>").selectmenu();
     });
+
+    var isShowingSuggestion = false;
+    function showSuggestedEvents() {
+        if (isShowingSuggestion) {
+            $('#suggested_events').hide();
+            isShowingSuggestion = false;
+        } else {
+            $('#suggested_events').show();
+            isShowingSuggestion = true;
+        }   
+    }
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -200,7 +211,7 @@
          <table id="tbl_newEvent" border="0" class="auto-style2">
              <tr><td><asp:Label ID="lb_name" runat="server" Text="Name: "></asp:Label></td>
                  <td><asp:TextBox ID="tb_name" runat="server"></asp:TextBox></td>
-                 <td colspan="2"><asp:HyperLink ID="hl_suggestedEvents" runat="server" ForeColor="Black" Font-Underline="True">Suggested Events?</asp:HyperLink></td>
+                 <td colspan="2"><input type="button" value="Suggested Events?" style="color:black;border:none;background-color:white;text-decoration:underline" onclick="showSuggestedEvents();return false;"/></td>
              </tr>
              <tr><td><asp:Label ID="lb_location" runat="server" Text="Location: "></asp:Label></td>
                  <td><asp:TextBox ID="tb_location" runat="server"></asp:TextBox></td>
@@ -264,16 +275,16 @@
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btn_cancel" CssClass="button" Height="50px" Width="100px" runat="server" Text="Cancel" ToolTip="Cancel Event" OnClick="btn_cancel_Click"/>
          </div>
-          <div id="eventCreated" class="okCreated" style="text-align:center;margin:0 auto;">
+          <div id="eventCreated" class="okCreated" style="text-align:center;margin:0 auto;display:block">
                <br /><h3 style="text-align:center">Event is being created !</h3><br />
-              <asp:Button ID="btn_okCreated" CssClass="button" Height="40px" Width="80px" runat="server" Text="OK" OnClick="btn_okCreated_Click"/>
+               <asp:Button ID="btn_okCreated" CssClass="button" Height="40px" Width="80px" runat="server" Text="OK" OnClick="btn_okCreated_Click"/>
           </div>
      </div>
-    <div id="suggested_events" class="suggestedEvents" style="margin-right:5%;">
+    <div id="suggested_events" class="suggestedEvents" style="margin-right:5%;display:none">
          <h2 style="text-align:center;color:black">Suggested Events</h2>
          <table id="tbl_suggestedEvents" border="0" class="auto-style5">
              <tr><td><asp:Label ID="lb_region" runat="server" Text="Region: "></asp:Label></td>
-                 <td><asp:DropDownList ID="ddl_region" runat="server" Width="180px">
+                 <td><asp:DropDownList ID="ddl_region" runat="server" Width="180px" AutoPostBack="True" OnSelectedIndexChanged="ddl_region_SelectedIndexChanged">
                      <asp:ListItem Value="Islandwide">Islandwide</asp:ListItem>
                      <asp:ListItem Value="East">East</asp:ListItem>
                      <asp:ListItem Value="West">West</asp:ListItem>
@@ -283,7 +294,7 @@
                      </asp:DropDownList></td>
              </tr>
              <tr><td><asp:Label ID="lb_category" runat="server" Text="Category: "></asp:Label></td>
-                 <td><asp:DropDownList ID="ddl_category" runat="server" Width="180px">
+                 <td><asp:DropDownList ID="ddl_category" runat="server" Width="180px" AutoPostBack="True" OnSelectedIndexChanged="ddl_category_SelectedIndexChanged">
                      <asp:ListItem Value="Dining">Dining</asp:ListItem>
                      <asp:ListItem Value="Moviews">Movies</asp:ListItem>
                      <asp:ListItem Value="Shopping">Shopping</asp:ListItem>
@@ -330,10 +341,21 @@
                          <asp:BoundField DataField="eventLocation" HeaderText="Location: " SortExpression="eventLocation" />
                          <asp:BoundField DataField="dateFrom" DataFormatString="{0:dd/MM/yyyy}" ApplyFormatInEditMode="true" HeaderText="From: " SortExpression="dateFrom" />
                          <asp:BoundField DataField="dateTo" DataFormatString="{0:dd/MM/yyyy}" ApplyFormatInEditMode="true" HeaderText="To: " SortExpression="dateTo" />
+                         <asp:TemplateField HeaderText="Know More:" SortExpression="url">
+                             <EditItemTemplate>
+                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("url") %>'></asp:TextBox>
+                             </EditItemTemplate>
+                             <InsertItemTemplate>
+                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("url") %>'></asp:TextBox>
+                             </InsertItemTemplate>
+                             <ItemTemplate>
+                                 <asp:HyperLink ID="hl_eventLink" runat="server" NavigateUrl='<%# Eval("url") %>' Text='<%# Eval("url") %>'></asp:HyperLink>
+                             </ItemTemplate>
+                             <ControlStyle Font-Underline="True" ForeColor="Black" />
+                         </asp:TemplateField>
                          <asp:BoundField DataField="category" HeaderText="category" SortExpression="category" Visible="False" />
-                         <asp:BoundField DataField="locationRegion" HeaderText="locationRegion" SortExpression="locationRegion" Visible="False" />
-                         <asp:BoundField DataField="url" HeaderText="Event Link" SortExpression="url" Visible="False" />
                          <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" Visible="False" />
+                         <asp:BoundField DataField="locationRegion" HeaderText="locationRegion" SortExpression="locationRegion" Visible="False" />
                          <asp:BoundField DataField="website" HeaderText="Company Website" SortExpression="website" Visible="False" />
                      </Fields>
                  </asp:DetailsView>
@@ -347,16 +369,18 @@
             <asp:ControlParameter ControlID="ddl_category" Name="category" PropertyName="SelectedValue" Type="String" />
 		 </SelectParameters>
          </asp:SqlDataSource>
-         <asp:SqlDataSource ID="SqlDataSource_Corporates" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.eventName, E.eventLocation, E.locationRegion, E.category, E.dateFrom, E.dateTo, E.url, C.name, C.email, C.website, C.Id  FROM CORPORATE C INNER JOIN CORPORATE_EVENT E ON C.Id = E.userId WHERE C.Id=@CorporateId">
+         <asp:SqlDataSource ID="SqlDataSource_Corporates" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+             SelectCommand="SELECT E.Id, E.eventName, E.eventLocation, E.locationRegion, E.category, E.dateFrom, E.dateTo, 
+             E.url, C.name, C.email, C.website, C.Id  FROM CORPORATE C INNER JOIN CORPORATE_EVENT E ON C.Id = E.userId WHERE E.Id=@Id">
              <SelectParameters>
-                 <asp:ControlParameter ControlID="gv_corporateEvents" Name="CorporateId" />
+                 <asp:ControlParameter ControlID="gv_corporateEvents" DefaultValue="7" Name="Id" PropertyName="SelectedValue" />
              </SelectParameters>
          </asp:SqlDataSource>
          <br /><br />
          <div style="text-align:center">
-                <asp:Button ID="btn_ok" CssClass="button" Height="50px" Width="100px" runat="server" Text="Ok" OnClick="btn_ok_Click" />
+                <input type="button" id="btn_okSuggestion" class="button" style="height:50px;width:100px" value="OK" onclick="showSuggestedEvents();return false;"/>
                 &nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btn_cancelSuggestion" CssClass="button" Height="50px" Width="100px" runat="server" Text="Cancel" OnClick="btn_cancelSuggestion_Click" />
-         </div>
+               <input type="button" id="btn_cancelSuggestion" class="button" style="height:50px;width:100px" value="Cancel" onclick="showSuggestedEvents();return false;"/>
+         </div><br /><br />
      </div>
 </asp:Content>

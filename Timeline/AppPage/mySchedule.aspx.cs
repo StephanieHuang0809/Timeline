@@ -17,7 +17,7 @@ namespace Timeline
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.saveChanges.Visible = false;
+            //this.saveChanges.Visible = false;
             if (!IsPostBack)
             {
                 this.tb_dateFrom.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now);
@@ -36,11 +36,6 @@ namespace Timeline
             }
         }
 
-        protected void btn_edit_Click(object sender, ImageClickEventArgs e)
-        {
-            this.saveChanges.Visible = true;
-        }
-
         protected void btn_view_Click(object sender, ImageClickEventArgs e)
         {
             ScheduleBLL scheduleBLL = new ScheduleBLL();
@@ -55,17 +50,7 @@ namespace Timeline
                 Console.WriteLine(schedule.freeSlotTimeTo);
             }
 
-            this.saveChanges.Visible = false;
-        }
-
-        protected void btn_save_Click(object sender, EventArgs e)
-        {
-            this.saveChanges.Visible = false;
-        }
-
-        protected void btn_cancel_Click(object sender, EventArgs e)
-        {
-            this.saveChanges.Visible = false;
+         //   this.saveChanges.Visible = false;
         }
 
         protected void btn_howToUse_Click(object sender, ImageClickEventArgs e)
@@ -82,11 +67,11 @@ namespace Timeline
         }
 
         [System.Web.Services.WebMethod]
-        public static string saveTimeCells(List<String> timecells)
+        public static string saveTimeCells(List<String> timecells, string startDate, string endDate)
         {
             ScheduleBLL bll = new ScheduleBLL();
             bll.userId = 1;
-            bll.update(timecells);
+            bll.update(timecells,Util.StringToDate(startDate)??DateTime.MaxValue,Util.StringToDate(endDate)??DateTime.MinValue);
 
             return "Successfully saved";
         }

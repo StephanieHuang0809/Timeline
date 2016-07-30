@@ -39,29 +39,13 @@
   background: #FACC2E;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-}
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
-
 .popup {
-  margin: 70px auto;
+  margin: auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 30%;
-  position: relative;
+  width: 100%;
+  position: absolute;
   transition: all 5s ease-in-out;
 }
 
@@ -70,37 +54,21 @@
   color: #333;
   font-family: Tahoma, Arial, sans-serif;
 }
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
 
-@media screen and (max-width: 700px){
-  .box{
-    width: 10%;
-  }
-  .popup{
-    width: 70%;
-  }
+
+
+
+.popup .content {
+  max-height: 90%;
+  overflow: auto;
+  text-align:center;
 }
 
 #squareFree {
     width:50px;
     height:50px;
     background:#FAAC58;
+    margin:auto
 }
 
 /*Table style*/
@@ -164,7 +132,7 @@ td {
 </style>
 
     <script type="text/javascript" charset="utf-8">
-        var isEditing = false;
+        var isShow = false;
 
         function stringToDate(_date, _format, _delimiter) {
             var formatLowerCase = _format.toLowerCase();
@@ -316,21 +284,13 @@ td {
 		    );
 		}();
 		
-	 $('#<%= btn_edit.ClientID %>').click(function () {
-            isEditing = true;
-        });
-
-         $('#<%= btn_view.ClientID %>').click(function () {
-            isEditing = false;
-        });
 	
       var isMouseDown = false;
       $("#our_table td")
         .mousedown(function () {
-            if (isEditing == true) {
                 isMouseDown = true;
                 $(this).toggleClass("highlighted");
-            }
+            
           return false; // prevent text selection
         })
         .mouseover(function () {
@@ -346,7 +306,7 @@ td {
           isMouseDown = false;
         });
 		
-      $('#btn_submit_test').click(function () {
+      $('#btn_save').click(function () {
           tableData.toSave = [];
           //For each highlighted cell, add it to tableData
           $(".highlighted").each(function () {
@@ -363,12 +323,13 @@ td {
               type: "POST",
               url: "mySchedule.aspx/saveTimeCells",
               // data: { timecells: tableData.toSave },
-              data: '{timecells:' + jsonTimeCellstr + '}',
+              data: '{timecells:' + jsonTimeCellstr + ', startDate: "' + tableData.start + '", endDate:"' + tableData.end  + '"}',
               contentType: "application/json; charset=utf-8",//response
               dataType: "json",//request
               async: false,//sync: so that when data is retrieved, the table is ready to highlight cells
               success: function (response) {
                   alert(response.d);//For testing purpose
+                  $('#saveChanges').hide();
               },
               failure: function (response) {
                   alert(response.d);
@@ -376,40 +337,27 @@ td {
           });
       });
 
-
-		function updateTimeTable(data){
-		    alert(data.d);
-		    return false;
-		}
-   
-
-        function OnSuccess(response) {
-            alert(response.d);
-        }
-
-		$('#btn_test').click(function () {
-		    $.ajax({
-        type: "POST",
-        url: "mySchedule.aspx/GetCurrentTime",
-        data: '{name: "jifen" }',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: updateTimeTable,
-        failure: function(response) {
-            alert(response.d);
-        }
-    });
-
-
-		});
-
-		
 	});
 
-        $('#<%= btn_howToUse.ClientID %>').click(function () {
-            alert("Hello");
-            $('#popup1').show();
-        });
+        function editSchedule() {
+            $('#saveChanges').show();
+        }
+
+        function cancelEditing() {
+            $('#saveChanges').hide();
+        }
+
+        
+        function showHideHowToUse() {
+            if(isShow){
+                $('#popup').hide();
+                isShow = false;
+            } else {
+                $('#popup').show();
+                isShow = true;
+            }
+        }
+
   </script>
 </asp:Content>
 
@@ -426,21 +374,25 @@ td {
    <!-- <input type="button" id="btn_test" value="Test" />-->
     
 &nbsp;<asp:ImageButton ID="btn_view" runat="server" Height="25px" ImageUrl="~/Images/view.png" ToolTip="View Selected Dates" BorderStyle="None" ImageAlign="AbsBottom" OnClick="btn_view_Click" />
-&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Schedule" />
-    &nbsp;&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="btn_howToUse" runat="server" Height="35px" ImageAlign="AbsBottom" ImageUrl="~/Images/Help.png" ToolTip="Help"  />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="image" id="btn_edit" src="../Images/editButtonBlack.png" style="width:70px;height:25px" onclick="editSchedule(); return false;"/>
+    &nbsp;&nbsp;&nbsp;&nbsp; <input type="image" id="btn_howToUse" src="../Images/Help.png" style="width:35px;height:35px" onclick="showHideHowToUse(); return false;"/>
    <!-- <input type="image" name="img" src="../Images/Help.png"onclick="#popup1"  style="height:35px; width:35px" title="Help"/> -->
 &nbsp;<p> &nbsp;</p>
 
-<div id="popup1" class="overlay">
-	<div class="popup" style="text-align:center">
+
+	<div class="popup" id="popup" style="text-align:center;z-index:300;display:block;position:absolute;width:400px;height:300px;
+                                vertical-align:central;margin:auto">
 		<h2>How to Use</h2>
 		<a class="close" href="#">&times;</a>
 		<div class="content">
-            <div id="squareFree"></div>Free Slot<br />
-			Select your free slots by clicking on the relevant time slots.
-		</div>
+            <div id="squareFree"></div>Free Slot<br /><br />
+			Click on '<input type="image" disabled="disabled" style="width:70px;height:25px;background-position:bottom"  src="../Images/editButtonBlack.png" /> ', select your free slots by clicking on the relevant time slots and save changes.
+		</div><br /><br />
+        <input type="button" id="btn_ok" class="button" value="OK" style="width:60px;height:40px" onclick="showHideHowToUse(); return false;"/>
+
 	</div>
-</div>
+
        
 <div style="float:left">
         <table id="our_table" border="0">
@@ -470,13 +422,12 @@ td {
 			</tr> -->
 			</table>
     </div>
-			<div id="saveChanges" runat="server" style ="text-align:center">
+			<div id="saveChanges" style ="text-align:center;display:none">
 
-                <asp:Button ID="btn_save" CssClass="button" Height="50px" Width="100px" runat="server" Text="Save" OnClick="btn_save_Click" ToolTip="Save Changes"/>
+                <input id="btn_save" class="button" type="button" value="Save" style="height:50px;width:100px"/>
                 &nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btn_cance" CssClass="button" Height="50px" Width="100px" runat="server" Text="Cancel" OnClick="btn_cancel_Click" ToolTip="Cancel Changes"/>
+                <input id="btn_cancel" class="button" type="button" value="Cancel" onclick="cancelEditing(); return false;" style="height:50px;width:100px"/>
                 <br />
-                <br />
-                <input id="btn_submit_test" type="button" class="btn-big-red" value="Save" />
+                <br />     
                 </div>
 </asp:Content>

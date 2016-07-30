@@ -9,6 +9,7 @@ namespace Timeline.AppCode.BLL
 {
     public class EventBLL
     {
+        public int id { set; get; }
         public int ownerUserId { set; get; }
         public String name { set; get; }
         public String location { set; get; }
@@ -25,6 +26,19 @@ namespace Timeline.AppCode.BLL
         {
             EventDAL eventDal = new EventDAL();
             eventDal.createEvent(name, location, from, to, status, ownerUserId, participantIdList);
+        }
+
+        public Event getEvent(int id)
+        {
+            EventDAL eventDal = new EventDAL();
+            return eventDal.getEventsInfo(id);
+
+        }
+
+        public void updateEvent()
+        {
+            EventDAL eventDal = new EventDAL();
+            eventDal.update(id,name, location, from, to, status, ownerUserId, participantIdList);
         }
     }
 }

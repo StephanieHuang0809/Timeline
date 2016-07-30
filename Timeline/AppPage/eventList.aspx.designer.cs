@@ -58,15 +58,6 @@ namespace Timeline.AppPage {
         protected global::System.Web.UI.WebControls.TextBox tb_name;
         
         /// <summary>
-        /// hl_suggestedEvents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hl_suggestedEvents;
-        
-        /// <summary>
         /// lb_location control.
         /// </summary>
         /// <remarks>
@@ -245,23 +236,5 @@ namespace Timeline.AppPage {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_Corporates;
-        
-        /// <summary>
-        /// btn_ok control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_ok;
-        
-        /// <summary>
-        /// btn_cancelSuggestion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_cancelSuggestion;
     }
 }

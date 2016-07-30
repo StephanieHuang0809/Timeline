@@ -76,16 +76,21 @@ namespace Timeline.AppCode.BLL
 
         }
 
-        public void update(List<string> timecells)
+        public void update(List<string> timecells, DateTime fromDate, DateTime toDate)
         {
-            convertToMap(timecells);
+            convertToMap(timecells);// Key:date Value: timecells
             ScheduleDAL dal = new ScheduleDAL();
             SqlConnection conn = DBManager.getSqlConnection();
             conn.Open();
-            foreach (String dtStr in this.timeCellMap.Keys)
+
+            // foreach (String dtStr in this.timeCellMap.Keys)
+            DateTime dateRange = fromDate;
+
+            while(dateRange <= toDate)
             {
-                DateTime scheduleDate = Util.StringToDate(dtStr) ?? DateTime.MaxValue;
+                DateTime scheduleDate = dateRange;//Util.StringToDate(dtStr) ?? DateTime.MaxValue;
                 dal.delete(conn, this.userId, scheduleDate);
+                dateRange = dateRange.AddDays(1);
             }
 
             foreach (String dtStr in this.timeCellMap.Keys)

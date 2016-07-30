@@ -41,5 +41,20 @@ namespace Timeline.AppCode.Domain
 
 
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+
+            User objEt = (User)obj;
+            
+            return objEt.userId.Equals(this.userId);
+
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

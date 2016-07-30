@@ -46,10 +46,11 @@ namespace Timeline.AppCode.DAL
         {
             List<Chat> lst = new List<Chat>();
             SqlConnection conn = DBManager.getSqlConnection();
-            conn.Open();
             try
             {
-                // Start a local transaction.
+
+                conn.Open();
+               // Start a local transaction.
                 string sql = "select  C.userId, U.firstName, U.lastName, C.content, C.eventId, C.postTime, P.colorCode " +
                               "from CHAT C inner join User_info U on C.userId=U.Id " +
                               " inner join Event_PARTICIPANTS P on (C.eventId=P.eventId and C.userId=P.userId) " +
@@ -78,10 +79,14 @@ namespace Timeline.AppCode.DAL
             {
                 System.Diagnostics.Debug.WriteLine(@"Commit Exception Type: {0}", ex.GetType());
                 System.Diagnostics.Debug.WriteLine(@"Message: {0}", ex.Message);
-                throw ex;
+
+            }
+            finally
+            {
+                conn.Close();
+
             }
 
-            conn.Close();
             return lst;
         }
 

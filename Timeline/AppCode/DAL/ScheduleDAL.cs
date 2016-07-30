@@ -143,6 +143,7 @@ namespace Timeline.AppCode.DAL
         {
 
             string sql = "delete from schedule where scheduleDate=@date and userId=@userId";
+            System.Diagnostics.Debug.WriteLine(@"delete from schedule where scheduleDate=@date and userId=@userId {0},{1}", userId,scheduleDate);
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("date", scheduleDate);
             cmd.Parameters.AddWithValue("userId", userId);
@@ -155,6 +156,10 @@ namespace Timeline.AppCode.DAL
         {
             string sql = "insert into schedule (userId, freeSlot,scheduleDate,freeSlotTimeFrom,freeSlotTimeTo) " +
                 " values (@userId,@freeSlot,@scheduleDate,@freeSlotTimeFrom,@freeSlotTimeTo)";
+            
+            System.Diagnostics.Debug.WriteLine("userId="+ userId +"DateTime"+ scheduleDate+" FromeDateTime"+ timefrom + " ToDateTime" + timeto+" free" + freeSlot);
+
+
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("userId", userId);
             cmd.Parameters.AddWithValue("freeSlot", freeSlot);
