@@ -104,5 +104,11 @@ namespace Timeline.AppPage
 
         }
 
+
+        protected void gv_corporateEvents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string eventName = this.gv_corporateEvents.SelectedRow.Cells[3].Text;
+            this.hf_selectedEventName.Value = eventName;
+        }
     }
 }

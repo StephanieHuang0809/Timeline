@@ -347,7 +347,6 @@ td {
             $('#saveChanges').hide();
         }
 
-        
         function showHideHowToUse() {
             if(isShow){
                 $('#popup').hide();
@@ -375,8 +374,8 @@ td {
     
 &nbsp;<asp:ImageButton ID="btn_view" runat="server" Height="25px" ImageUrl="~/Images/view.png" ToolTip="View Selected Dates" BorderStyle="None" ImageAlign="AbsBottom" OnClick="btn_view_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="image" id="btn_edit" src="../Images/editButtonBlack.png" style="width:70px;height:25px" onclick="editSchedule(); return false;"/>
-    &nbsp;&nbsp;&nbsp;&nbsp; <input type="image" id="btn_howToUse" src="../Images/Help.png" style="width:35px;height:35px" onclick="showHideHowToUse(); return false;"/>
+    <input type="image" id="btn_edit" src="../Images/editButtonBlack.png" style="width:70px;height:25px" title="Edit Schedule" onclick="editSchedule(); return false;"/>
+    &nbsp;&nbsp;&nbsp;&nbsp; <input type="image" id="btn_howToUse" src="../Images/Help.png" style="width:35px;height:35px" title="Help" onclick="showHideHowToUse(); return false;"/>
    <!-- <input type="image" name="img" src="../Images/Help.png"onclick="#popup1"  style="height:35px; width:35px" title="Help"/> -->
 &nbsp;<p> &nbsp;</p>
 
