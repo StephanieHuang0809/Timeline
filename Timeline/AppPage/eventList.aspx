@@ -300,7 +300,7 @@
                <asp:Button ID="btn_okCreated" CssClass="button" Height="40px" Width="80px" runat="server" Text="OK" OnClick="btn_okCreated_Click"/>
           </div>
      </div>
-    <div id="suggested_events" class="suggestedEvents" style="margin-right:5%;display:block">
+    <div id="suggested_events" class="suggestedEvents" style="margin-right:5%;display:none">
          <h2 style="text-align:center;color:black">Suggested Events</h2>
          <table id="tbl_suggestedEvents" border="0" class="auto-style5">
              <tr><td><asp:Label ID="lb_region" runat="server" Text="Region: "></asp:Label></td>
