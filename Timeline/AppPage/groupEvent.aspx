@@ -10,17 +10,7 @@
     border:1px solid #999999;
 }
 
- #tbl_menu{
-    width:70%;
-    border-collapse:collapse;
-    table-layout:auto;
-    vertical-align:top;
-    margin-bottom:15px;
-    border:1px solid #999999;
-}
-
-
-th {
+#our_table th {
     font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,sans-serif;
     color: #F2EDEB;
     border-right: 1px solid #C1DAD7;
@@ -33,31 +23,35 @@ th {
     background: #522D25 url(images/bg_header.jpg) no-repeat;
 }
 
-tr {
+#our_table tr {
     background: #fff;
     color: #261F1D;
 }
-
-/*tr:hover, tr.alt:hover {
-    color: #261F1D;
-    background-color: #E5C37E;
-}*/
 
 .highlighted {
     color: #261F1D;
     background-color: #E5C37E;
 }
 
-tr.alt {
+#our_table tr.alt {
     background: #F5FAFA;
     color: #B4AA9D;
 }
 
-td {
+#our_table td {
     border-right: 1px solid #C1DAD7;
     border-bottom: 1px solid #C1DAD7;
     padding: 6px 6px 6px 12px;
 }	
+
+ #tbl_menu{
+    width:70%;
+    border-collapse:collapse;
+    table-layout:auto;
+    vertical-align:top;
+    margin-bottom:15px;
+    border:1px solid #999999;
+}
 
 .button {
   font-size: 15px;
@@ -75,9 +69,62 @@ td {
 .button:hover {
   background: #FACC2E;
 }
-        .auto-style1 {
-            height: 37px;
+
+.event_info{
+    border-collapse:collapse;
+    font-family:Comic Sans MS;
+    font-size:large;
+    font-weight:900;
+    background-color:transparent;
+    width:40%;
+}
+
+.event_info td{
+    color:white;
+}
+
+.auto-style2 {
+            width: 155px;
         }
+
+#tbl_chatlogs{
+    width:70%;
+    height:auto;
+    border-collapse:collapse;
+    table-layout:auto;
+    vertical-align:top;
+    margin-bottom:15px;
+    border:1px solid #999999;
+}
+
+#tbl_chatlogs th {
+    font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,sans-serif;
+    color: #F2EDEB;
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    border-top: 1px solid #C1DAD7;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 6px 6px 6px 12px;
+    background: #522D25 url(images/bg_header.jpg) no-repeat;
+}
+
+#tbl_chatlogs tr {
+    background: #fff;
+    color: #261F1D;
+}
+
+#tbl_chatlogs tr.alt {
+    background: #F5FAFA;
+    color: #B4AA9D;
+}
+
+#tbl_chatlogs td {
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    padding: 6px 6px 6px 12px;
+}	
     </style>
 
   <script type="text/javascript" charset="utf-8">
@@ -370,14 +417,25 @@ td {
   </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p style="font-family: 'Comic Sans MS'; font-size:large; font-weight: 900; color: #FFFFFF">
-       Event: <asp:label runat="server" ID="lb_eventName">Skating</asp:label>&nbsp;&nbsp;&nbsp;
-       Location: <asp:label runat="server" ID="lb_location">Kallang</asp:label>&nbsp;&nbsp;&nbsp;
-       <asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Event" />
-    <br />
-       Date: <asp:label runat="server" ID="lb_date">07/30/2016</asp:label>&nbsp;&nbsp;&nbsp;
-       Time: <asp:label runat="server" ID="lb_time">15:00:00 - 17:00:00</asp:label>
-    </p>
+    
+       <table id="event_info" class="event_info">
+           <tr><td style="width:10%">Event: </td>
+               <td ><asp:label runat="server" ID="lb_eventName"></asp:label></td>
+               <td><asp:ImageButton ID="btn_edit" runat="server" Height="25px" ImageAlign="AbsBottom" ImageUrl="~/Images/editButtonBlack.png" OnClick="btn_edit_Click" ToolTip="Edit Event" /></td>
+           </tr>
+           <tr><td>Location: </td>
+               <td><asp:label runat="server" ID="lb_location"></asp:label></td>
+           </tr>
+           <tr><td>From: </td>
+               <td ><asp:label runat="server" ID="lb_from"></asp:label></td>
+           </tr>
+           <tr><td>To: </td>
+               <td><asp:label runat="server" ID="lb_to"></asp:label></td>
+           </tr>
+           <tr><td>Status: </td>
+               <td><asp:label runat="server" ID="lb_status"></asp:label></td>
+           </tr>
+       </table>   
     <br />
     <asp:Label ID="lb_dateFrom" runat="server" Text=" Date From" ForeColor="White" Font-Bold="True" Font-Names="Arial"></asp:Label>
    

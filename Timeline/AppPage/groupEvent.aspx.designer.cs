@@ -22,15 +22,6 @@ namespace Timeline.AppPage {
         protected global::System.Web.UI.WebControls.Label lb_eventName;
         
         /// <summary>
-        /// lb_location control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lb_location;
-        
-        /// <summary>
         /// btn_edit control.
         /// </summary>
         /// <remarks>
@@ -40,22 +31,40 @@ namespace Timeline.AppPage {
         protected global::System.Web.UI.WebControls.ImageButton btn_edit;
         
         /// <summary>
-        /// lb_date control.
+        /// lb_location control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lb_date;
+        protected global::System.Web.UI.WebControls.Label lb_location;
         
         /// <summary>
-        /// lb_time control.
+        /// lb_from control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lb_time;
+        protected global::System.Web.UI.WebControls.Label lb_from;
+        
+        /// <summary>
+        /// lb_to control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_to;
+        
+        /// <summary>
+        /// lb_status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_status;
         
         /// <summary>
         /// lb_dateFrom control.

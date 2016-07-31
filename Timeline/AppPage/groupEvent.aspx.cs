@@ -33,7 +33,11 @@ namespace Timeline.AppPage
                
                 this.tb_dateFrom.Text = String.Format("{0:MM/dd/yyyy}", myEvent.from);
                 this.tb_dateTo.Text = String.Format("{0:MM/dd/yyyy}", myEvent.to);
-
+                this.lb_eventName.Text = myEvent.name;
+                this.lb_location.Text = myEvent.location;
+                this.lb_from.Text = String.Format("{0:g}", myEvent.from);
+                this.lb_to.Text = String.Format("{0:g}", myEvent.to); //String.Format("{0:MM/dd/yyyy}", myEvent.to)
+                this.lb_status.Text = myEvent.status;
             }
         }
 

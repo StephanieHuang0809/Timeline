@@ -129,7 +129,22 @@ td {
     padding: 6px 6px 6px 12px;
 }	
 
-</style>
+.howToUse {
+          margin: auto;
+          padding: 20px;
+          background: #fff;
+          border-radius: 5px;
+          width: 400px;
+          position: absolute;
+          transition: all 5s ease-in-out;
+          z-index: 300;
+          height: 350px;
+          left: 200px;
+          top: 200px;
+          color:black;
+      }
+
+  </style>
 
     <script type="text/javascript" charset="utf-8">
         var isShow = false;
@@ -375,14 +390,13 @@ td {
 &nbsp;<asp:ImageButton ID="btn_view" runat="server" Height="25px" ImageUrl="~/Images/view.png" ToolTip="View Selected Dates" BorderStyle="None" ImageAlign="AbsBottom" OnClick="btn_view_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input type="image" id="btn_edit" src="../Images/editButtonBlack.png" style="width:70px;height:25px" title="Edit Schedule" onclick="editSchedule(); return false;"/>
-    &nbsp;&nbsp;&nbsp;&nbsp; <input type="image" id="btn_howToUse" src="../Images/Help.png" style="width:35px;height:35px" title="Help" onclick="showHideHowToUse(); return false;"/>
+    &nbsp;&nbsp;&nbsp;&nbsp; <input type="image" id="btn_howToUse" src="../Images/Help.png" style="width:35px;height:35px" title="How to use?" onclick="showHideHowToUse(); return false;"/>
    <!-- <input type="image" name="img" src="../Images/Help.png"onclick="#popup1"  style="height:35px; width:35px" title="Help"/> -->
 &nbsp;<p> &nbsp;</p>
 
 
-	<div class="popup" id="popup" style="text-align:center;z-index:300;display:block;position:absolute;width:400px;height:300px;
-                                vertical-align:central;margin:auto">
-		<h2>How to Use</h2>
+	<div class="howToUse" id="popup" style="text-align:center;display:none;vertical-align:central;margin:auto;">
+		<h2 style="color:black">How to Use</h2>
 		<a class="close" href="#">&times;</a>
 		<div class="content">
             <div id="squareFree"></div>Free Slot<br /><br />
