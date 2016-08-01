@@ -99,11 +99,11 @@ namespace Timeline.AppCode.DAL
                 // Start a local transaction.
                 string sql = "UPDATE EVENT_INFO SET " +
                              "eventName=@name, " +
-                             "EventLocation=@location, " +
+                             "eventLocation=@location, " +
                              "eventDateFrom=@from, " +
-                             "EventDateTo=@to, " +
+                             "eventDateTo=@to, " +
                              "status=@status, " +
-                             "ownerUserId=@ownerUserId WHERE ID="+id+")";//get the event Id
+                             "ownerUserId=@ownerUserId WHERE ID="+id;//get the event Id
 
 
                 cmd = new SqlCommand(sql, conn);
@@ -130,6 +130,8 @@ namespace Timeline.AppCode.DAL
                 }
 
                 cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+
                 sql = "DELETE FROM EVENT_PARTICIPANTS WHERE eventId="+id;
                 cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -196,7 +198,6 @@ namespace Timeline.AppCode.DAL
                     myEvent.to = dr.GetDateTime(5);
                     myEvent.status = dr.GetString(6);
                     myEvent.participants = this.getParticipants(myEvent.id);
-
                 }
 
                 dr.Close();
