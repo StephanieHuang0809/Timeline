@@ -12,7 +12,7 @@ namespace Timeline.AppCode.BLL
         public String firstName { set; get; }
         public String lastName { set; get; }
         public String gender { set; get; }
-        public DateTime? birthday { set; get; }
+        public DateTime birthday { set; get; }
         public String occupation { set; get; }
         public String email { set; get; }
         public String password { set; get; }
@@ -22,6 +22,12 @@ namespace Timeline.AppCode.BLL
         {
             RegisterDAL registerDAL = new RegisterDAL();
             registerDAL.register(this.firstName, this.lastName, this.gender, this.birthday,this.occupation, this.email, this.password, this.role);
+        }
+
+        public void updateProfile()
+        {
+            RegisterDAL registerDAL = new RegisterDAL();
+            registerDAL.updateProfile(this.userId, this.firstName, this.lastName, this.gender, this.birthday, this.email, this.occupation);
         }
     }
 }

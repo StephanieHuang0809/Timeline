@@ -49,6 +49,24 @@ namespace Timeline {
         protected global::System.Web.UI.WebControls.Image nav_friends;
         
         /// <summary>
+        /// nav_addFriends control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image nav_addFriends;
+        
+        /// <summary>
+        /// nav_profile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image nav_profile;
+        
+        /// <summary>
         /// Image1 control.
         /// </summary>
         /// <remarks>

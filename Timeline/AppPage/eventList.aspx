@@ -406,7 +406,9 @@
                  </td>
              </tr>
          </table>
-         <asp:SqlDataSource ID="SqlDataSource_CorporateEvents" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT E.Id as eventId, E.eventName, E.eventLocation, E.locationRegion, E.category, E.dateFrom, E.dateTo, E.url, C.name, C.email, C.website, C.Id  FROM CORPORATE C INNER JOIN CORPORATE_EVENT E ON C.Id = E.userId WHERE E.locationRegion=@region AND E.category=@category">
+         <asp:SqlDataSource ID="SqlDataSource_CorporateEvents" runat="server"
+              ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+             SelectCommand="SELECT E.Id as eventId, E.eventName, E.eventLocation, E.locationRegion, E.category, E.dateFrom, E.dateTo, E.url, C.name, C.email, C.website, C.Id  FROM CORPORATE C INNER JOIN CORPORATE_EVENT E ON C.Id = E.userId WHERE E.locationRegion=@region AND E.category=@category">
        <SelectParameters>
 		   <%--  <asp:ControlParameter Name="Id" ControlID="gv_corporateEvents" />--%>
            <asp:ControlParameter ControlID="ddl_region" Name="region" PropertyName="SelectedValue" Type="String" />
