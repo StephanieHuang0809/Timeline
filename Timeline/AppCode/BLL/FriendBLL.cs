@@ -16,5 +16,23 @@ namespace Timeline.AppCode.BLL
             FriendDAL friendDAL = new FriendDAL();
             return friendDAL.getFriendList(userId);
         }
+
+        public void sendRequest(int fromUser,int toUser)
+        {
+            FriendDAL dal = new FriendDAL();
+            dal.sendFriendRequest(toUser, fromUser);
+        }
+
+        public void acceptRequest(int requestId)
+        {
+            FriendDAL dal = new FriendDAL();
+            dal.acceptFriendRequest(requestId);
+        }
+
+        public void ignoreRequest(int requestId)
+        {
+            FriendDAL dal = new FriendDAL();
+            dal.ignoreFriendRequest(requestId);
+        }
     }
 }

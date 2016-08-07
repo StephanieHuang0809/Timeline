@@ -13,30 +13,57 @@ namespace Timeline.AppPage {
     public partial class addFriends {
         
         /// <summary>
-        /// gv_friends control.
+        /// tb_search control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_friends;
+        protected global::System.Web.UI.WebControls.TextBox tb_search;
         
         /// <summary>
-        /// SqlDataSource_friends control.
+        /// btn_searchFriend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_friends;
+        protected global::System.Web.UI.WebControls.Button btn_searchFriend;
         
         /// <summary>
-        /// dv_friends control.
+        /// gv_searchResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView dv_friends;
+        protected global::System.Web.UI.WebControls.GridView gv_searchResults;
+        
+        /// <summary>
+        /// SqlDataSource_searchFriend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_searchFriend;
+        
+        /// <summary>
+        /// gv_friendRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_friendRequests;
+        
+        /// <summary>
+        /// SqlDataSource_friendRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_friendRequests;
     }
 }

@@ -73,6 +73,7 @@
     <Content Include="AppPage\eventList.aspx" />
     <Content Include="AppPage\groupEvent.aspx" />
     <Content Include="AppPage\myProfile.aspx" />
+    <Content Include="AppPage\notifications.aspx" />
     <Content Include="css\jquery-ui-1.11.4.custom\external\jquery\jquery.js" />
     <Content Include="css\jquery-ui-1.11.4.custom\images\ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
     <Content Include="css\jquery-ui-1.11.4.custom\images\ui-bg_dots-small_65_a6a6a6_2x2.png" />
@@ -224,6 +225,13 @@
     </Compile>
     <Compile Include="AppPage\myProfile.aspx.designer.cs">
       <DependentUpon>myProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppPage\notifications.aspx.cs">
+      <DependentUpon>notifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppPage\notifications.aspx.designer.cs">
+      <DependentUpon>notifications.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -66,5 +66,8 @@
                 <asp:Button ID="btn_save" CssClass="button" Height="50px" Width="100px" runat="server" Text="Save" ToolTip="Save" OnClick="btn_save_Click" Visible="False" />
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btn_cancel" CssClass="button" Height="50px" Width="100px" runat="server" Text="Cancel" ToolTip="Cancel Event" OnClick="btn_cancel_Click" Visible="False"/>
-         </div>
-</asp:Content>
+     </div><br />
+     <p style="font-family: 'Comic Sans MS'; font-size: xx-large; font-weight: 900; color: #FFFFFF">
+        Changing Password</p>
+
+    </asp:Content>

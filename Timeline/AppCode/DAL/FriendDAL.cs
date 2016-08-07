@@ -42,5 +42,95 @@ namespace Timeline.AppCode.DAL
             return friendList;
         }
 
+        public void ignoreFriendRequest(int requestId)
+        {
+            SqlConnection conn = DBManager.getSqlConnection();
+            conn.Open();
+            SqlCommand cmd = null;
+            try
+            {
+                // Start a local transaction.
+                string sql = "UPDATE REQUESTS SET " +
+                             "approvalDate=@approvalDate " +
+                             "status=@status WHERE ID=" + requestId;//get the event Id
+
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("status", "IGNORED");
+                cmd.Parameters.AddWithValue("approvalDate",DateTime.Now);
+            }
+            catch (Exception ex)
+            {
+
+                System.Diagnostics.Debug.WriteLine(@"Commit Exception Type: {0}", ex.GetType());
+                System.Diagnostics.Debug.WriteLine(@"Message: {0}", ex.Message);
+                throw ex;
+            }
+
+            conn.Close();
+        }
+
+        public void acceptFriendRequest(int requestId)
+        {
+            
+        }
+
+        public void sendFriendRequest(int targetId, int requestSentById)
+        {
+            SqlConnection conn = DBManager.getSqlConnection();
+            conn.Open();
+            SqlCommand cmd = null;
+            try
+            {
+                // Start a local transaction.
+                string sql = "INSERT REQUESTS (requestType, requestFrom, requestTo, requestDate, status)" +
+                             " VALUES ( " +
+                             "@requestType, " +
+                             "@requestFrom, " +
+                             "@requestTo, " +
+                             "@requestDate, " +
+                   //          "@approvalDate, " +
+                             "@status);SELECT SCOPE_IDENTITY()";//get the event Id
+
+
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("requestType", "ADD FRIEND");
+                cmd.Parameters.AddWithValue("requestFrom", requestSentById);
+                cmd.Parameters.AddWithValue("requestTo", targetId);
+                cmd.Parameters.AddWithValue("requestDate", DateTime.Now);
+             //   cmd.Parameters.AddWithValue("approvalDate", null);
+                cmd.Parameters.AddWithValue("status", "PENDING");
+
+                object newId = cmd.ExecuteScalar();
+                int requestId = int.Parse(((Decimal)newId).ToString());
+
+                sql = "INSERT NOTIFICATIONS (targetUserId,scope,type,message,date,link)" +
+                           " VALUES ( " +
+                           "@targetUserId, " +
+                           "@scope, " +
+                           "@type, " +
+                           "@message, " +
+                           "@date, " +
+                           "@link)";
+
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("targetUserId", targetId);
+                cmd.Parameters.AddWithValue("scope", "USER");
+                cmd.Parameters.AddWithValue("type","FRIEND REQUEST");
+                cmd.Parameters.AddWithValue("message","You have a new friend request!");
+                cmd.Parameters.AddWithValue("date",DateTime.Now);
+                cmd.Parameters.AddWithValue("link", "viewFriend?id="+ requestId);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                System.Diagnostics.Debug.WriteLine(@"Commit Exception Type: {0}", ex.GetType());
+                System.Diagnostics.Debug.WriteLine(@"Message: {0}", ex.Message);
+                throw ex;
+            }
+
+            conn.Close();
+        }
+
     }
 }
