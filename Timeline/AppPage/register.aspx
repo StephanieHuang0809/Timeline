@@ -368,7 +368,7 @@
                 <asp:RequiredFieldValidator ID="rfv_password" runat="server" ErrorMessage="Please enter password!" ControlToValidate="tb_password" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td>
            </tr>
-        <tr> <td>Confirmed Password :</td><td><asp:TextBox ID="tb_confirmedPassword" runat="server" TextMode="Password"></asp:TextBox></td><td>
+        <tr> <td>Confirm Password :</td><td><asp:TextBox ID="tb_confirmedPassword" runat="server" TextMode="Password"></asp:TextBox></td><td>
             <asp:RequiredFieldValidator ID="rfv_confirmPassword" runat="server" ErrorMessage="Please confirm password!" ControlToValidate="tb_confirmedPassword" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td></tr>
         <tr><td colspan="3"><asp:CheckBox ID="cb_agree" runat="server" Text="I agree to all the terms and conditions and the terms of use." OnCheckedChanged="cb_agree_CheckedChanged" /></td></tr>
