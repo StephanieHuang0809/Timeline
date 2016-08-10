@@ -371,7 +371,7 @@
         <tr> <td>Confirm Password :</td><td><asp:TextBox ID="tb_confirmedPassword" runat="server" TextMode="Password"></asp:TextBox></td><td>
             <asp:RequiredFieldValidator ID="rfv_confirmPassword" runat="server" ErrorMessage="Please confirm password!" ControlToValidate="tb_confirmedPassword" ForeColor="#CC3300" Font-Bold="True"></asp:RequiredFieldValidator>
             </td></tr>
-        <tr><td colspan="3"><asp:CheckBox ID="cb_agree" runat="server" Text="I agree to all the terms and conditions and the terms of use." OnCheckedChanged="cb_agree_CheckedChanged" /></td></tr>
+        <tr><td colspan="3"><asp:CheckBox ID="cb_agree" runat="server" Text=" I agree to all the terms and conditions and the terms of use." OnCheckedChanged="cb_agree_CheckedChanged" /></td></tr>
         <tr><td colspan="3"><asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="false"
     OnServerValidate="CheckBoxRequired_ServerValidate"
     ClientValidationFunction="CheckBoxRequired_ClientValidate" Font-Bold="True" Font-Names="Arial" ForeColor="#CC3300">You must agree to terms and conditions to proceed.</asp:CustomValidator></td></tr>
