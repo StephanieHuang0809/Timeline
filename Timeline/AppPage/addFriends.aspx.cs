@@ -30,9 +30,7 @@ namespace Timeline.AppPage
             String value = Id.Value;
 
             FriendBLL bll = new FriendBLL();
-            //int userId = (int)Session["userId"];
-
-            int userId = 1;
+            int userId = (int)Session["userId"];
             bll.sendRequest(userId, int.Parse(value));
 
         }

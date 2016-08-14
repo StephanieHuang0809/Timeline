@@ -55,10 +55,7 @@ namespace Timeline.AppPage
         public static string GetCurrentTime(int groupId, string startDate, string endDate)
         {
             ScheduleBLL scheduleBLL = new ScheduleBLL();
-            // scheduleBLL.userId = (Int32)Session["userId"];
-            scheduleBLL.userId = 1;
-            //scheduleBLL.readSchedule(Util.StringToDate(startDate),Util.StringToDate(endDate));
-            scheduleBLL.readGroupSchedule(1, Util.StringToDate(startDate), Util.StringToDate(endDate));
+            scheduleBLL.readGroupSchedule(groupId, Util.StringToDate(startDate), Util.StringToDate(endDate));
             List<Schedule> dss = scheduleBLL.scheduleList;
             List<string> allcells = new List<string>();
             List<TimeCell> tmCells = new List<TimeCell>();
@@ -111,9 +108,9 @@ namespace Timeline.AppPage
         {
             ScheduleBLL scheduleBLL = new ScheduleBLL();
             // scheduleBLL.userId = (Int32)Session["userId"];
-            scheduleBLL.userId = 1;
-            //scheduleBLL.readSchedule(Util.StringToDate(startDate),Util.StringToDate(endDate));
-            scheduleBLL.readSchedule(null, null);
+            //scheduleBLL.userId = 1;
+            scheduleBLL.readSchedule(Util.StringToDate(startDate),Util.StringToDate(endDate));
+            //scheduleBLL.readSchedule(null, null);
             List<Schedule> dss = scheduleBLL.scheduleList;
             List<string> allcells = new List<string>();
             foreach (Schedule s in dss)

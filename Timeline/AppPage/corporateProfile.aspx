@@ -61,7 +61,7 @@
          </asp:DetailsView>
          <asp:SqlDataSource ID="SqlDataSource_profile" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Id], [name], [email], [website], [password], [username] FROM [CORPORATE] WHERE ([Id] = @Id)" UpdateCommand="UPDATE CORPORATE SET name=@name, email=@email, website=@website, password=@password WHERE Id=@Id; ">
              <SelectParameters>
-                 <asp:SessionParameter DefaultValue="1" Name="Id" SessionField="userId" Type="Int32" />
+                 <asp:SessionParameter  Name="Id" SessionField="userId" Type="Int32" />
              </SelectParameters>
              <UpdateParameters>
                  <asp:Parameter Name="name" />

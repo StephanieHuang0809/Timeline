@@ -39,8 +39,7 @@ namespace Timeline
         protected void btn_view_Click(object sender, ImageClickEventArgs e)
         {
             ScheduleBLL scheduleBLL = new ScheduleBLL();
-            // scheduleBLL.userId = (Int32)Session["userId"];
-             scheduleBLL.userId = 1;
+             scheduleBLL.userId = (Int32)Session["userId"];
              scheduleBLL.readSchedule(Util.StringToDate(this.tb_dateFrom.Text), Util.StringToDate(this.tb_dateTo.Text));
             List<Schedule> scheduleList = scheduleBLL.scheduleList;
             
@@ -77,12 +76,11 @@ namespace Timeline
         }
 
         [System.Web.Services.WebMethod]
-        public static string GetCurrentTime(string name, string startDate, string endDate)
+        public static string GetCurrentTime(int userId, string startDate, string endDate)
         {
             ScheduleBLL scheduleBLL = new ScheduleBLL();
-            // scheduleBLL.userId = (Int32)Session["userId"];
-            scheduleBLL.userId = 1;
-            scheduleBLL.readSchedule(null,null);
+            scheduleBLL.userId = userId;
+            scheduleBLL.readSchedule(Util.StringToDate(startDate), Util.StringToDate(endDate));
             List<Schedule> scheduleList = scheduleBLL.scheduleList;
             List<string> allcells = new List<string>();//E.g 8:00 - 10:00 Then in allcells: 8:00, 8:30, 9:00, 9:30, 10:00
             foreach (Schedule schedule in scheduleList)

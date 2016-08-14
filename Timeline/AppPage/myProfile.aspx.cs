@@ -16,8 +16,7 @@ namespace Timeline.AppPage
             if (!IsPostBack)
             {
                 User userProfile = new User();
-                // userProfile.userId = (Int32)Session["userId"];
-                userProfile.userId = 1;
+                userProfile.userId = (Int32)Session["userId"];
                 userProfile.loadSelf();
                 this.tb_firstName.Text = userProfile.firstName;
                 this.tb_lastName.Text = userProfile.lastName;

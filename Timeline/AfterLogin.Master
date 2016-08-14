@@ -142,12 +142,13 @@
         
          function retrieve() {
              //alert("start retrieve");
+             var userId = <%=(int)Session["userId"]%>;
              showHideFriendList();
              $('#tbody').empty();
              $.ajax({
                  type: "POST",
                  url: "login.aspx/GetFriends",
-                 data: null,
+                 data: "{userId:'"+userId+"'}",
                  contentType: "application/json; charset=utf-8",
                  dataType: "json",
                  async: false,

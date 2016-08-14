@@ -118,7 +118,7 @@ namespace Timeline.AppCode.DAL
                 cmd.Parameters.AddWithValue("type","FRIEND REQUEST");
                 cmd.Parameters.AddWithValue("message","You have a new friend request!");
                 cmd.Parameters.AddWithValue("date",DateTime.Now);
-                cmd.Parameters.AddWithValue("link", "viewFriend?id="+ requestId);
+                cmd.Parameters.AddWithValue("link", "addFriends.aspx?id="+ requestId);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

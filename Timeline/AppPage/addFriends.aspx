@@ -115,7 +115,7 @@ WHERE
 </asp:GridView><br />
     <asp:SqlDataSource ID="SqlDataSource_friendRequests" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT R.Id, R.requestType, R.requestFrom, R.requestTo, R.requestDate, R.approvalDate, R.status, U.firstName+' ' + U.lastName as name FROM [REQUESTS] R INNER JOIN USER_INFO U ON R.requestFrom = U.Id WHERE (([requestTo] = @requestTo) AND ([status] = @status))">
         <SelectParameters>
-            <asp:SessionParameter DefaultValue="1" Name="requestTo" SessionField="userId" Type="Int32" />
+            <asp:SessionParameter Name="requestTo" SessionField="userId" Type="Int32" />
             <asp:Parameter DefaultValue="PENDING" Name="status" Type="String" />
         </SelectParameters>
 </asp:SqlDataSource>

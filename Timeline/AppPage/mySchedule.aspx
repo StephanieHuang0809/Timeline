@@ -181,10 +181,11 @@ td {
 	}
 
 	getTimeCellData = function (startMMddyyyy, endMMddyyyy) {
+        var userId = <%=(int)Session["userId"]%>;
 	    $.ajax({
 	        type: "POST",
 	        url: "mySchedule.aspx/GetCurrentTime",
-	        data: '{name: "stephanie",startDate: "' + startMMddyyyy + '", endDate:"' + endMMddyyyy + '" }',
+	        data: '{userId: "' + userId + '",startDate: "' + startMMddyyyy + '", endDate:"' + endMMddyyyy + '" }',
 	        contentType: "application/json; charset=utf-8",
 	        dataType: "json",
 	        async: false,

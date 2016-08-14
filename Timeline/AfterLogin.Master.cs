@@ -17,17 +17,17 @@ namespace Timeline
 
         }
 
-        [System.Web.Services.WebMethod]
-        public static string GetFriends()
+      /*  [System.Web.Services.WebMethod]
+        public static string GetFriends(int userId)
         {
             FriendBLL  friendBLL = new FriendBLL();
-            // scheduleBLL.userId = (Int32)Session["userId"];
-            List<User> friendList = friendBLL.getFriendList(1);
+           // int userId = (Int32)Session["userId"];
+            List<User> friendList = friendBLL.getFriendList(userId);
 
             String json = friendList.ToJSON();
 
             return json;
         }
-
+        */
     }
 }
