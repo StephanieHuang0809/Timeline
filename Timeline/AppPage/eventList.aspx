@@ -200,7 +200,7 @@
 
 <ItemStyle Width="45%"></ItemStyle>
                  </asp:TemplateField>
-                 <asp:BoundField DataField="eventDateFrom" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Date" ShowHeader="False" SortExpression="eventDateFrom" />
+                 <asp:BoundField DataField="eventDateFrom" DataFormatString="{0:d}" HeaderText="Date" ShowHeader="False" SortExpression="eventDateFrom" />
                  <asp:CommandField ShowDeleteButton="True" />
              </Columns>
              <EmptyDataTemplate>
