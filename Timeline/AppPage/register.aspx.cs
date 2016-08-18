@@ -35,6 +35,7 @@ namespace Timeline
             registerBLL.role = "P";
 
             registerBLL.register();
+            Response.Redirect("~/AppPage/registerSuccess.aspx");
         }
 
         protected void cb_agree_CheckedChanged(object sender, EventArgs e)
