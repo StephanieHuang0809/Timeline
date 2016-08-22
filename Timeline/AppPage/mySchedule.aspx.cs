@@ -20,8 +20,8 @@ namespace Timeline
             //this.saveChanges.Visible = false;
             if (!IsPostBack)
             {
-                this.tb_dateFrom.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now);
-                this.tb_dateTo.Text = String.Format("{0:MM/dd/yyyy}", DateTime.Now.AddDays(6)); ;
+                this.tb_dateFrom.Text = DateTime.Today.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                this.tb_dateTo.Text = DateTime.Now.AddDays(6).ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture); ;
 
              /*   ScheduleBLL scheduleBLL = new ScheduleBLL();
                 scheduleBLL.userId = (Int32)Session["userId"];

@@ -28,7 +28,7 @@ namespace Timeline
             {
                 registerBLL.gender = "M";
             }
-            registerBLL.birthday =DateTime.ParseExact(this.tb_birthday.Text, @"MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            registerBLL.birthday = DateTime.ParseExact(this.tb_birthday.Text, @"MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             registerBLL.occupation = this.tb_occupation.Text;
             registerBLL.email = this.tb_email.Text;
             registerBLL.password = this.tb_password.Text;

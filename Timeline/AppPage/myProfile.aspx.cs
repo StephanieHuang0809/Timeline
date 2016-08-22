@@ -20,7 +20,7 @@ namespace Timeline.AppPage
                 userProfile.loadSelf();
                 this.tb_firstName.Text = userProfile.firstName;
                 this.tb_lastName.Text = userProfile.lastName;
-                this.tb_birthday.Text = String.Format("{0:MM/dd/yyyy}", userProfile.birthday);
+                this.tb_birthday.Text = String.Format("{0:dd/MM/yyyy}", userProfile.birthday);
                 this.tb_email.Text = userProfile.email;
                 this.tb_occupation.Text = userProfile.occupation;
                 if (userProfile.gender.Equals("F"))
