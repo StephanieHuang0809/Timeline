@@ -217,12 +217,15 @@
              <SortedDescendingHeaderStyle BackColor="#275353" />
          </asp:GridView>
          <asp:SqlDataSource ID="SqlDataSource_Events" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-             SelectCommand="SELECT E.Id, E.eventName, E.eventDateFrom FROM EVENT_INFO E INNER JOIN EVENT_PARTICIPANTS P ON E.Id = P.eventId INNER JOIN USER_INFO U ON P.userId = U.Id WHERE U.Id = 1" 
+             SelectCommand="SELECT E.Id, E.eventName, E.eventDateFrom FROM EVENT_INFO E INNER JOIN EVENT_PARTICIPANTS P ON E.Id = P.eventId INNER JOIN USER_INFO U ON P.userId = U.Id WHERE U.Id = @userId" 
              DeleteCommand="delete from EVENT_PARTICIPANTS where eventId=@Id; DELETE FROM EVENT_INFO WHERE Id = @Id">
                  
                <DeleteParameters>
                  <asp:Parameter Name="Id" />
              </DeleteParameters>
+               <SelectParameters>
+                   <asp:SessionParameter Name="userId" SessionField="userId" />
+               </SelectParameters>
          </asp:SqlDataSource>
      </div>
     
@@ -288,7 +291,13 @@
              <SortedDescendingHeaderStyle BackColor="#275353" />
          </asp:GridView></div>
          <br />
-         <asp:SqlDataSource ID="SqlDataSource_Friends" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT U.Id, U.firstName, U.lastName, U.gender, U.birthday, U.email, U.occupation, F.Id, F.userId, F.userFriendId FROM USER_INFO U INNER JOIN FRIENDS F ON U.Id = F.userFriendId WHERE F.userId = 1" ></asp:SqlDataSource>
+         <asp:SqlDataSource ID="SqlDataSource_Friends" runat="server" 
+             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+             SelectCommand="SELECT U.Id, U.firstName, U.lastName, U.gender, U.birthday, U.email, U.occupation, F.Id, F.userId, F.userFriendId FROM USER_INFO U INNER JOIN FRIENDS F ON U.Id = F.userFriendId WHERE F.userId = @userId" >
+             <SelectParameters>
+                 <asp:SessionParameter Name="userId" SessionField="userId" />
+             </SelectParameters>
+         </asp:SqlDataSource>
          <br /><br />
          <div id="button" style="text-align:center">
                 <asp:Button ID="btn_create" CssClass="button" Height="50px" Width="100px" runat="server" Text="Create" ToolTip="Create Event" OnClick="btn_create_Click"/>

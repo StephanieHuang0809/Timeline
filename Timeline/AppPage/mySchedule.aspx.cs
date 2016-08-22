@@ -66,10 +66,10 @@ namespace Timeline
         }
 
         [System.Web.Services.WebMethod]
-        public static string saveTimeCells(List<String> timecells, string startDate, string endDate)
+        public static string saveTimeCells(int userId, List<String> timecells, string startDate, string endDate)
         {
             ScheduleBLL bll = new ScheduleBLL();
-            bll.userId = 1;
+            bll.userId = userId;
             bll.update(timecells,Util.StringToDate(startDate)??DateTime.MaxValue,Util.StringToDate(endDate)??DateTime.MinValue);
 
             return "Successfully saved";

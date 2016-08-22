@@ -84,6 +84,11 @@ WHERE
        </div><br /><br />
     <asp:GridView ID="gv_friendRequests" runat="server" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal" AutoGenerateColumns="False" CssClass="auto-style1" DataKeyNames="Id" DataSourceID="SqlDataSource_friendRequests" OnSelectedIndexChanged="gv_friendRequests_SelectedIndexChanged" OnRowCommand="gv_friendRequests_RowCommand">
         <Columns>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:HiddenField ID="hf_requestId" runat="server" Value='<%# Eval("Id") %>' />
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
                     <asp:Button ID="btn_accept" runat="server" CausesValidation="false" CommandName="accept" Text="Accept" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
@@ -95,6 +100,7 @@ WHERE
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField></asp:TemplateField>
+            
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" Visible="False" />
             <asp:BoundField DataField="requestType" HeaderText="requestType" SortExpression="requestType" Visible="False" />
             <asp:BoundField DataField="name" HeaderText="Request From" SortExpression="requestFrom" />
@@ -113,10 +119,9 @@ WHERE
         <SortedDescendingCellStyle BackColor="#E5E5E5" />
         <SortedDescendingHeaderStyle BackColor="#275353" />
 </asp:GridView><br />
-    <asp:SqlDataSource ID="SqlDataSource_friendRequests" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT R.Id, R.requestType, R.requestFrom, R.requestTo, R.requestDate, R.approvalDate, R.status, U.firstName+' ' + U.lastName as name FROM [REQUESTS] R INNER JOIN USER_INFO U ON R.requestFrom = U.Id WHERE (([requestTo] = @requestTo) AND ([status] = @status))">
+    <asp:SqlDataSource ID="SqlDataSource_friendRequests" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT R.Id, R.requestType, R.requestFrom, R.requestTo, R.requestDate, R.approvalDate, R.status, U.firstName+' ' + U.lastName as name FROM [REQUESTS] R INNER JOIN USER_INFO U ON R.requestFrom = U.Id WHERE (([requestTo] = @requestTo) AND ([status] = 'PENDING'))">
         <SelectParameters>
             <asp:SessionParameter Name="requestTo" SessionField="userId" Type="Int32" />
-            <asp:Parameter DefaultValue="PENDING" Name="status" Type="String" />
         </SelectParameters>
 </asp:SqlDataSource>
     </asp:Content>

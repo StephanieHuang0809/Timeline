@@ -230,7 +230,11 @@
          </div>
              <asp:HiddenField ID="hf_eventId" runat="server" />
          <br />
-         <asp:SqlDataSource ID="SqlDataSource_Friends" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT U.Id, U.firstName, U.lastName, U.gender, U.birthday, U.email, U.occupation, F.Id, F.userId, F.userFriendId FROM USER_INFO U INNER JOIN FRIENDS F ON U.Id = F.userFriendId WHERE F.userId = 1" ></asp:SqlDataSource>
+         <asp:SqlDataSource ID="SqlDataSource_Friends" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT U.Id, U.firstName, U.lastName, U.gender, U.birthday, U.email, U.occupation, F.Id, F.userId, F.userFriendId FROM USER_INFO U INNER JOIN FRIENDS F ON U.Id = F.userFriendId WHERE F.userId = @userId" >
+             <SelectParameters>
+                 <asp:SessionParameter Name="userId" SessionField="userId" />
+             </SelectParameters>
+         </asp:SqlDataSource>
          <br /><br />
          <div id="button" style="text-align:center">
                 <asp:Button ID="btn_save" CssClass="button" Height="50px" Width="100px" runat="server" Text="Save" ToolTip="Save" OnClick="btn_save_Click" />

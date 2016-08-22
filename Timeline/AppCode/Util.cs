@@ -34,7 +34,8 @@ namespace Timeline
         {
             if (IsBlank(dateStr)) return null;
 
-            DateTime MyDateTime = DateTime.ParseExact(dateStr, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            //DateTime MyDateTime = DateTime.ParseExact(dateStr, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            DateTime MyDateTime = Convert.ToDateTime(dateStr, System.Globalization.CultureInfo.GetCultureInfo("en-US").DateTimeFormat);
             return MyDateTime;
         }
 

@@ -71,6 +71,69 @@ namespace Timeline.AppCode.DAL
 
         public void acceptFriendRequest(int requestId)
         {
+            SqlConnection conn = DBManager.getSqlConnection();
+            conn.Open();
+            SqlTransaction transaction = conn.BeginTransaction();
+            SqlCommand cmd = null;
+            try
+            {
+                // Start a local transaction.
+                string sql = "UPDATE REQUESTS SET " +
+                             "approvalDate=@approvalDate ," +
+                             "status=@status WHERE ID=" + requestId;
+                
+                cmd = new SqlCommand(sql, conn, transaction);
+                cmd.Parameters.AddWithValue("status", "ACCEPTED");
+                cmd.Parameters.AddWithValue("approvalDate", DateTime.Now);
+                cmd.ExecuteNonQuery();
+
+                sql = "SELECT requestFrom, requestTo FROM REQUESTS WHERE Id =" + requestId;
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                int targetId = 0;
+                int requestSentById = 0;
+                
+                if (dr.Read())
+                {    
+                   targetId = dr.GetInt32(0);
+                   requestSentById = dr.GetInt32(1);
+                }
+
+                dr.Close();
+
+                sql = "INSERT FRIENDS (userId,userFriendId)" +
+                         " VALUES ( " +
+                         "@userId, " +
+                         "@userFriendId)";
+
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("userId", targetId);
+                cmd.Parameters.AddWithValue("userFriendId", requestSentById);
+                cmd.ExecuteNonQuery();
+
+
+                sql = "INSERT FRIENDS (userId,userFriendId)" +
+                        " VALUES ( " +
+                        "@userId2, " +
+                        "@userFriendId2)";
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("userId2", requestSentById);
+                cmd.Parameters.AddWithValue("userFriendId2", targetId);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                System.Diagnostics.Debug.WriteLine(@"Commit Exception Type: {0}", ex.GetType());
+                System.Diagnostics.Debug.WriteLine(@"Message: {0}", ex.Message);
+                throw ex;
+            }
+            finally {
+                conn.Close();
+            }
+
             
         }
 

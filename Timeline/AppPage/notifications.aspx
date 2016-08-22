@@ -48,7 +48,11 @@
             <SortedDescendingCellStyle BackColor="#E5E5E5" />
             <SortedDescendingHeaderStyle BackColor="#275353" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource_notifications" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Id], [targetUserId], [scope], [type], [message], [date], [link] FROM [NOTIFICATIONS]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource_notifications" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Id], [targetUserId], [scope], [type], [message], [date], [link] FROM [NOTIFICATIONS] WHERE ([targetUserId] = @targetUserId)">
+            <SelectParameters>
+                <asp:SessionParameter Name="targetUserId" SessionField="userId" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
 
     </div>
 </asp:Content>

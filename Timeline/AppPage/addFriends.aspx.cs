@@ -12,7 +12,7 @@ namespace Timeline.AppPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+          
         }
 
         protected void btn_searchFriend_Click(object sender, EventArgs e)
@@ -50,17 +50,22 @@ namespace Timeline.AppPage
             GridView grid = sender as GridView;
             index = Convert.ToInt32(e.CommandArgument);
             row = grid.Rows[index];
+            HiddenField hf_requestId = row.FindControl("hf_requestId") as HiddenField;
+            
             FriendBLL friendBLL = new FriendBLL();
+            int id = int.Parse(hf_requestId.Value);
 
             switch (e.CommandName)
             {
                 case "accept":
-                    friendBLL.acceptRequest(1);
+                    friendBLL.acceptRequest(id);
                     break;
                 case "ignore":
-                    friendBLL.ignoreRequest(1);
+                    friendBLL.ignoreRequest(id);
                     break;
             }
+
+            this.gv_friendRequests.DataBind();
         }
     }
 }

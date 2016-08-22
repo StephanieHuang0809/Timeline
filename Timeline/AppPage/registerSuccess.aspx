@@ -25,7 +25,7 @@
         &nbsp;</p>
     </div>
     <div style="text-align:center">
-        <p style="font-family: 'Comic Sans MS'; font-size:medium; font-weight: 900; color:black">
+        <p style="font-family: 'Comic Sans MS'; font-size:medium; font-weight: 900; color:white">
         Congratulations! You have been registered successfully!</p>
         <br /><br />
         <asp:Button ID="btn_ok" CssClass="button" Height="40px" Width="80px" runat="server" Text="Ok" ToolTip="Ok" OnClick="btn_ok_Click" />

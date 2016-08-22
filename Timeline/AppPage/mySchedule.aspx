@@ -190,7 +190,7 @@
 	var tableData = {
 	    //start://startDateStr will replace by selected value
 	    //end: //will replace by selected value
-	    tableRowCell: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:00", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "00:00", "00:30", "01:00", "01:30", "02:00", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30"],  /* show the verticle scale */
+	    tableRowCell: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "00:00", "00:30", "01:00", "01:30", "02:00", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30"],  /* show the verticle scale */
 	    days: [],// this value will be auto set base on start and end date.                                                            /* show the horizal  scale */
 	    timeCell: [ /*"06/20/2016 10:00", "06/20/2016 11:00"*/], //this value will be set by ajax call
 	    toSave: []
@@ -320,8 +320,10 @@
       var isMouseDown = false;
       $("#our_table td")
         .mousedown(function () {
+            if($('#saveChanges').is(':visible')){
                 isMouseDown = true;
-                $(this).toggleClass("highlighted");
+                $(this).toggleClass("highlighted"); 
+            }
             
           return false; // prevent text selection
         })
@@ -351,11 +353,14 @@
           //Convert javascrip object (tableData.toSave) to string (JSON)
           var jsonTimeCellstr = JSON.stringify(tableData.toSave);
           alert(jsonTimeCellstr);
+
+          
+             var userId = <%=(int)Session["userId"]%>;
           $.ajax({
               type: "POST",
               url: "mySchedule.aspx/saveTimeCells",
               // data: { timecells: tableData.toSave },
-              data: '{timecells:' + jsonTimeCellstr + ', startDate: "' + tableData.start + '", endDate:"' + tableData.end  + '"}',
+              data: '{userId: "' + userId + '",timecells:' + jsonTimeCellstr + ', startDate: "' + tableData.start + '", endDate:"' + tableData.end  + '"}',
               contentType: "application/json; charset=utf-8",//response
               dataType: "json",//request
               async: false,//sync: so that when data is retrieved, the table is ready to highlight cells
@@ -376,7 +381,9 @@
         }
 
         function cancelEditing() {
-            $('#saveChanges').hide();
+            window.location.assign("http://localhost:53349/AppPage/mySchedule.aspx");
+            //$('#saveChanges').hide();
+
         }
 
         function showHideHowToUse() {
@@ -453,11 +460,13 @@
 			</table>
     </div>
 			<div id="saveChanges" style ="text-align:center;display:none">
-
+               
                 <input id="btn_save" class="button" type="button" value="Save" style="height:50px;width:100px"/>
                 &nbsp;&nbsp;&nbsp;
                 <input id="btn_cancel" class="button" type="button" value="Cancel" onclick="cancelEditing(); return false;" style="height:50px;width:100px"/>
                 <br />
                 <br />     
                 </div>
+
+
 </asp:Content>
